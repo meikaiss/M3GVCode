@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+
+        <com.m3gv.video.common.view.M3CloudVideoView
+            android:id="@+id/m3_video_view"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:visibility="visible"/>
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/video_player_control_bar"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:background="#99000000"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/pause"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingRight="12dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/video_player_pause_icon"
+            android:visibility="visible"/>
+
+        <SeekBar
+            android:id="@+id/controller_seekbar"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:max="100"
+            android:maxHeight="2dp"
+            android:minHeight="2dp"
+            android:progress="0"
+            android:progressDrawable="@drawable/video__seekbar_selector"
+            android:thumb="@drawable/video__seekbar_thumb"
+            android:thumbOffset="0dp"/>
+
+        <TextView
+            android:id="@+id/time_current"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:gravity="center"
+            android:paddingLeft="0dip"
+            android:paddingRight="0dip"
+            android:text="00:00"
+            android:textColor="#eee"
+            android:textSize="13sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingLeft="0dip"
+            android:paddingRight="0dip"
+            android:text="/"
+            android:textColor="#eee"
+            android:textSize="13sp"/>
+
+        <TextView
+            android:id="@+id/time_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingLeft="0dip"
+            android:paddingRight="0dip"
+            android:text="00:00"
+            android:textColor="#eee"
+            android:textSize="13sp"
+            android:textStyle="normal"/>
+
+        <TextView
+            android:id="@+id/mc_video_src"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:text="流畅"
+            android:textColor="#eee"
+            android:textSize="13sp"/>
+
+        <ImageButton
+            android:id="@+id/fullscreen"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@android:color/transparent"
+            android:scaleType="centerInside"
+            android:src="@drawable/video__fullscreen_entry"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
