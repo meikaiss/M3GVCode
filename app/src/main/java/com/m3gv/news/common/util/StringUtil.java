@@ -1,4 +1,4 @@
-package com.m3gv.video.common.util;
+package com.m3gv.news.common.util;
 
 /**
  * Created by meikai on 16/12/3.

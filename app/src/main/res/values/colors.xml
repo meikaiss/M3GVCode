@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#e14123</color>
+    <color name="colorPrimaryDark">#d33d3c</color>
+    <color name="colorAccent">#FFB72424</color>
+
+    <color name="color_video_player_play_pause_pressed">#333333</color>
+
 </resources>

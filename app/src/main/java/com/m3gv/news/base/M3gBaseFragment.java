@@ -1,4 +1,4 @@
-package com.m3gv.video.base;
+package com.m3gv.news.base;
 
 import android.os.Bundle;
 import android.support.annotation.IdRes;

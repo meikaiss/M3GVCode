@@ -1,11 +1,11 @@
-package com.m3gv.video.business.homepage;
+package com.m3gv.news.business.homepage;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.m3gv.video.R;
-import com.m3gv.video.business.video.VideoDetailActivity;
+import com.m3gv.news.R;
+import com.m3gv.news.business.video.VideoDetailActivity;
 
 public class MainActivity extends AppCompatActivity {
 

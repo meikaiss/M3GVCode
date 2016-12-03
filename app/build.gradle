@@ -4,18 +4,58 @@ android {
     compileSdkVersion 25
     buildToolsVersion "25.0.1"
     defaultConfig {
-        applicationId "com.m3gv.video"
+        applicationId "com.m3gv.news"
         minSdkVersion 21
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        jackOptions {
+            enabled true
+        }
     }
+
+    signingConfigs {
+        debug {
+            storeFile file(debugMKeystoreFile)
+            storePassword debugMKeystorePassword
+            keyAlias debugMKeyAlias
+            keyPassword debugMKeyPassword
+        }
+        release {
+            storeFile file(releaseMKeystoreFile)
+            storePassword releaseMKeystorePassword
+            keyAlias releaseMKeyAlias
+            keyPassword releaseMKeyPassword
+        }
+    }
+
     buildTypes {
         release {
-            minifyEnabled false
+            signingConfig signingConfigs.release
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+        debug {
+            signingConfig signingConfigs.debug
+            minifyEnabled false
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            debuggable true
+        }
+    }
+
+    dexOptions {
+        //incremental true
+        //preDexLibraries = false
+        javaMaxHeapSize "4g"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="#fff"
     android:orientation="vertical"
-    tools:context="com.m3gv.video.business.homepage.MainActivity">
+    tools:context="com.m3gv.news.business.homepage.MainActivity">
 
     <TextView
         android:layout_width="wrap_content"

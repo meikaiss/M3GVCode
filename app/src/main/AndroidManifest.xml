@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.m3gv.video"
+<manifest package="com.m3gv.news"
           xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -22,7 +22,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".business.homepage.MainActivity">
+        <activity android:name="com.m3gv.news.business.homepage.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -30,7 +30,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".business.video.VideoDetailActivity"/>
+        <activity android:name="com.m3gv.news.business.video.VideoDetailActivity"/>
         
     </application>
 

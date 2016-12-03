@@ -1,4 +1,4 @@
-package com.m3gv.video;
+package com.m3gv.news;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.m3gv.video", appContext.getPackageName());
+        assertEquals("com.m3gv.news", appContext.getPackageName());
     }
 }

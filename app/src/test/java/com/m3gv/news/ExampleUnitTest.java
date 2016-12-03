@@ -1,4 +1,4 @@
-package com.m3gv.video;
+package com.m3gv.news;
 
 import org.junit.Test;
 

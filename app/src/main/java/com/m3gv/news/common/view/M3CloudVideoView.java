@@ -1,4 +1,4 @@
-package com.m3gv.video.common.view;
+package com.m3gv.news.common.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
