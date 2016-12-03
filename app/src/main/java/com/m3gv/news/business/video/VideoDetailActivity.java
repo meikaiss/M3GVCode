@@ -4,9 +4,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.widget.TextView;
 
 import com.m3gv.news.R;
 import com.m3gv.news.base.M3gBaseActivity;
+import com.m3gv.news.common.videoplayer.VideoDurationEntity;
+import com.m3gv.news.common.videoplayer.VideoEntity;
 import com.m3gv.news.common.videoplayer.VideoPlayerFragment;
 
 /**
@@ -15,6 +18,8 @@ import com.m3gv.news.common.videoplayer.VideoPlayerFragment;
 
 public class VideoDetailActivity extends M3gBaseActivity {
 
+
+    private TextView tvVideoTitle;
 
     public static void start(Activity activity, String url) {
         Intent intent = new Intent(activity, VideoDetailActivity.class);
@@ -36,6 +41,9 @@ public class VideoDetailActivity extends M3gBaseActivity {
                 VideoPlayerFragment.newInstance(videoEntity))
                 .commitAllowingStateLoss();
 
+        tvVideoTitle = f(R.id.tv_video_detail_title);
+        tvVideoTitle.setText(videoEntity.title);
     }
+
 
 }

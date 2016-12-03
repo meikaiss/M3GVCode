@@ -6,4 +6,6 @@
 
     <color name="color_video_player_play_pause_pressed">#333333</color>
 
+    <color name="text_color_normal_gray">#333333</color>
+
 </resources>

@@ -1,4 +1,4 @@
-package com.m3gv.news.business.video;
+package com.m3gv.news.common.videoplayer;
 
 import android.os.Parcel;
 import android.os.Parcelable;

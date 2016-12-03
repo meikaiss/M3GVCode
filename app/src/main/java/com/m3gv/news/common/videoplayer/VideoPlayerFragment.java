@@ -15,7 +15,6 @@ import android.widget.TextView;
 
 import com.m3gv.news.R;
 import com.m3gv.news.base.M3gBaseFragment;
-import com.m3gv.news.business.video.VideoEntity;
 import com.m3gv.news.common.util.TimeUtil;
 import com.tencent.rtmp.ITXLivePlayListener;
 import com.tencent.rtmp.TXLiveConstants;
@@ -200,7 +199,7 @@ public class VideoPlayerFragment extends M3gBaseFragment {
                     }
                     break;
                 case R.id.fullscreen:
-                    
+
                     break;
                 default:
                     break;

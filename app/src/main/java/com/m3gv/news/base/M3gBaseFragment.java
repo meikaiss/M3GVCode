@@ -32,6 +32,14 @@ public abstract class M3gBaseFragment extends Fragment {
     }
 
     @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (outState != null) {
+            outState.clear();
+        }
+    }
+
+    @Override
     public void onDestroy() {
         super.onDestroy();
         isDestroyed = true;
