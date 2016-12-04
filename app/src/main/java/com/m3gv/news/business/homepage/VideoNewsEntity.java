@@ -58,8 +58,12 @@ public class VideoNewsEntity implements Parcelable {
         videoNewsEntity.playCount = avObject.getInt("playCount");
         videoNewsEntity.zanCount = avObject.getInt("zanCount");
         videoNewsEntity.caiCount = avObject.getInt("caiCount");
-        videoNewsEntity.videoUrl = avObject.getAVFile("videoUrl").getUrl();
-        videoNewsEntity.thumbnail = avObject.getAVFile("thumbnail").getUrl();
+        if (avObject.getAVFile("videoUrl") != null) {
+            videoNewsEntity.videoUrl = avObject.getAVFile("videoUrl").getUrl();
+        }
+        if (avObject.getAVFile("thumbnail") != null) {
+            videoNewsEntity.thumbnail = avObject.getAVFile("thumbnail").getUrl();
+        }
         videoNewsEntity.videoResolution = avObject.getInt("videoResolution");
         videoNewsEntity.videoId = avObject.getInt("videoId");
 

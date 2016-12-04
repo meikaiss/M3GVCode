@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <bool name="open_bugly_in_debug">true</bool>
+
+</resources>

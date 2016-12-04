@@ -14,6 +14,10 @@ android {
         jackOptions {
             enabled true
         }
+        ndk {
+            // 设置支持的SO库架构
+            abiFilters 'armeabi' //, 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
+        }
     }
 
     signingConfigs {
@@ -76,14 +80,12 @@ dependencies {
 
     compile 'com.android.support:appcompat-v7:25.0.0'
     compile 'com.android.support:design:25.0.0'
-
     compile 'com.github.bumptech.glide:glide:3.7.0'
 
     // LeanCloud 基础存储包
     compile ('cn.leancloud.android:avoscloud-sdk:v3.+')
-
     // LeanCloud 推送与实时聊天需要的包
     compile ('cn.leancloud.android:avoscloud-push:v3.+@aar'){transitive = true}
-
-
+    compile 'com.tencent.bugly:crashreport:latest.release' //其中latest.release指代最新Bugly SDK版本号，也可以指定明确的版本号，例如2.1.9
+    compile 'com.tencent.bugly:nativecrashreport:latest.release' //其中latest.release指代最新Bugly NDK版本号，也可以指定明确的版本号，例如3.0
 }

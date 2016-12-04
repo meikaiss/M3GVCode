@@ -39,6 +39,8 @@ public class VideoListFragment extends M3gBaseFragment {
     private TextView tvRefreshResultTip;
 
     private boolean isRefreshTipShow = false;
+    private ObjectAnimator hideRefreshTipAnimator;
+    private boolean isGoing2HideRefreshTip = false;
 
     private List<VideoNewsEntity> dataList = new ArrayList<>();
     private VideoNewsAdapter videoNewsAdapter;
@@ -141,20 +143,30 @@ public class VideoListFragment extends M3gBaseFragment {
 
     private void showRefreshTip(int msgCount, String msgType) {
         tvRefreshResultTip.setText(getString(R.string.x_recycler_view_refresh_tip, String.valueOf(msgCount), msgType));
-        animatorRefreshTip();
+        showRefreshTipAnimator();
     }
 
     private void showRefreshTip(String msg) {
         tvRefreshResultTip.setText(msg);
-        animatorRefreshTip();
+        showRefreshTipAnimator();
     }
 
-    private void animatorRefreshTip() {
+    private void showRefreshTipAnimator() {
         int deltaY = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 30, Resources.getSystem()
                 .getDisplayMetrics());
+
+        if (hideRefreshTipAnimator == null) {
+            hideRefreshTipAnimator = ObjectAnimator.ofFloat(tvRefreshResultTip, "translationY", 0, -deltaY)
+                    .setDuration(200);
+        }
+
         if (!isRefreshTipShow) {
-            ObjectAnimator animator = ObjectAnimator.ofFloat(tvRefreshResultTip, "translationY", -deltaY, 0).setDuration
-                    (200);
+            ObjectAnimator animator = ObjectAnimator.ofFloat(tvRefreshResultTip, "translationY", -deltaY, 0)
+                    .setDuration(200);
+            if (isGoing2HideRefreshTip) {
+                // 告诉 即将到来的 Runnable 不要执行Run方法体
+                isGoing2HideRefreshTip = false;
+            }
             animator.addListener(new Animator.AnimatorListener() {
                 @Override
                 public void onAnimationStart(Animator animator) {
@@ -163,13 +175,13 @@ public class VideoListFragment extends M3gBaseFragment {
 
                 @Override
                 public void onAnimationEnd(Animator animator) {
+                    isGoing2HideRefreshTip = true;
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            ObjectAnimator.ofFloat(tvRefreshResultTip, "translationY", 0, -deltaY).setDuration(200)
-                                    .start();
+                            hideRefreshTipAnimator.start();
                         }
-                    }, 3000);
+                    }, 2000);
                 }
 
                 @Override
