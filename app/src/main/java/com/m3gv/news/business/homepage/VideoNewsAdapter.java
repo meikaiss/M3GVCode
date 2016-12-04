@@ -51,9 +51,9 @@ public class VideoNewsAdapter extends RecyclerView.Adapter<VideoNewsAdapter.Vide
             public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> animation) {
                 super.onResourceReady(resource, animation);
                 if (dataList.get(pos).videoResolution == 4) {
-                    holder.imgLabel.setBackgroundResource(R.drawable.video_label_hot);
+                    holder.imgLabel.setImageResource(R.drawable.video_label_hot);
                 } else {
-                    holder.imgLabel.setBackgroundResource(0);
+                    holder.imgLabel.setImageResource(0);
                 }
             }
         });
