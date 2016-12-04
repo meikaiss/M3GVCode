@@ -237,7 +237,7 @@ public class VideoPlayerFragment extends M3gBaseFragment {
             } else if (event == TXLiveConstants.PLAY_ERR_NET_DISCONNECT || event == TXLiveConstants.PLAY_EVT_PLAY_END) {
                 seekBar.setProgress(0);
                 tvCurrent.setText(TimeUtil.toDurationString(0));
-                isVideoPlaying = false;
+                pauseVideo();
             } else if (event == TXLiveConstants.PLAY_EVT_PLAY_LOADING) {
 
             }

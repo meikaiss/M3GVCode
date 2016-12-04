@@ -18,6 +18,8 @@ public class VideoNewsEntity implements Parcelable {
     public int caiCount;
     public String videoUrl;
     public String thumbnail;
+    public int videoResolution;
+    public int videoId;
 
     public VideoNewsEntity() {
     }
@@ -30,6 +32,8 @@ public class VideoNewsEntity implements Parcelable {
         caiCount = in.readInt();
         videoUrl = in.readString();
         thumbnail = in.readString();
+        videoResolution = in.readInt();
+        videoId = in.readInt();
     }
 
     public static final Creator<VideoNewsEntity> CREATOR = new Creator<VideoNewsEntity>() {
@@ -56,6 +60,8 @@ public class VideoNewsEntity implements Parcelable {
         videoNewsEntity.caiCount = avObject.getInt("caiCount");
         videoNewsEntity.videoUrl = avObject.getAVFile("videoUrl").getUrl();
         videoNewsEntity.thumbnail = avObject.getAVFile("thumbnail").getUrl();
+        videoNewsEntity.videoResolution = avObject.getInt("videoResolution");
+        videoNewsEntity.videoId = avObject.getInt("videoId");
 
         return videoNewsEntity;
     }
@@ -74,5 +80,7 @@ public class VideoNewsEntity implements Parcelable {
         parcel.writeInt(caiCount);
         parcel.writeString(videoUrl);
         parcel.writeString(thumbnail);
+        parcel.writeInt(videoResolution);
+        parcel.writeInt(videoId);
     }
 }

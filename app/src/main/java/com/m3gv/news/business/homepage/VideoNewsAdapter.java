@@ -6,10 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 import com.m3gv.news.R;
 import com.m3gv.news.business.video.VideoDetailActivity;
 
@@ -43,7 +45,18 @@ public class VideoNewsAdapter extends RecyclerView.Adapter<VideoNewsAdapter.Vide
         holder.tvZanCount.setText("" + dataList.get(pos).zanCount);
         holder.tvCaiCount.setText("" + dataList.get(pos).caiCount);
 
-        Glide.with(activity).load(dataList.get(pos).thumbnail).centerCrop().into(holder.imgThumbs);
+        Glide.with(activity).load(dataList.get(pos).thumbnail).centerCrop().into(new GlideDrawableImageViewTarget
+                (holder.imgThumbs) {
+            @Override
+            public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> animation) {
+                super.onResourceReady(resource, animation);
+                if (dataList.get(pos).videoResolution == 4) {
+                    holder.imgLabel.setBackgroundResource(R.drawable.video_label_hot);
+                } else {
+                    holder.imgLabel.setBackgroundResource(0);
+                }
+            }
+        });
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,6 +79,7 @@ public class VideoNewsAdapter extends RecyclerView.Adapter<VideoNewsAdapter.Vide
         public TextView tvPlayCount;
         public TextView tvZanCount;
         public TextView tvCaiCount;
+        public ImageView imgLabel;
 
         public VideoNewsViewHolder(View itemView) {
             super(itemView);
@@ -74,7 +88,7 @@ public class VideoNewsAdapter extends RecyclerView.Adapter<VideoNewsAdapter.Vide
             tvPlayCount = (TextView) itemView.findViewById(R.id.tv_play_count);
             tvZanCount = (TextView) itemView.findViewById(R.id.tv_zan_count);
             tvCaiCount = (TextView) itemView.findViewById(R.id.tv_cai_count);
-
+            imgLabel = (ImageView) itemView.findViewById(R.id.img_label);
         }
     }
 }

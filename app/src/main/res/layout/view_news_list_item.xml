@@ -73,12 +73,23 @@
 
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/img_video_news_list_thumbs"
+    <RelativeLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:background="#b0b0b0"
-        android:minHeight="60dp"/>
+        android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/img_video_news_list_thumbs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#b0b0b0"
+            android:minHeight="60dp"/>
+
+        <ImageView
+            android:id="@+id/img_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
 
 </LinearLayout>
