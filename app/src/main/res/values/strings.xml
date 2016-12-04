@@ -7,5 +7,6 @@
     <string name="x_recycler_view_complete_no_more">加载完毕, 没有更多啦!</string>
     <string name="x_recycler_view_load_failed">加载失败, 点击重试!</string>
 
+    <string name="x_recycler_view_refresh_tip">为您推荐了%1$s篇%2$s</string>
 
 </resources>

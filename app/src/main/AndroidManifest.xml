@@ -33,7 +33,7 @@
         </activity>
 
         <activity android:name="com.m3gv.news.business.video.VideoDetailActivity"/>
-        <activity android:name=".business.homepage.HomePageActivity"/>
+        <activity android:name=".business.homepage.VideoListActivity"/>
 
 
         <!-- 实时通信模块、推送（均需要加入以下声明） START -->

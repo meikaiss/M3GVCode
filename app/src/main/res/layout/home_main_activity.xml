@@ -28,4 +28,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
+    <TextView
+        android:id="@+id/tv_refresh_result_tip"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="@color/color_video_news_list_refresh_tip"
+        android:gravity="center"
+        android:textColor="#f0f0f0"
+        android:textSize="12dp"
+        android:translationY="-30dp"/>
+
 </FrameLayout>

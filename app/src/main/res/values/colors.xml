@@ -5,11 +5,14 @@
     <color name="colorAccent">#FFB72424</color>
 
     <color name="color_video_player_play_pause_pressed">#333333</color>
+    <color name="color_video_player_controller_bg">#99000000</color>
 
     <color name="text_color_normal_gray">#333333</color>
     <color name="text_color_mini_description">#999999</color>
 
     <color name="list_item_selector_normal">#FFFFFF</color>
     <color name="list_item_selector_pressed">#F0F0F0</color>
+
+    <color name="color_video_news_list_refresh_tip">#cc000000</color>
 
 </resources>
