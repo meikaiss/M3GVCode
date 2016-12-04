@@ -17,10 +17,26 @@
 
         <ProgressBar
             android:id="@+id/progress_video_loading"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_gravity="center"
-            android:layout_marginBottom="20dp"/>
+            android:layout_marginBottom="20dp"
+            android:indeterminateDrawable="@drawable/progress_bar_animator"/>
+
+        <TextView
+            android:id="@+id/tv_re_play"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/video_re_play_btn_btn"
+            android:gravity="center"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:text="重播"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18dp"
+            android:visibility="gone"/>
 
     </FrameLayout>
 
@@ -55,7 +71,7 @@
                 android:maxHeight="2dp"
                 android:minHeight="2dp"
                 android:progress="0"
-                android:progressDrawable="@drawable/video__seekbar_selector"
+                android:progressDrawable="@drawable/video_seekbar_selector"
                 android:thumb="@drawable/video__seekbar_thumb"
                 android:thumbOffset="0dp"/>
 
