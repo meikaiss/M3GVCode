@@ -39,8 +39,7 @@ public class VideoListFragment extends M3gBaseFragment {
     private TextView tvRefreshResultTip;
 
     private boolean isRefreshTipShow = false;
-    private ObjectAnimator hideRefreshTipAnimator;
-    private boolean isGoing2HideRefreshTip = false;
+    private List<RefreshTipRunnable> refreshTipRunnableList = new ArrayList<>();
 
     private List<VideoNewsEntity> dataList = new ArrayList<>();
     private VideoNewsAdapter videoNewsAdapter;
@@ -80,7 +79,7 @@ public class VideoListFragment extends M3gBaseFragment {
         xRecyclerView.setAdapter(videoNewsAdapter);
 
         AVQuery<AVObject> avQuery = new AVQuery<>("VideoNews");
-        avQuery.orderByAscending("updatedAt").whereEqualTo("enable", true);
+        avQuery.orderByAscending("videoId").whereEqualTo("enable", true);
         avQuery.limit(1);
         avQuery.findInBackground(new FindCallback<AVObject>() {
             @Override
@@ -127,7 +126,8 @@ public class VideoListFragment extends M3gBaseFragment {
 
                         videoNewsAdapter.notifyDataSetChanged();
                         xRecyclerView.refreshComplete();
-                        showRefreshTip(list.size(), "视频");
+                        showRefreshTip(
+                                getString(R.string.x_recycler_view_refresh_tip, String.valueOf(list.size()), "视频"));
                     }
                 });
             }
@@ -141,32 +141,30 @@ public class VideoListFragment extends M3gBaseFragment {
         return rootView;
     }
 
-    private void showRefreshTip(int msgCount, String msgType) {
-        tvRefreshResultTip.setText(getString(R.string.x_recycler_view_refresh_tip, String.valueOf(msgCount), msgType));
-        showRefreshTipAnimator();
-    }
-
     private void showRefreshTip(String msg) {
         tvRefreshResultTip.setText(msg);
         showRefreshTipAnimator();
     }
 
     private void showRefreshTipAnimator() {
-        int deltaY = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 30, Resources.getSystem()
-                .getDisplayMetrics());
-
-        if (hideRefreshTipAnimator == null) {
-            hideRefreshTipAnimator = ObjectAnimator.ofFloat(tvRefreshResultTip, "translationY", 0, -deltaY)
-                    .setDuration(200);
-        }
-
         if (!isRefreshTipShow) {
+            int deltaY = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 30, Resources.getSystem()
+                    .getDisplayMetrics());
             ObjectAnimator animator = ObjectAnimator.ofFloat(tvRefreshResultTip, "translationY", -deltaY, 0)
                     .setDuration(200);
-            if (isGoing2HideRefreshTip) {
-                // 告诉 即将到来的 Runnable 不要执行Run方法体
-                isGoing2HideRefreshTip = false;
+
+            // 终止 之前的所有 tip退出动画
+            for (int i = 0; i < refreshTipRunnableList.size(); i++) {
+                // 将还未启动的tip退出动画 置死
+                refreshTipRunnableList.get(i).terminateFlag = true;
+
+                // 将已经启动的tip退出动画 取消执行
+                if (refreshTipRunnableList.get(i).hideRefreshTipAnimator != null &&
+                        refreshTipRunnableList.get(i).hideRefreshTipAnimator.isStarted()) {
+                    refreshTipRunnableList.get(i).hideRefreshTipAnimator.end();
+                }
             }
+
             animator.addListener(new Animator.AnimatorListener() {
                 @Override
                 public void onAnimationStart(Animator animator) {
@@ -175,13 +173,24 @@ public class VideoListFragment extends M3gBaseFragment {
 
                 @Override
                 public void onAnimationEnd(Animator animator) {
-                    isGoing2HideRefreshTip = true;
-                    new Handler().postDelayed(new Runnable() {
+                    RefreshTipRunnable hideRefreshTipRunnable = new RefreshTipRunnable() {
                         @Override
                         public void run() {
-                            hideRefreshTipAnimator.start();
+                            if (terminateFlag) {
+                                // 已经被终止
+                            } else {
+                                int deltaY = (int) TypedValue
+                                        .applyDimension(TypedValue.COMPLEX_UNIT_DIP, 30, Resources.getSystem()
+                                                .getDisplayMetrics());
+                                hideRefreshTipAnimator = ObjectAnimator
+                                        .ofFloat(tvRefreshResultTip, "translationY", 0, -deltaY)
+                                        .setDuration(200);
+                                hideRefreshTipAnimator.start();
+                            }
                         }
-                    }, 2000);
+                    };
+                    refreshTipRunnableList.add(hideRefreshTipRunnable);
+                    new Handler().postDelayed(hideRefreshTipRunnable, 2000);
                 }
 
                 @Override
