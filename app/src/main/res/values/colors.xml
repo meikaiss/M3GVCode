@@ -12,6 +12,7 @@
 
     <color name="list_item_selector_normal">#FFFFFF</color>
     <color name="list_item_selector_pressed">#F0F0F0</color>
+    <color name="list_item_selector_ripple">#d0d0d0</color>
 
     <color name="color_video_news_list_refresh_tip">#cc000000</color>
 

@@ -3,6 +3,7 @@ package com.m3gv.news.common.videoplayer;
 import android.animation.ObjectAnimator;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -37,6 +39,7 @@ public class VideoPlayerFragment extends M3gBaseFragment {
 
     private FrameLayout realVideoContainer;
     private TXCloudVideoView playerView;
+    private ProgressBar progressBarLoading;
     private LinearLayout videoPlayerControllerBar;
     /**
      * 必须使用 视频的时长（单位：秒）来作为进度条的数据
@@ -86,6 +89,7 @@ public class VideoPlayerFragment extends M3gBaseFragment {
         playOrPauseImgv = f(view, R.id.play_or_pause);
         playOrPauseImgv.setOnClickListener(clickListener);
         playerView = f(view, R.id.m3_video_view);
+        progressBarLoading = f(view, R.id.progress_video_loading);
         seekBar = f(view, R.id.controller_seek_bar);
         tvCurrent = f(view, R.id.time_current);
         tvTotal = f(view, R.id.time_total);
@@ -210,8 +214,11 @@ public class VideoPlayerFragment extends M3gBaseFragment {
     private ITXLivePlayListener itxLivePlayListener = new ITXLivePlayListener() {
         @Override
         public void onPlayEvent(int event, Bundle bundle) {
+            Log.e("onPlayEvent", "event=" + event);
             if (event == TXLiveConstants.PLAY_EVT_PLAY_BEGIN) {
-
+                progressBarLoading.setVisibility(View.GONE);
+            } else if (event == TXLiveConstants.PLAY_EVT_PLAY_LOADING) {
+                progressBarLoading.setVisibility(View.VISIBLE);
             } else if (event == TXLiveConstants.PLAY_EVT_PLAY_PROGRESS) {
                 if (!isVideoPlaying) {
                     return;
@@ -238,8 +245,6 @@ public class VideoPlayerFragment extends M3gBaseFragment {
                 seekBar.setProgress(0);
                 tvCurrent.setText(TimeUtil.toDurationString(0));
                 pauseVideo();
-            } else if (event == TXLiveConstants.PLAY_EVT_PLAY_LOADING) {
-
             }
         }
 

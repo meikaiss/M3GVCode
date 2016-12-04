@@ -104,7 +104,7 @@ public class VideoListFragment extends M3gBaseFragment {
             @Override
             public void onRefresh() {
                 AVQuery<AVObject> avQuery = new AVQuery<>("VideoNews");
-                avQuery.orderByAscending("updatedAt").whereEqualTo("enable", true);
+                avQuery.orderByAscending("videoId").whereEqualTo("enable", true);
                 if (CollectionUtil.isNotEmpty(dataList)) {
                     avQuery.whereGreaterThan("videoId", dataList.get(0).videoId);
                 }
@@ -177,7 +177,7 @@ public class VideoListFragment extends M3gBaseFragment {
                         @Override
                         public void run() {
                             if (terminateFlag) {
-                                // 已经被终止
+                                // 已经被外部终止，则不再执行任何动作
                             } else {
                                 int deltaY = (int) TypedValue
                                         .applyDimension(TypedValue.COMPLEX_UNIT_DIP, 30, Resources.getSystem()

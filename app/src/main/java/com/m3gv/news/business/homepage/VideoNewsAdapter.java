@@ -1,6 +1,7 @@
 package com.m3gv.news.business.homepage;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 import com.m3gv.news.R;
 import com.m3gv.news.business.video.VideoDetailActivity;
+import com.m3gv.news.common.util.UnitUtil;
 
 import java.util.List;
 
@@ -40,8 +42,12 @@ public class VideoNewsAdapter extends RecyclerView.Adapter<VideoNewsAdapter.Vide
 
     @Override
     public void onBindViewHolder(VideoNewsAdapter.VideoNewsViewHolder holder, int pos) {
+
+        holder.imgThumbs.setBackgroundColor(Color.GRAY);
+        holder.imgLabel.setImageResource(0);
+
         holder.tvTitle.setText(dataList.get(pos).videoTitle);
-        holder.tvPlayCount.setText("" + dataList.get(pos).playCount);
+        holder.tvPlayCount.setText(UnitUtil.toWan(dataList.get(pos).playCount));
         holder.tvZanCount.setText("" + dataList.get(pos).zanCount);
         holder.tvCaiCount.setText("" + dataList.get(pos).caiCount);
 
@@ -51,7 +57,7 @@ public class VideoNewsAdapter extends RecyclerView.Adapter<VideoNewsAdapter.Vide
             public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> animation) {
                 super.onResourceReady(resource, animation);
                 if (dataList.get(pos).videoResolution == 4) {
-                    holder.imgLabel.setImageResource(R.drawable.video_label_hot);
+                    holder.imgLabel.setImageResource(R.drawable.video_label_1080_p);
                 } else {
                     holder.imgLabel.setImageResource(0);
                 }
