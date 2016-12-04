@@ -22,6 +22,10 @@ public class VideoDurationEntity implements Parcelable {
         this.totalSecond = getTotalSecond();
     }
 
+    public VideoDurationEntity(int totalSecond) {
+        updateDuration(totalSecond);
+    }
+
     protected VideoDurationEntity(Parcel in) {
         hour = in.readInt();
         minute = in.readInt();

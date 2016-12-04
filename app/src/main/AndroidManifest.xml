@@ -17,12 +17,14 @@
 
 
     <application
+        android:name=".M3gApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_96x96"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.m3gv.news.TestMainActivity">
+
+        <activity android:name=".TestMainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -31,7 +33,22 @@
         </activity>
 
         <activity android:name="com.m3gv.news.business.video.VideoDetailActivity"/>
-        
+        <activity android:name=".business.homepage.HomePageActivity"/>
+
+
+        <!-- 实时通信模块、推送（均需要加入以下声明） START -->
+        <!-- 实时通信模块、推送都要使用 PushService -->
+        <service android:name="com.avos.avoscloud.PushService"/>
+        <receiver android:name="com.avos.avoscloud.AVBroadcastReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.USER_PRESENT"/>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+            </intent-filter>
+        </receiver>
+        <!-- 实时通信模块、推送 END -->
+
+
     </application>
 
 </manifest>

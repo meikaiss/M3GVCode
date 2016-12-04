@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.m3gv.news.R;
 import com.m3gv.news.base.M3gBaseActivity;
+import com.m3gv.news.business.homepage.VideoNewsEntity;
 import com.m3gv.news.common.videoplayer.VideoDurationEntity;
 import com.m3gv.news.common.videoplayer.VideoEntity;
 import com.m3gv.news.common.videoplayer.VideoPlayerFragment;
@@ -18,11 +19,14 @@ import com.m3gv.news.common.videoplayer.VideoPlayerFragment;
 
 public class VideoDetailActivity extends M3gBaseActivity {
 
+    private static String KEY_VIDEO_NEWS_ENTITY = "key_video_news_entity";
+
 
     private TextView tvVideoTitle;
 
-    public static void start(Activity activity, String url) {
+    public static void start(Activity activity, VideoNewsEntity videoNewsEntity) {
         Intent intent = new Intent(activity, VideoDetailActivity.class);
+        intent.putExtra(KEY_VIDEO_NEWS_ENTITY, videoNewsEntity);
         activity.startActivity(intent);
     }
 
@@ -32,10 +36,12 @@ public class VideoDetailActivity extends M3gBaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.video_detail_activity);
 
+        VideoNewsEntity videoNewsEntity = getIntent().getParcelableExtra(KEY_VIDEO_NEWS_ENTITY);
+
         VideoEntity videoEntity = new VideoEntity();
-        videoEntity.title = "EP499魏延一刀五杀最心机借刀杀人！";
-        videoEntity.url = "http://ac-orciop2a.clouddn.com/c0c422c71c897ece20d3.mp4";
-        videoEntity.durationEntity = new VideoDurationEntity(0, 9, 27);
+        videoEntity.title = videoNewsEntity.videoTitle;
+        videoEntity.url = videoNewsEntity.videoUrl;
+        videoEntity.durationEntity = new VideoDurationEntity(videoNewsEntity.videoDuration);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_video_container,
                 VideoPlayerFragment.newInstance(videoEntity))
