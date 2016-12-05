@@ -41,7 +41,7 @@ public class VideoNewsAdapter extends RecyclerView.Adapter<VideoNewsAdapter.Vide
     }
 
     @Override
-    public void onBindViewHolder(VideoNewsAdapter.VideoNewsViewHolder holder, int pos) {
+    public void onBindViewHolder(final VideoNewsAdapter.VideoNewsViewHolder holder, final int pos) {
 
         holder.imgThumbs.setBackgroundColor(Color.GRAY);
         holder.imgLabel.setImageResource(0);

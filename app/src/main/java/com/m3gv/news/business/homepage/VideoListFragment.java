@@ -29,7 +29,6 @@ import java.util.List;
 /**
  * Created by meikai on 16/12/3.
  */
-
 public class VideoListFragment extends M3gBaseFragment {
 
     private ViewGroup emptyViewGroup;
