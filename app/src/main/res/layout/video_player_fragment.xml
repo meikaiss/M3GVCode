@@ -7,7 +7,9 @@
     <FrameLayout
         android:id="@+id/real_video_container"
         android:layout_width="match_parent"
-        android:layout_height="200dp">
+        android:layout_height="200dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
 
         <com.m3gv.news.common.view.M3CloudVideoView
             android:id="@+id/m3_video_view"
@@ -26,16 +28,18 @@
         <TextView
             android:id="@+id/tv_re_play"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="36dp"
             android:layout_gravity="center"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="15dp"
             android:background="@drawable/video_re_play_btn_btn"
+            android:drawableLeft="@drawable/video_complete_replay"
+            android:drawablePadding="20dp"
             android:gravity="center"
-            android:paddingLeft="30dp"
-            android:paddingRight="30dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
             android:text="重播"
-            android:textColor="@color/colorPrimary"
-            android:textSize="18dp"
+            android:textColor="@android:color/white"
+            android:textSize="14dp"
             android:visibility="gone"/>
 
     </FrameLayout>
