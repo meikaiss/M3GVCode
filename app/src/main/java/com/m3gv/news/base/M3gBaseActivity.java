@@ -12,6 +12,10 @@ import android.view.View;
 public class M3gBaseActivity extends AppCompatActivity {
 
 
+    public M3gBaseActivity() {
+        M3Config.setCurrentActivity(this);
+    }
+
     public <T extends View> T f(@IdRes int viewId) {
         return (T) findViewById(viewId);
     }

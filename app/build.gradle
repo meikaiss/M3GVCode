@@ -5,11 +5,10 @@ android {
     buildToolsVersion "25.0.1"
     defaultConfig {
         applicationId "com.m3gv.news"
-        minSdkVersion 21
+        minSdkVersion 14
         targetSdkVersion 21
         versionCode 1
         versionName "0.1"
-//        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         jackOptions {
             enabled false

@@ -123,7 +123,7 @@ public class VideoListFragment extends M3gBaseFragment {
                             dataList.add(0, VideoNewsEntity.parse(list.get(i)));
                         }
 
-                        videoNewsAdapter.notifyDataSetChanged();
+                        videoNewsAdapter.notifyItemInserted(0);
                         xRecyclerView.refreshComplete();
                         showRefreshTip(
                                 getString(R.string.x_recycler_view_refresh_tip, String.valueOf(list.size()), "视频"));

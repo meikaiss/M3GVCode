@@ -14,9 +14,12 @@ import com.tencent.bugly.crashreport.CrashReport;
 public class M3gApplication extends Application {
 
 
+    public static Application application;
+
     @Override
     public void onCreate() {
         super.onCreate();
+        M3gApplication.application = this;
 
         initBugly();
 
@@ -38,8 +41,8 @@ public class M3gApplication extends Application {
         CrashReport.UserStrategy strategy = new CrashReport.UserStrategy(context);
         strategy.setUploadProcess(processName == null || processName.equals(packageName));
         // 初始化Bugly
-        CrashReport.initCrashReport(context, "45ff042175", getResources().getBoolean(R.bool.open_bugly_in_debug),
-                strategy);
+        CrashReport.initCrashReport(context, "45ff042175",
+                getResources().getBoolean(R.bool.open_bugly_in_debug), strategy);
     }
 
 
