@@ -11,6 +11,7 @@ import android.view.View;
 
 public class M3gBaseActivity extends AppCompatActivity {
 
+    public boolean isDestroyed;
 
     public M3gBaseActivity() {
         M3Config.setCurrentActivity(this);
@@ -21,10 +22,26 @@ public class M3gBaseActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        isDestroyed = false;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        isDestroyed = true;
+    }
+
+    @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         if (outState != null) {
             outState.clear();
         }
+    }
+
+    public boolean getDestroyedFlag() {
+        return isDestroyed;
     }
 }

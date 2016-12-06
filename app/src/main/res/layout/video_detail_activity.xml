@@ -21,4 +21,39 @@
         android:textColor="@color/text_color_normal_gray"
         android:textSize="@dimen/text_size_title_big"/>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:clipChildren="false"
+        android:gravity="center_vertical">
+
+        <android.support.v4.widget.Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <ImageView
+            android:id="@+id/img_zan"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/zan_no"/>
+
+        <android.support.v4.widget.Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <ImageView
+            android:id="@+id/img_cai"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/cai_no"/>
+
+        <android.support.v4.widget.Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
 </LinearLayout>
