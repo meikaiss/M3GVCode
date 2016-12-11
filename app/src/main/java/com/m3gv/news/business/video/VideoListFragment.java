@@ -107,33 +107,39 @@ public class VideoListFragment extends M3gBaseFragment {
         xRecyclerView.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
-                AVQuery<AVObject> avQuery = new AVQuery<>("VideoNews");
-                avQuery.orderByAscending("videoId").whereEqualTo("enable", true);
-                if (CollectionUtil.isNotEmpty(dataList)) {
-                    avQuery.whereGreaterThan("videoId", dataList.get(0).videoId);
-                }
-                avQuery.limit(1);
-                avQuery.findInBackground(new FindCallback<AVObject>() {
+                new Handler().postDelayed(new Runnable() {
                     @Override
-                    public void done(List<AVObject> list, AVException e) {
-                        if (VideoListFragment.this == null
-                                || VideoListFragment.this.isDestroyed()
-                                || CollectionUtil.isEmpty(list)) {
-                            showRefreshTip("没有发现新视频");
-                            xRecyclerView.refreshComplete();
-                            return;
+                    public void run() {
+                        AVQuery<AVObject> avQuery = new AVQuery<>("VideoNews");
+                        avQuery.orderByAscending("videoId").whereEqualTo("enable", true);
+                        if (CollectionUtil.isNotEmpty(dataList)) {
+                            avQuery.whereGreaterThan("videoId", dataList.get(0).videoId);
                         }
+                        avQuery.limit(1);
+                        avQuery.findInBackground(new FindCallback<AVObject>() {
+                            @Override
+                            public void done(List<AVObject> list, AVException e) {
+                                if (VideoListFragment.this == null
+                                        || VideoListFragment.this.isDestroyed()
+                                        || CollectionUtil.isEmpty(list)) {
+                                    showRefreshTip("没有发现新视频");
+                                    xRecyclerView.refreshComplete();
+                                    return;
+                                }
 
-                        for (int i = list.size() - 1; i >= 0; i--) {
-                            dataList.add(0, VideoNewsEntity.parse(list.get(i)));
-                        }
+                                for (int i = list.size() - 1; i >= 0; i--) {
+                                    dataList.add(0, VideoNewsEntity.parse(list.get(i)));
+                                }
 
-                        videoNewsAdapter.notifyItemInserted(1);
-                        xRecyclerView.refreshComplete();
-                        showRefreshTip(
-                                getString(R.string.x_recycler_view_refresh_tip, String.valueOf(list.size()), "视频"));
+                                videoNewsAdapter.notifyItemInserted(1);
+                                xRecyclerView.refreshComplete();
+                                showRefreshTip(
+                                        getString(R.string.x_recycler_view_refresh_tip, String.valueOf(list.size()), "视频"));
+                            }
+                        });
                     }
-                });
+                }, 2000);
+
             }
 
             @Override

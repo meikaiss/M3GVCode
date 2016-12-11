@@ -2,6 +2,7 @@ package com.m3gv.news.common.view.xrecyclerview;
 
 import android.animation.Animator;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.support.annotation.DrawableRes;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
@@ -14,6 +15,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
+
+import com.m3gv.news.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -90,12 +93,16 @@ public class XRecyclerView extends SafeRecyclerView {
 
     public XRecyclerView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        init();
+        init(context, attrs, defStyle);
     }
 
-    private void init() {
+    private void init(Context context, AttributeSet attrs, int defStyle) {
+        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.XRecyclerView);
+        int pullImgResId = ta.getResourceId(R.styleable.XRecyclerView_pull_img_src, 0);
+        ta.recycle();
+
         if (pullRefreshEnabled) {
-            mRefreshHeader = new PullRefreshHeader(getContext());
+            mRefreshHeader = new PullRefreshHeader(getContext(), null, pullImgResId);
         }
 
         if (loadingMoreEnabled) {

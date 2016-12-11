@@ -29,6 +29,7 @@
             android:layout_height="match_parent"
             android:background="@android:color/white"
             android:scrollbars="vertical"
+            app:pull_img_src="@drawable/home_menu_1_selected"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
     </LinearLayout>

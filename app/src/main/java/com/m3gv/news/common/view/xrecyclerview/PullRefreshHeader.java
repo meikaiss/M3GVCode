@@ -1,6 +1,7 @@
 package com.m3gv.news.common.view.xrecyclerview;
 
 import android.animation.Animator;
+import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.drawable.AnimationDrawable;
@@ -8,9 +9,11 @@ import android.os.Handler;
 import android.support.annotation.DrawableRes;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.m3gv.news.R;
@@ -27,22 +30,25 @@ public class PullRefreshHeader extends LinearLayout {
     private LinearLayout mContainer;
     private TextView mStatusTextView;
     private ImageView mRefreshImageView;
+    private ProgressBar progressBar;
 
     private int mCurrentState = STATE_NORMAL;
 
     public int mMeasuredHeight;
 
+    public int pullImgResId;
 
     public PullRefreshHeader(Context context) {
-        this(context, null);
+        this(context, null, 0);
     }
 
     /**
      * @param context
      * @param attrs
      */
-    public PullRefreshHeader(Context context, AttributeSet attrs) {
+    public PullRefreshHeader(Context context, AttributeSet attrs, int pullImgResId) {
         super(context, attrs);
+        this.pullImgResId = pullImgResId;
         initView();
     }
 
@@ -61,6 +67,11 @@ public class PullRefreshHeader extends LinearLayout {
 
         mStatusTextView = (TextView) findViewById(R.id.refresh_status_textview);
         mRefreshImageView = (ImageView) findViewById(R.id.refresh_image);
+        progressBar = (ProgressBar) findViewById(R.id.loading_progress);
+
+        if (pullImgResId > 0) {
+            mRefreshImageView.setImageResource(pullImgResId);
+        }
 
         measure(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         mMeasuredHeight = getMeasuredHeight();
@@ -80,9 +91,17 @@ public class PullRefreshHeader extends LinearLayout {
         switch (state) {
             case STATE_NORMAL:
                 mStatusTextView.setText("下拉刷新");
+                if (pullImgResId > 0) {
+                    mRefreshImageView.setVisibility(View.VISIBLE);
+                    progressBar.setVisibility(View.GONE);
+                    ObjectAnimator.ofFloat(mRefreshImageView, "rotation", -180f, 0f).setDuration(300).start();
+                }
                 break;
             case STATE_RELEASE_TO_REFRESH:
                 mStatusTextView.setText("释放立即刷新");
+                if (pullImgResId > 0) {
+                    ObjectAnimator.ofFloat(mRefreshImageView, "rotation", 0f, -180f).setDuration(300).start();
+                }
                 break;
             case STATE_REFRESHING:
                 if (mRefreshImageView.getBackground() != null
@@ -90,6 +109,10 @@ public class PullRefreshHeader extends LinearLayout {
                     ((AnimationDrawable) mRefreshImageView.getBackground()).start();
                 }
                 mStatusTextView.setText("正在刷新...");
+                if (pullImgResId > 0) {
+                    progressBar.setVisibility(View.VISIBLE);
+                    mRefreshImageView.setVisibility(View.GONE);
+                }
                 break;
             case STATE_DONE: {
                 if (mRefreshImageView.getBackground() != null
@@ -97,6 +120,9 @@ public class PullRefreshHeader extends LinearLayout {
                     ((AnimationDrawable) mRefreshImageView.getBackground()).stop();
                 }
                 mStatusTextView.setText("刷新完成");
+                if (pullImgResId > 0) {
+                    progressBar.setVisibility(View.GONE);
+                }
             }
             break;
             default:
@@ -172,7 +198,7 @@ public class PullRefreshHeader extends LinearLayout {
 
     public void reset() {
         smoothScrollTo(0);
-        if (mRefreshImageView.getBackground() != null){
+        if (mRefreshImageView.getBackground() != null) {
             AnimationDrawable drawable = (AnimationDrawable) mRefreshImageView.getBackground();
             drawable.selectDrawable(0);
         }
