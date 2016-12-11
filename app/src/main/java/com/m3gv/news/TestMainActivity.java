@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.m3gv.news.base.M3gBaseActivity;
-import com.m3gv.news.business.homepage.VideoListActivity;
+import com.m3gv.news.business.video.VideoListActivity;
 
 public class TestMainActivity extends M3gBaseActivity {
 

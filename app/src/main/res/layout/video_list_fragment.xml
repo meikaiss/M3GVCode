@@ -4,14 +4,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.m3gv.news.common.view.xrecyclerview.XRecyclerView
-        android:id="@+id/base_x_recycler_view"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <LinearLayout
+        android:id="@+id/content_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/white"
-        android:scrollbars="vertical"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <com.m3gv.news.common.view.magicindicator.MagicIndicator
+            android:id="@+id/magic_indicator"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@android:color/white"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#e0e0e0"/>
+
+        <com.m3gv.news.common.view.xrecyclerview.XRecyclerView
+            android:id="@+id/base_x_recycler_view"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"
+            android:scrollbars="vertical"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
+    </LinearLayout>
 
     <include
         layout="@layout/common__empty_status"

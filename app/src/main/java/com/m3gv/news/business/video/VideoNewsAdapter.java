@@ -1,4 +1,4 @@
-package com.m3gv.news.business.homepage;
+package com.m3gv.news.business.video;
 
 import android.app.Activity;
 import android.graphics.Color;
@@ -14,7 +14,6 @@ import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 import com.m3gv.news.R;
-import com.m3gv.news.business.video.VideoDetailActivity;
 import com.m3gv.news.common.util.UnitUtil;
 
 import java.util.List;
@@ -26,10 +25,12 @@ public class VideoNewsAdapter extends RecyclerView.Adapter<VideoNewsAdapter.Vide
 
     private Activity activity;
     private List<VideoNewsEntity> dataList;
+    private boolean isPullRefershEnable;
 
-    public VideoNewsAdapter(Activity activity, List<VideoNewsEntity> dataList) {
+    public VideoNewsAdapter(Activity activity, List<VideoNewsEntity> dataList, boolean isPullRefershEnable) {
         this.activity = activity;
         this.dataList = dataList;
+        this.isPullRefershEnable = isPullRefershEnable;
     }
 
     @Override
@@ -68,7 +69,9 @@ public class VideoNewsAdapter extends RecyclerView.Adapter<VideoNewsAdapter.Vide
             @Override
             public void onClick(View view) {
 
-                VideoDetailActivity.start(activity, dataList.get(pos));
+                VideoDetailActivity
+                        .start(activity, dataList.get(holder.getAdapterPosition() - (isPullRefershEnable ? 1 : 0)))
+                ;//是因为头部下拉刷新占了一个位置
             }
         });
     }

@@ -195,6 +195,14 @@ public class XRecyclerView extends SafeRecyclerView {
         loadingMoreEnabled = enabled;
     }
 
+    public boolean isPullRefreshEnabled() {
+        return pullRefreshEnabled;
+    }
+
+    public boolean isLoadingMoreEnabled() {
+        return loadingMoreEnabled;
+    }
+
     public void setEmptyView(View emptyView) {
         this.mEmptyView = emptyView;
         mDataObserver.onChanged();

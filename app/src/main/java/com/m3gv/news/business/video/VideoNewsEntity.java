@@ -1,4 +1,4 @@
-package com.m3gv.news.business.homepage;
+package com.m3gv.news.business.video;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -8,7 +8,6 @@ import com.avos.avoscloud.AVObject;
 /**
  * Created by meikai on 16/12/3.
  */
-
 public class VideoNewsEntity implements Parcelable {
 
     public int videoDuration;
@@ -20,6 +19,7 @@ public class VideoNewsEntity implements Parcelable {
     public String thumbnail;
     public int videoResolution;
     public int videoId;
+    public int categoryId;
 
     public VideoNewsEntity() {
     }
@@ -34,6 +34,7 @@ public class VideoNewsEntity implements Parcelable {
         thumbnail = in.readString();
         videoResolution = in.readInt();
         videoId = in.readInt();
+        categoryId = in.readInt();
     }
 
     public static final Creator<VideoNewsEntity> CREATOR = new Creator<VideoNewsEntity>() {
@@ -66,6 +67,7 @@ public class VideoNewsEntity implements Parcelable {
         }
         videoNewsEntity.videoResolution = avObject.getInt("videoResolution");
         videoNewsEntity.videoId = avObject.getInt("videoId");
+        videoNewsEntity.categoryId = avObject.getInt("categoryId");
 
         return videoNewsEntity;
     }
@@ -86,5 +88,6 @@ public class VideoNewsEntity implements Parcelable {
         parcel.writeString(thumbnail);
         parcel.writeInt(videoResolution);
         parcel.writeInt(videoId);
+        parcel.writeInt(categoryId);
     }
 }

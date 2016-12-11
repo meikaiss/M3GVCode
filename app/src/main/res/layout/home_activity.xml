@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/home_frame_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/divider_bottom"/>
+
+    <View
+        android:id="@+id/divider_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_above="@+id/layout_bottom_menu"
+        android:background="#999999"/>
+
+    <LinearLayout
+        android:id="@+id/layout_bottom_menu"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true">
+
+        <TextView
+            android:id="@+id/home_menu_tv_1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/home_bottom_menu_item_bg_selector"
+            android:drawableTop="@drawable/home_menu_1_selector"
+            android:gravity="center"
+            android:paddingTop="5dp"
+            android:text="视频"
+            android:textColor="@drawable/home_bottom_menu_item_text_color"
+            android:textSize="13dp"/>
+
+        <TextView
+            android:id="@+id/home_menu_tv_2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/home_bottom_menu_item_bg_selector"
+            android:drawableTop="@drawable/home_menu_2_selector"
+            android:gravity="center"
+            android:paddingTop="5dp"
+            android:text="社区"
+            android:textColor="@drawable/home_bottom_menu_item_text_color"
+            android:textSize="13dp"/>
+
+        <TextView
+            android:id="@+id/home_menu_tv_3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/home_bottom_menu_item_bg_selector"
+            android:drawableTop="@drawable/home_menu_3_selector"
+            android:gravity="center"
+            android:paddingTop="5dp"
+            android:text="壁纸"
+            android:textColor="@drawable/home_bottom_menu_item_text_color"
+            android:textSize="13dp"/>
+
+        <TextView
+            android:id="@+id/home_menu_tv_4"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/home_bottom_menu_item_bg_selector"
+            android:drawableTop="@drawable/home_menu_4_selector"
+            android:gravity="center"
+            android:paddingTop="5dp"
+            android:text="资料"
+            android:textColor="@drawable/home_bottom_menu_item_text_color"
+            android:textSize="13dp"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

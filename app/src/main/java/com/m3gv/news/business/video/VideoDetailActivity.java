@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import com.m3gv.news.R;
 import com.m3gv.news.base.M3gBaseActivity;
-import com.m3gv.news.business.homepage.VideoNewsEntity;
 import com.m3gv.news.common.videoplayer.VideoDurationEntity;
 import com.m3gv.news.common.videoplayer.VideoEntity;
 import com.m3gv.news.common.videoplayer.VideoPlayerFragment;

@@ -1,4 +1,4 @@
-package com.m3gv.news.business.homepage;
+package com.m3gv.news.business.video;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
@@ -21,6 +21,8 @@ import com.avos.avoscloud.FindCallback;
 import com.m3gv.news.R;
 import com.m3gv.news.base.M3gBaseFragment;
 import com.m3gv.news.common.util.CollectionUtil;
+import com.m3gv.news.common.view.magicindicator.MagicIndicator;
+import com.m3gv.news.common.view.magicindicator.buildins.commonnavigator.CommonNavigator;
 import com.m3gv.news.common.view.xrecyclerview.XRecyclerView;
 
 import java.util.ArrayList;
@@ -34,6 +36,8 @@ public class VideoListFragment extends M3gBaseFragment {
     private ViewGroup emptyViewGroup;
     private ViewGroup loadingViewGroup;
     private ViewGroup noNetViewGroup;
+    private MagicIndicator magicIndicator;
+    private CommonNavigator commonNavigator;
     private XRecyclerView xRecyclerView;
     private TextView tvRefreshResultTip;
 
@@ -55,8 +59,9 @@ public class VideoListFragment extends M3gBaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.home_main_activity, container, false);
+        rootView = inflater.inflate(R.layout.video_list_fragment, container, false);
 
+        magicIndicator = f(R.id.magic_indicator);
         xRecyclerView = f(R.id.base_x_recycler_view);
         xRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
 
@@ -74,7 +79,7 @@ public class VideoListFragment extends M3gBaseFragment {
         xRecyclerView.setLayoutManager(layoutManager);
         loadingViewGroup.setVisibility(View.VISIBLE);
 
-        videoNewsAdapter = new VideoNewsAdapter(getActivity(), dataList);
+        videoNewsAdapter = new VideoNewsAdapter(getActivity(), dataList, xRecyclerView.isPullRefreshEnabled());
         xRecyclerView.setAdapter(videoNewsAdapter);
 
         AVQuery<AVObject> avQuery = new AVQuery<>("VideoNews");
@@ -93,7 +98,7 @@ public class VideoListFragment extends M3gBaseFragment {
                     dataList.add(VideoNewsEntity.parse(list.get(i)));
                 }
 
-                videoNewsAdapter.notifyDataSetChanged();
+                videoNewsAdapter.notifyItemInserted(dataList.size());
                 xRecyclerView.setVisibility(View.VISIBLE);
                 loadingViewGroup.setVisibility(View.GONE);
             }
@@ -123,7 +128,7 @@ public class VideoListFragment extends M3gBaseFragment {
                             dataList.add(0, VideoNewsEntity.parse(list.get(i)));
                         }
 
-                        videoNewsAdapter.notifyDataSetChanged();
+                        videoNewsAdapter.notifyItemInserted(1);
                         xRecyclerView.refreshComplete();
                         showRefreshTip(
                                 getString(R.string.x_recycler_view_refresh_tip, String.valueOf(list.size()), "视频"));
@@ -138,6 +143,17 @@ public class VideoListFragment extends M3gBaseFragment {
         });
 
         return rootView;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        commonNavigator = new CommonNavigator(getContext());
+        commonNavigator.setAdjustMode(false);
+        commonNavigator.setScrollPivotX(0.65f);
+
+
     }
 
     private void showRefreshTip(String msg) {

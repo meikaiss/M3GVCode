@@ -1,4 +1,4 @@
-package com.m3gv.news.business.homepage;
+package com.m3gv.news.business.video;
 
 import android.app.Activity;
 import android.content.Intent;
