@@ -201,10 +201,12 @@ public class VideoPlayerFragment extends M3gBaseFragment {
         boolean newFullScreenState = isInFullScreen = !isInFullScreen;
         if (newFullScreenState) {
             // 期望到横屏，但当前是竖屏
+            fullscreenImgBtn.setBackgroundResource(R.drawable.video_player_fullscreen_landscape_selector);
             rootView.getLayoutParams().width = Resources.getSystem().getDisplayMetrics().heightPixels;
             rootView.getLayoutParams().height = Resources.getSystem().getDisplayMetrics().widthPixels;
         } else {
             // 期望到竖屏，但当前是横屏，注意此时getDisplayMetrics()方法得到的宽高也是横屏时宽高!
+            fullscreenImgBtn.setBackgroundResource(R.drawable.video_player_fullscreen_portrait_selector);
             rootView.getLayoutParams().width = Resources.getSystem().getDisplayMetrics().heightPixels;
             rootView.getLayoutParams().height = Resources.getSystem().getDisplayMetrics().heightPixels * 9 / 16;
         }
