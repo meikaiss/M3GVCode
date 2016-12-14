@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 /**
  * Created by meikai on 16/12/3.
  */
-
 public abstract class M3gBaseFragment extends Fragment {
 
     public boolean isDestroyed;

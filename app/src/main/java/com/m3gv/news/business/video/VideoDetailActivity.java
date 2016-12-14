@@ -11,16 +11,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.m3gv.news.R;
-import com.m3gv.news.base.M3gBaseActivity;
 import com.m3gv.news.common.videoplayer.VideoDurationEntity;
 import com.m3gv.news.common.videoplayer.VideoEntity;
+import com.m3gv.news.common.videoplayer.VideoPlayerActivity;
 import com.m3gv.news.common.videoplayer.VideoPlayerFragment;
 
 /**
  * Created by meikai on 16/12/3.
  */
 
-public class VideoDetailActivity extends M3gBaseActivity implements View.OnClickListener {
+public class VideoDetailActivity extends VideoPlayerActivity implements View.OnClickListener {
 
     private static String KEY_VIDEO_NEWS_ENTITY = "key_video_news_entity";
 

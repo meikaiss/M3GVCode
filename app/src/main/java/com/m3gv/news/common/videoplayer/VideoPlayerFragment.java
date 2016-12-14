@@ -1,8 +1,10 @@
 package com.m3gv.news.common.videoplayer;
 
 import android.animation.ObjectAnimator;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,6 +55,7 @@ public class VideoPlayerFragment extends M3gBaseFragment {
     private boolean isControllerBarShowing = true;
     private boolean isVideoPlaying;
     private boolean isSeekBarInDrag;
+    private boolean isInFullScreen;
     private VideoEntity videoEntity;
 
     public static VideoPlayerFragment newInstance(VideoEntity videoEntity) {
@@ -71,6 +74,8 @@ public class VideoPlayerFragment extends M3gBaseFragment {
 
         rootView = inflater.inflate(R.layout.video_player_fragment, container, false);
 
+        rootView.getLayoutParams().width = Resources.getSystem().getDisplayMetrics().widthPixels;
+        rootView.getLayoutParams().height = Resources.getSystem().getDisplayMetrics().widthPixels * 9 / 16;
         return rootView;
     }
 
@@ -88,7 +93,7 @@ public class VideoPlayerFragment extends M3gBaseFragment {
         videoPlayerControllerBar = f(view, R.id.video_player_controller_bar);
         playOrPauseImgv = f(view, R.id.play_or_pause);
         playOrPauseImgv.setOnClickListener(clickListener);
-        playerView = f(view, R.id.m3_video_view);
+        playerView = f(rootView, R.id.m3_video_view);
         progressBarLoading = f(view, R.id.progress_video_loading);
         tvRePlay = f(view, R.id.tv_re_play);
         tvRePlay.setOnClickListener(clickListener);
@@ -122,6 +127,8 @@ public class VideoPlayerFragment extends M3gBaseFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        ((VideoPlayerActivity) getActivity()).bindVideoPlayerFragment(this);
 
         Bundle paramsBundle = getArguments();
         if (paramsBundle != null) {
@@ -178,6 +185,32 @@ public class VideoPlayerFragment extends M3gBaseFragment {
         }
     }
 
+    public boolean onBackPressed() {
+        if (isInFullScreen) {
+            onFullScreenToggle();
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 自动切换 横竖屏
+     * 若当前为竖屏，则切换到横屏；若当前为横屏，则切换到竖屏
+     */
+    private void onFullScreenToggle() {
+        boolean newFullScreenState = isInFullScreen = !isInFullScreen;
+        if (newFullScreenState) {
+            // 期望到横屏，但当前是竖屏
+            rootView.getLayoutParams().width = Resources.getSystem().getDisplayMetrics().heightPixels;
+            rootView.getLayoutParams().height = Resources.getSystem().getDisplayMetrics().widthPixels;
+        } else {
+            // 期望到竖屏，但当前是横屏，注意此时getDisplayMetrics()方法得到的宽高也是横屏时宽高!
+            rootView.getLayoutParams().width = Resources.getSystem().getDisplayMetrics().heightPixels;
+            rootView.getLayoutParams().height = Resources.getSystem().getDisplayMetrics().heightPixels * 9 / 16;
+        }
+        ((VideoPlayerActivity) getActivity()).onFullScreenChange(isInFullScreen);
+    }
+
     private View.OnClickListener clickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -205,7 +238,9 @@ public class VideoPlayerFragment extends M3gBaseFragment {
                     }
                     break;
                 case R.id.fullscreen:
-
+                    if (getActivity() != null && getActivity() instanceof VideoPlayerActivity) {
+                        onFullScreenToggle();
+                    }
                     break;
                 case R.id.tv_re_play:
                     playOrPauseImgv.callOnClick();
@@ -258,8 +293,14 @@ public class VideoPlayerFragment extends M3gBaseFragment {
         }
 
         @Override
-        public void onNetStatus(Bundle bundle) {
-
+        public void onNetStatus(Bundle status) {
+            Log.d("status", "Current status, CPU:" + status.getString(TXLiveConstants.NET_STATUS_CPU_USAGE) +
+                    ", RES:" + status.getInt(TXLiveConstants.NET_STATUS_VIDEO_WIDTH) + "*" + status
+                    .getInt(TXLiveConstants.NET_STATUS_VIDEO_HEIGHT) +
+                    ", SPD:" + status.getInt(TXLiveConstants.NET_STATUS_NET_SPEED) + "Kbps" +
+                    ", FPS:" + status.getInt(TXLiveConstants.NET_STATUS_VIDEO_FPS) +
+                    ", ARA:" + status.getInt(TXLiveConstants.NET_STATUS_AUDIO_BITRATE) + "Kbps" +
+                    ", VRA:" + status.getInt(TXLiveConstants.NET_STATUS_VIDEO_BITRATE) + "Kbps");
         }
     };
 }
