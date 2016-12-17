@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=320,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no,user-scalable=no">
+
+    <title>jsBridge v1.0</title>
+
+    <script src="../source/core.js"></script>
+    <script src="../source/router.js"></script>
+
+</head>
+
+<body bgcolor="#ff0000">
+
+
+<div>
+
+    <label>current page version is 1.0<br></label>
+
+
+    <button id="system.version"
+            style="width:200px; height:45px; border:#00F 2px solid; background:#69F; color:#FFF">
+        system.version
+    </button>
+    <button id="system.toast"
+            style="width:200px; height:45px; border:#00F 2px solid; background:#69F; color:#FFF">
+        system.toast
+    </button>
+    <button id="system.log"
+            style="width:200px; height:45px; border:#00F 2px solid; background:#69F; color:#FFF">
+        system.log
+    </button>
+    <button id="jump.action"
+            style="width:200px; height:45px; border:#00F 2px solid; background:#69F; color:#FFF">
+        jump.action
+    </button>
+
+    <br>
+    <label id="operation_log">日志列表<br></label>
+</div>
+
+<script language="javascript">
+
+    var printLog = function(message){
+        document.getElementById('operation_log').innerText +=  message+'\n';
+    }
+
+    var domEventBind = function (id, onclick) {
+        document.getElementById(id).onclick = onclick;
+    }
+
+    domEventBind('system.version', function () {
+        var message = window.webview.system.version();
+        printLog(message);
+    });
+
+    domEventBind('system.toast', function () {
+        var message = '从js中弹出toast的测试';
+        window.webview.system.toast(message);
+
+        printLog(message);
+    });
+
+    domEventBind('system.log', function () {
+        var message = '从js中让安卓打印日志的测试';
+        window.webview.system.log(message);
+
+        printLog(message);
+    });
+
+    domEventBind('jump.action', function () {
+        var message = '从js中打开安卓Activity';
+        window.webview.jump.action('com.android.framework.demo.activity.LayoutAnimationActivity');
+
+        printLog(message);
+    });
+
+</script>
+
+</body>
+</html>

@@ -1,10 +1,11 @@
 package com.m3gv.news;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
 import com.m3gv.news.base.M3gBaseActivity;
-import com.m3gv.news.business.video.VideoListActivity;
+import com.m3gv.news.business.news.ArticleNewsDetailActivity;
 
 public class TestMainActivity extends M3gBaseActivity {
 
@@ -14,12 +15,16 @@ public class TestMainActivity extends M3gBaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.test_main_activity);
 
-        f(R.id.btn_start).setOnClickListener(new View.OnClickListener() {
+
+        findViewById(R.id.btn_start).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                VideoListActivity.start(TestMainActivity.this);
+                Intent intent = new Intent(TestMainActivity.this, ArticleNewsDetailActivity.class);
+                startActivity(intent);
+
             }
         });
+
 
     }
 

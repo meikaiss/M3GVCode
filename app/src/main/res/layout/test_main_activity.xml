@@ -18,6 +18,6 @@
         android:id="@+id/btn_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="播放远程视频"/>
+        android:text="打开"/>
 
 </LinearLayout>

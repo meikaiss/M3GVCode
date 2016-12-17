@@ -25,17 +25,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".business.homepage.HomeActivity">
+        <activity android:name=".business.news.ArticleNewsDetailActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-
         <activity
             android:name="com.m3gv.news.business.video.VideoDetailActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"/>
+        <!--<activity android:name=".business.news.ArticleNewsDetailActivity"/>-->
 
 
         <!-- 实时通信模块、推送（均需要加入以下声明） START -->

@@ -11,7 +11,6 @@ import java.lang.ref.WeakReference;
 /**
  * Created by meikai on 16/12/14.
  */
-
 public class VideoPlayerActivity extends M3gBaseActivity {
 
     private WeakReference<VideoPlayerFragment> videoPlayerFragmentRef;
