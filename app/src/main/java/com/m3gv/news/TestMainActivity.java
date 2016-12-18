@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.m3gv.news.base.M3gBaseActivity;
-import com.m3gv.news.business.news.ArticleNewsDetailActivity;
+import com.m3gv.news.business.article.ArticleNewsDetailActivity;
 
 public class TestMainActivity extends M3gBaseActivity {
 

@@ -1,4 +1,4 @@
-package com.m3gv.news.business.video;
+package com.m3gv.news.business.article;
 
 import android.app.Activity;
 import android.graphics.Color;
@@ -14,6 +14,7 @@ import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 import com.m3gv.news.R;
+import com.m3gv.news.business.video.VideoDetailActivity;
 import com.m3gv.news.common.util.UnitUtil;
 
 import java.util.List;
@@ -21,33 +22,33 @@ import java.util.List;
 /**
  * Created by meikai on 16/12/3.
  */
-public class VideoNewsAdapter extends RecyclerView.Adapter<VideoNewsAdapter.VideoNewsViewHolder> {
+public class ArticleNewsAdapter extends RecyclerView.Adapter<ArticleNewsAdapter.ArticleNewsViewHolder> {
 
     private Activity activity;
-    private List<VideoNewsEntity> dataList;
+    private List<ArticleNewsEntity> dataList;
     private boolean isPullRefreshEnable;
 
-    public VideoNewsAdapter(Activity activity, List<VideoNewsEntity> dataList, boolean isPullRefreshEnable) {
+    public ArticleNewsAdapter(Activity activity, List<ArticleNewsEntity> dataList, boolean isPullRefreshEnable) {
         this.activity = activity;
         this.dataList = dataList;
         this.isPullRefreshEnable = isPullRefreshEnable;
     }
 
     @Override
-    public VideoNewsAdapter.VideoNewsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ArticleNewsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.video_news_list_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.article_news_list_item, parent, false);
 
-        return new VideoNewsViewHolder(view);
+        return new ArticleNewsViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final VideoNewsAdapter.VideoNewsViewHolder holder, final int pos) {
+    public void onBindViewHolder(final ArticleNewsViewHolder holder, final int pos) {
 
         holder.imgThumbs.setBackgroundColor(Color.GRAY);
         holder.imgLabel.setImageResource(0);
 
-        holder.tvTitle.setText(dataList.get(pos).videoTitle);
+        holder.tvTitle.setText(dataList.get(pos).articleTitle);
         holder.tvPlayCount.setText(UnitUtil.toWan(dataList.get(pos).playCount));
         holder.tvZanCount.setText("" + dataList.get(pos).zanCount);
         holder.tvCaiCount.setText("" + dataList.get(pos).caiCount);
@@ -57,11 +58,6 @@ public class VideoNewsAdapter extends RecyclerView.Adapter<VideoNewsAdapter.Vide
             @Override
             public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> animation) {
                 super.onResourceReady(resource, animation);
-                if (dataList.get(pos).videoResolution == 4) {
-                    holder.imgLabel.setImageResource(R.drawable.video_label_1080_p);
-                } else {
-                    holder.imgLabel.setImageResource(0);
-                }
             }
         });
 
@@ -69,9 +65,6 @@ public class VideoNewsAdapter extends RecyclerView.Adapter<VideoNewsAdapter.Vide
             @Override
             public void onClick(View view) {
 
-                VideoDetailActivity
-                        .start(activity, dataList.get(holder.getAdapterPosition() - (isPullRefreshEnable ? 1 : 0)))
-                ;//是因为头部下拉刷新占了一个位置
             }
         });
     }
@@ -81,7 +74,7 @@ public class VideoNewsAdapter extends RecyclerView.Adapter<VideoNewsAdapter.Vide
         return dataList == null ? 0 : dataList.size();
     }
 
-    public class VideoNewsViewHolder extends RecyclerView.ViewHolder {
+    public class ArticleNewsViewHolder extends RecyclerView.ViewHolder {
 
         public TextView tvTitle;
         public ImageView imgThumbs;
@@ -90,10 +83,10 @@ public class VideoNewsAdapter extends RecyclerView.Adapter<VideoNewsAdapter.Vide
         public TextView tvCaiCount;
         public ImageView imgLabel;
 
-        public VideoNewsViewHolder(View itemView) {
+        public ArticleNewsViewHolder(View itemView) {
             super(itemView);
-            tvTitle = (TextView) itemView.findViewById(R.id.tv_video_news_list_title);
-            imgThumbs = (ImageView) itemView.findViewById(R.id.img_video_news_list_thumbs);
+            tvTitle = (TextView) itemView.findViewById(R.id.tv_article_news_list_title);
+            imgThumbs = (ImageView) itemView.findViewById(R.id.img_article_news_list_thumbs);
             tvPlayCount = (TextView) itemView.findViewById(R.id.tv_play_count);
             tvZanCount = (TextView) itemView.findViewById(R.id.tv_zan_count);
             tvCaiCount = (TextView) itemView.findViewById(R.id.tv_cai_count);

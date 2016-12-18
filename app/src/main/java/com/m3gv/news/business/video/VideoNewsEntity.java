@@ -49,6 +49,25 @@ public class VideoNewsEntity implements Parcelable {
         }
     };
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(videoDuration);
+        parcel.writeString(videoTitle);
+        parcel.writeInt(playCount);
+        parcel.writeInt(zanCount);
+        parcel.writeInt(caiCount);
+        parcel.writeString(videoUrl);
+        parcel.writeString(thumbnail);
+        parcel.writeInt(videoResolution);
+        parcel.writeInt(videoId);
+        parcel.writeInt(categoryId);
+    }
+
     public static VideoNewsEntity parse(AVObject avObject) {
         if (avObject == null) {
             return null;
@@ -70,24 +89,5 @@ public class VideoNewsEntity implements Parcelable {
         videoNewsEntity.categoryId = avObject.getInt("categoryId");
 
         return videoNewsEntity;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeInt(videoDuration);
-        parcel.writeString(videoTitle);
-        parcel.writeInt(playCount);
-        parcel.writeInt(zanCount);
-        parcel.writeInt(caiCount);
-        parcel.writeString(videoUrl);
-        parcel.writeString(thumbnail);
-        parcel.writeInt(videoResolution);
-        parcel.writeInt(videoId);
-        parcel.writeInt(categoryId);
     }
 }

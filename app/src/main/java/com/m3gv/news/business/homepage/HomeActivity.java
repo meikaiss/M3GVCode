@@ -13,6 +13,7 @@ import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.SaveCallback;
 import com.m3gv.news.R;
 import com.m3gv.news.base.M3gBaseActivity;
+import com.m3gv.news.business.article.ArticleListFragment;
 import com.m3gv.news.business.video.VideoListFragment;
 import com.m3gv.news.common.util.AppUtil;
 import com.m3gv.news.common.util.NetUtil;
@@ -32,8 +33,8 @@ public class HomeActivity extends M3gBaseActivity implements View.OnClickListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_activity);
 
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.home_frame_container, VideoListFragment.newInstance()).commitAllowingStateLoss();
+        getSupportFragmentManager().beginTransaction().replace(R.id.home_frame_container,
+                VideoListFragment.newInstance()).commit();
 
         tvMenu1 = f(R.id.home_menu_tv_1);
         tvMenu2 = f(R.id.home_menu_tv_2);
@@ -55,10 +56,12 @@ public class HomeActivity extends M3gBaseActivity implements View.OnClickListene
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.home_menu_tv_1:
-
+                getSupportFragmentManager().beginTransaction().replace(R.id.home_frame_container,
+                        VideoListFragment.newInstance()).commit();
                 break;
             case R.id.home_menu_tv_2:
-
+                getSupportFragmentManager().beginTransaction().replace(R.id.home_frame_container,
+                        ArticleListFragment.newInstance()).commit();
                 break;
             case R.id.home_menu_tv_3:
 

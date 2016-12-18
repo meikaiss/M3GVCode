@@ -1,4 +1,4 @@
-package com.m3gv.news.business.video;
+package com.m3gv.news.business.article;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,17 +21,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by meikai on 16/12/3.
+ * Created by meikai on 16/12/18.
  */
-public class VideoListFragment extends NewsListFragment {
+public class ArticleListFragment extends NewsListFragment {
 
-    private List<VideoNewsEntity> dataList = new ArrayList<>();
-    private VideoNewsAdapter videoNewsAdapter;
+    private List<ArticleNewsEntity> dataList = new ArrayList<>();
+    private ArticleNewsAdapter articleNewsAdapter;
 
-    public static VideoListFragment newInstance() {
+    public static ArticleListFragment newInstance() {
         Bundle args = new Bundle();
 
-        VideoListFragment fragment = new VideoListFragment();
+        ArticleListFragment fragment = new ArticleListFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -42,26 +42,25 @@ public class VideoListFragment extends NewsListFragment {
             @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
-        videoNewsAdapter = new VideoNewsAdapter(getActivity(), dataList, xRecyclerView.isPullRefreshEnabled());
-        xRecyclerView.setAdapter(videoNewsAdapter);
+        articleNewsAdapter = new ArticleNewsAdapter(getActivity(), dataList, xRecyclerView.isPullRefreshEnabled());
+        xRecyclerView.setAdapter(articleNewsAdapter);
 
-        AVQuery<AVObject> avQuery = new AVQuery<>("VideoNews");
-        avQuery.orderByAscending("videoId").whereEqualTo("enable", true);
+        AVQuery<AVObject> avQuery = new AVQuery<>("ArticleNews");
         avQuery.limit(1);
         avQuery.findInBackground(new FindCallback<AVObject>() {
             @Override
             public void done(List<AVObject> list, AVException e) {
-                if (VideoListFragment.this == null
-                        || VideoListFragment.this.isDestroyed()
+                if (ArticleListFragment.this == null
+                        || ArticleListFragment.this.isDestroyed()
                         || list == null) {
                     return;
                 }
 
                 for (int i = 0; i < list.size(); i++) {
-                    dataList.add(VideoNewsEntity.parse(list.get(i)));
+                    dataList.add(ArticleNewsEntity.parse((list.get(i))));
                 }
 
-                videoNewsAdapter.notifyItemInserted(dataList.size());
+                articleNewsAdapter.notifyItemInserted(dataList.size());
                 xRecyclerView.setVisibility(View.VISIBLE);
                 loadingViewGroup.setVisibility(View.GONE);
             }
@@ -73,28 +72,28 @@ public class VideoListFragment extends NewsListFragment {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        AVQuery<AVObject> avQuery = new AVQuery<>("VideoNews");
+                        AVQuery<AVObject> avQuery = new AVQuery<>("ArticleNews");
                         avQuery.orderByAscending("videoId").whereEqualTo("enable", true);
                         if (CollectionUtil.isNotEmpty(dataList)) {
-                            avQuery.whereGreaterThan("videoId", dataList.get(0).videoId);
+                            avQuery.whereGreaterThan("videoId", dataList.get(0).articleId);
                         }
                         avQuery.limit(1);
                         avQuery.findInBackground(new FindCallback<AVObject>() {
                             @Override
                             public void done(List<AVObject> list, AVException e) {
-                                if (VideoListFragment.this == null
-                                        || VideoListFragment.this.isDestroyed()
+                                if (ArticleListFragment.this == null
+                                        || ArticleListFragment.this.isDestroyed()
                                         || CollectionUtil.isEmpty(list)) {
-                                    showRefreshTip("没有发现新视频");
+                                    showRefreshTip("没有发现新资讯");
                                     xRecyclerView.refreshComplete();
                                     return;
                                 }
 
                                 for (int i = list.size() - 1; i >= 0; i--) {
-                                    dataList.add(0, VideoNewsEntity.parse(list.get(i)));
+                                    dataList.add(0, ArticleNewsEntity.parse(list.get(i)));
                                 }
 
-                                videoNewsAdapter.notifyItemInserted(1);
+                                articleNewsAdapter.notifyItemInserted(1);
                                 xRecyclerView.refreshComplete();
                                 showRefreshTip(
                                         getString(R.string.x_recycler_view_refresh_tip, String.valueOf(list.size()), "视频"));

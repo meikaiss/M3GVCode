@@ -1,4 +1,4 @@
-package com.m3gv.news.business.video;
+package com.m3gv.news.business;
 
 import android.animation.ObjectAnimator;
 
@@ -8,9 +8,9 @@ import android.animation.ObjectAnimator;
  */
 public class RefreshTipRunnable implements Runnable {
 
-    boolean terminateFlag = false;
+    public boolean terminateFlag = false;
 
-    ObjectAnimator hideRefreshTipAnimator = null;
+    public ObjectAnimator hideRefreshTipAnimator = null;
 
     @Override
     public void run() {

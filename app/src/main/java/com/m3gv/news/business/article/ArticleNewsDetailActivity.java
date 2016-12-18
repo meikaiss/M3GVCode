@@ -1,4 +1,4 @@
-package com.m3gv.news.business.news;
+package com.m3gv.news.business.article;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -25,7 +25,7 @@ public class ArticleNewsDetailActivity extends M3gBaseActivity {
 
 //        m3WebView.loadUrl("file:///android_asset/webview/demo/testV1.0.html");
 
-        m3WebView.loadUrl("file:///android_asset/news.html");
+        m3WebView.loadUrl("file:///android_asset/article/news.html");
     }
 
 
