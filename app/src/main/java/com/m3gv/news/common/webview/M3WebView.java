@@ -5,13 +5,11 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Build;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.Toast;
 
-import com.m3gv.news.base.M3Config;
+import com.m3gv.news.common.util.LogUtil;
 
 import java.util.Arrays;
 
@@ -26,6 +24,9 @@ public class M3WebView extends WebView {
     private M3WebViewInterface m3WebViewInterface;
     private IM3WebProtocolHandler m3Protocol;
 
+    public String[] dataTypes;
+
+    public OnImageClickListener onImageClickListener;
 
     public M3WebView(Context context) {
         super(context);
@@ -77,13 +78,22 @@ public class M3WebView extends WebView {
         }
 
         @JavascriptInterface
-        public void clickArticleImage(String index) {
-            Toast.makeText(M3Config.getCurrentActivity(), "" + index, Toast.LENGTH_LONG).show();
+        public void clickArticleImage(String indexStr) {
+            if (onImageClickListener != null) {
+                int index;
+                try {
+                    index = Integer.parseInt(indexStr);
+                    onImageClickListener.onImageClick(index, M3WebView.this.dataTypes);
+                } catch (Exception e) {
+                    LogUtil.e("clickArticleImage", e.getMessage());
+                }
+            }
         }
 
         @JavascriptInterface
         public void setArticleImageArr(String[] dataTypes) {
-            Log.e("setArticleImageArr", (dataTypes == null ? "null" : Arrays.toString(dataTypes)));
+            M3WebView.this.dataTypes = dataTypes;
+            LogUtil.e("setArticleImageArr", (dataTypes == null ? "null" : Arrays.toString(dataTypes)));
         }
     }
 
@@ -95,6 +105,11 @@ public class M3WebView extends WebView {
                 M3WebView.this.setNetworkAvailable(online = !online);
             }
         });
+    }
+
+
+    public interface OnImageClickListener {
+        void onImageClick(int index, String[] dataTypes);
     }
 
 }
