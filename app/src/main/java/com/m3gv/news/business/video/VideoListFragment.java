@@ -117,7 +117,7 @@ public class VideoListFragment extends NewsListFragment {
                             }
                         });
                     }
-                }, 500);
+                }, 200);
 
             }
 

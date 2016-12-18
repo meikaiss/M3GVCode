@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <uses-permission android:name="android.permission.CALL_PHONE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_LOGS"/>
     <uses-permission android:name="android.permission.RECORD_AUDIO"/>
     <uses-permission android:name="android.permission.CAPTURE_AUDIO_OUTPUT"/>
@@ -33,9 +34,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.m3gv.news.business.video.VideoDetailActivity"
+            android:name=".business.video.VideoDetailActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"/>
-        <!--<activity android:name=".business.news.ArticleNewsDetailActivity"/>-->
+        <activity
+            android:name=".business.article.ArticleNewsDetailActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"/>
 
 
         <!-- 实时通信模块、推送（均需要加入以下声明） START -->

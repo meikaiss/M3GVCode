@@ -69,9 +69,9 @@ public class VideoNewsAdapter extends RecyclerView.Adapter<VideoNewsAdapter.Vide
             @Override
             public void onClick(View view) {
 
-                VideoDetailActivity
-                        .start(activity, dataList.get(holder.getAdapterPosition() - (isPullRefreshEnable ? 1 : 0)))
-                ;//是因为头部下拉刷新占了一个位置
+                VideoDetailActivity.start(activity,
+                        dataList.get(holder.getAdapterPosition() - (isPullRefreshEnable ? 1 : 0)));
+                //是因为头部下拉刷新占了一个位置
             }
         });
     }

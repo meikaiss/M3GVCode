@@ -1,8 +1,8 @@
 
 !function (window, undefined) {
 
-    var core_version = "core_1.0";
-    document.write(core_version + "<br>");
+    //var core_version = "core_1.0";
+    //document.write(core_version + "<br>");
 
 
     window.webview = window.webview || {};

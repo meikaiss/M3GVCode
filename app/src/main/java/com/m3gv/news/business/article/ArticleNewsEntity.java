@@ -64,6 +64,8 @@ public class ArticleNewsEntity implements Parcelable {
         }
         ArticleNewsEntity articleNewsEntity = new ArticleNewsEntity();
         articleNewsEntity.articleTitle = avObject.getString("articleTitle");
+        articleNewsEntity.articleId = avObject.getInt("articleId");
+        articleNewsEntity.content = avObject.getString("content");
         articleNewsEntity.playCount = avObject.getInt("playCount");
         articleNewsEntity.zanCount = avObject.getInt("zanCount");
         articleNewsEntity.caiCount = avObject.getInt("caiCount");

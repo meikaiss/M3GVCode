@@ -2,8 +2,8 @@
 
 !function (self, undefined) {
 
-    var router_version = "router_1.0";
-    document.write(router_version);
+    //var router_version = "router_1.0";
+    //document.write(router_version);
 
 
     self.webview = self.webview || {};

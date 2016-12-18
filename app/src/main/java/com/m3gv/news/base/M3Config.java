@@ -19,4 +19,8 @@ public class M3Config {
     public static Activity getCurrentActivity() {
         return currentActivity != null ? currentActivity.get() : null;
     }
+
+    public static boolean isDebug(){
+        return true;
+    }
 }

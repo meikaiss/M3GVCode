@@ -14,7 +14,6 @@ import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 import com.m3gv.news.R;
-import com.m3gv.news.business.video.VideoDetailActivity;
 import com.m3gv.news.common.util.UnitUtil;
 
 import java.util.List;
@@ -64,7 +63,9 @@ public class ArticleNewsAdapter extends RecyclerView.Adapter<ArticleNewsAdapter.
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                ArticleNewsDetailActivity.start(activity,
+                        dataList.get(holder.getAdapterPosition() - (isPullRefreshEnable ? 1 : 0)));
+                //是因为头部下拉刷新占了一个位置
             }
         });
     }

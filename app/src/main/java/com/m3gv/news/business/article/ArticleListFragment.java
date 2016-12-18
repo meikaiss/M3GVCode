@@ -114,7 +114,7 @@ public class ArticleListFragment extends NewsListFragment {
                             }
                         });
                     }
-                }, 500);
+                }, 200);
 
             }
 
