@@ -3,6 +3,7 @@ package com.m3gv.news.business.homepage;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
@@ -13,6 +14,7 @@ import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.SaveCallback;
 import com.m3gv.news.R;
 import com.m3gv.news.base.M3gBaseActivity;
+import com.m3gv.news.base.M3gBaseFragment;
 import com.m3gv.news.business.article.ArticleListFragment;
 import com.m3gv.news.business.video.VideoListFragment;
 import com.m3gv.news.common.util.AppUtil;
@@ -23,50 +25,45 @@ import com.m3gv.news.common.util.NetUtil;
  */
 public class HomeActivity extends M3gBaseActivity implements View.OnClickListener {
 
-    private TextView tvMenu1;
-    private TextView tvMenu2;
-    private TextView tvMenu3;
-    private TextView tvMenu4;
+    private TextView[] tvMenuArr;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_activity);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.home_frame_container,
-                VideoListFragment.newInstance()).commit();
+        tvMenuArr = new TextView[4];
+        tvMenuArr[0] = f(R.id.home_menu_tv_0);
+        tvMenuArr[1] = f(R.id.home_menu_tv_1);
+        tvMenuArr[2] = f(R.id.home_menu_tv_2);
+        tvMenuArr[3] = f(R.id.home_menu_tv_3);
 
-        tvMenu1 = f(R.id.home_menu_tv_1);
-        tvMenu2 = f(R.id.home_menu_tv_2);
-        tvMenu3 = f(R.id.home_menu_tv_3);
-        tvMenu4 = f(R.id.home_menu_tv_4);
+        tvMenuArr[0].setOnClickListener(this);
+        tvMenuArr[1].setOnClickListener(this);
+        tvMenuArr[2].setOnClickListener(this);
+        tvMenuArr[3].setOnClickListener(this);
 
-        tvMenu1.setOnClickListener(this);
-        tvMenu2.setOnClickListener(this);
-        tvMenu3.setOnClickListener(this);
-        tvMenu4.setOnClickListener(this);
-
-        tvMenu1.setSelected(true);
+        tabMenuClick(0);
 
         //收集用户信息
         submitUserInfo();
     }
 
+    private int currentTabIndex = -1;
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.home_menu_tv_0:
+                tabMenuClick(0);
+                break;
             case R.id.home_menu_tv_1:
-                getSupportFragmentManager().beginTransaction().replace(R.id.home_frame_container,
-                        VideoListFragment.newInstance()).commit();
+                tabMenuClick(1);
                 break;
             case R.id.home_menu_tv_2:
-                getSupportFragmentManager().beginTransaction().replace(R.id.home_frame_container,
-                        ArticleListFragment.newInstance()).commit();
-                break;
-            case R.id.home_menu_tv_3:
 
                 break;
-            case R.id.home_menu_tv_4:
+            case R.id.home_menu_tv_3:
 
                 break;
             default:
@@ -74,6 +71,55 @@ public class HomeActivity extends M3gBaseActivity implements View.OnClickListene
         }
     }
 
+    private void tabMenuClick(int clickIndex) {
+        if (currentTabIndex == clickIndex) {
+            return;
+        }
+        //显示 新的
+        Fragment fragment = getSupportFragmentManager().findFragmentByTag("tab_" + clickIndex);
+        if (fragment == null) {
+            fragment = createTabFragment(clickIndex);
+            getSupportFragmentManager().beginTransaction().add(R.id.home_frame_container, fragment, "tab_" + clickIndex)
+                    .commitAllowingStateLoss();
+        } else {
+            getSupportFragmentManager().beginTransaction().show(fragment).commitAllowingStateLoss();
+        }
+        tvMenuArr[clickIndex].setSelected(true);
+
+        //取消 旧的
+        if (currentTabIndex >= 0) {
+            Fragment fragment0 = getSupportFragmentManager().findFragmentByTag("tab_" + currentTabIndex);
+            if (fragment0 != null) {
+                getSupportFragmentManager().beginTransaction().hide(fragment0).commitAllowingStateLoss();
+            }
+
+            tvMenuArr[currentTabIndex].setSelected(false);
+        }
+
+        //更新数据
+        currentTabIndex = clickIndex;
+    }
+
+    private M3gBaseFragment createTabFragment(int index) {
+        M3gBaseFragment fragment = null;
+        switch (index) {
+            case 0:
+                fragment = VideoListFragment.newInstance();
+                break;
+            case 1:
+                fragment = ArticleListFragment.newInstance();
+                break;
+            case 2:
+
+                break;
+            case 3:
+
+                break;
+            default:
+                break;
+        }
+        return fragment;
+    }
 
     private void submitUserInfo() {
         TelephonyManager tm = (TelephonyManager) this.getSystemService(TELEPHONY_SERVICE);

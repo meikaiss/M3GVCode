@@ -44,7 +44,7 @@ public class NewsListFragment extends M3gBaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState) {
 
-        rootView = inflater.inflate(R.layout.video_list_fragment, container, false);
+        rootView = inflater.inflate(R.layout.news_list_fragment, container, false);
 
         magicIndicator = f(R.id.magic_indicator);
         xRecyclerView = f(R.id.base_x_recycler_view);

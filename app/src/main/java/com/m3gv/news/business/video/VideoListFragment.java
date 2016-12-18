@@ -1,11 +1,18 @@
 package com.m3gv.news.business.video;
 
+import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.util.Log;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
 
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
@@ -14,7 +21,13 @@ import com.avos.avoscloud.FindCallback;
 import com.m3gv.news.R;
 import com.m3gv.news.business.NewsListFragment;
 import com.m3gv.news.common.util.CollectionUtil;
+import com.m3gv.news.common.util.DensityUtil;
 import com.m3gv.news.common.view.magicindicator.buildins.commonnavigator.CommonNavigator;
+import com.m3gv.news.common.view.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter;
+import com.m3gv.news.common.view.magicindicator.buildins.commonnavigator.abs.IPagerIndicator;
+import com.m3gv.news.common.view.magicindicator.buildins.commonnavigator.abs.IPagerTitleView;
+import com.m3gv.news.common.view.magicindicator.buildins.commonnavigator.indicators.LinePagerIndicator;
+import com.m3gv.news.common.view.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView;
 import com.m3gv.news.common.view.xrecyclerview.XRecyclerView;
 
 import java.util.ArrayList;
@@ -27,6 +40,8 @@ public class VideoListFragment extends NewsListFragment {
 
     private List<VideoNewsEntity> dataList = new ArrayList<>();
     private VideoNewsAdapter videoNewsAdapter;
+
+    private List<String> channelList = new ArrayList<>();
 
     public static VideoListFragment newInstance() {
         Bundle args = new Bundle();
@@ -97,7 +112,8 @@ public class VideoListFragment extends NewsListFragment {
                                 videoNewsAdapter.notifyItemInserted(1);
                                 xRecyclerView.refreshComplete();
                                 showRefreshTip(
-                                        getString(R.string.x_recycler_view_refresh_tip, String.valueOf(list.size()), "视频"));
+                                        getString(R.string.x_recycler_view_refresh_tip, String.valueOf(list.size()),
+                                                "视频"));
                             }
                         });
                     }
@@ -121,6 +137,50 @@ public class VideoListFragment extends NewsListFragment {
         commonNavigator = new CommonNavigator(getContext());
         commonNavigator.setAdjustMode(false);
         commonNavigator.setScrollPivotX(0.65f);
+
+        magicIndicator.setNavigator(commonNavigator);
+
+        channelList.add("每日精彩镜头");
+        channelList.add("搞笑视频");
+
+        commonNavigator.setAdapter(new CommonNavigatorAdapter() {
+            @Override
+            public int getCount() {
+                return channelList.size();
+            }
+
+            @Override
+            public IPagerTitleView getTitleView(Context context, final int index) {
+                SimplePagerTitleView simplePagerTitleView = new SimplePagerTitleView(context);
+                simplePagerTitleView.setText(channelList.get(index));
+                simplePagerTitleView.setNormalColor(Color.parseColor("#9e9e9e"));
+                simplePagerTitleView.setSelectedColor(Color.parseColor("#ff3f3e"));
+                simplePagerTitleView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+                simplePagerTitleView.setGravity(Gravity.CENTER_VERTICAL);
+                simplePagerTitleView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Log.e("commonNavigator", "index=" + index);
+                    }
+                });
+                return simplePagerTitleView;
+            }
+
+            @Override
+            public IPagerIndicator getIndicator(Context context) {
+                LinePagerIndicator indicator = new LinePagerIndicator(context);
+                indicator.setMode(LinePagerIndicator.MODE_EXACTLY);
+                indicator.setLineHeight(DensityUtil.dp2px(context, 2));
+                indicator.setLineWidth(DensityUtil.dp2px(context, 30));
+                indicator.setRoundRadius(DensityUtil.dp2px(context, 1));
+                indicator.setStartInterpolator(new AccelerateInterpolator());
+                indicator.setEndInterpolator(new DecelerateInterpolator(2.0f));
+                List<String> colorList = new ArrayList<>();
+                colorList.add("#ff3f3e");
+                indicator.setColorList(colorList);
+                return indicator;
+            }
+        });
     }
 
 

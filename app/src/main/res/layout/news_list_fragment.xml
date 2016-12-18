@@ -22,14 +22,31 @@
             android:layout_height="1px"
             android:background="#e0e0e0"/>
 
-        <com.m3gv.news.common.view.xrecyclerview.XRecyclerView
-            android:id="@+id/base_x_recycler_view"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/white"
-            android:scrollbars="vertical"
-            app:pull_img_src="@drawable/home_menu_1_selected"/>
+            android:layout_height="match_parent">
+
+            <com.m3gv.news.common.view.xrecyclerview.XRecyclerView
+                android:id="@+id/base_x_recycler_view"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:overScrollMode="never"
+                android:layout_height="match_parent"
+                android:background="@android:color/white"
+                android:scrollbars="vertical"
+                app:pull_img_src="@drawable/home_menu_1_selected"/>
+
+            <TextView
+                android:id="@+id/tv_refresh_result_tip"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="@color/color_video_news_list_refresh_tip"
+                android:gravity="center"
+                android:textColor="#f0f0f0"
+                android:textSize="12dp"
+                android:translationY="-30dp"/>
+
+        </FrameLayout>
 
     </LinearLayout>
 
@@ -47,15 +64,5 @@
         layout="@layout/common__no_net_status"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-
-    <TextView
-        android:id="@+id/tv_refresh_result_tip"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:background="@color/color_video_news_list_refresh_tip"
-        android:gravity="center"
-        android:textColor="#f0f0f0"
-        android:textSize="12dp"
-        android:translationY="-30dp"/>
 
 </FrameLayout>

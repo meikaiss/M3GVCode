@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:layout_above="@+id/layout_bottom_menu"
-        android:background="#999999"/>
+        android:background="#aaaaaa"/>
 
     <LinearLayout
         android:id="@+id/layout_bottom_menu"
@@ -25,7 +25,7 @@
         android:layout_alignParentBottom="true">
 
         <TextView
-            android:id="@+id/home_menu_tv_1"
+            android:id="@+id/home_menu_tv_0"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -33,7 +33,22 @@
             android:drawableTop="@drawable/home_menu_1_selector"
             android:gravity="center"
             android:paddingTop="5dp"
+            android:tag="0"
             android:text="视频"
+            android:textColor="@drawable/home_bottom_menu_item_text_color"
+            android:textSize="13dp"/>
+
+        <TextView
+            android:id="@+id/home_menu_tv_1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/home_bottom_menu_item_bg_selector"
+            android:drawableTop="@drawable/home_menu_2_selector"
+            android:gravity="center"
+            android:paddingTop="5dp"
+            android:tag="1"
+            android:text="社区"
             android:textColor="@drawable/home_bottom_menu_item_text_color"
             android:textSize="13dp"/>
 
@@ -43,10 +58,11 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/home_bottom_menu_item_bg_selector"
-            android:drawableTop="@drawable/home_menu_2_selector"
+            android:drawableTop="@drawable/home_menu_3_selector"
             android:gravity="center"
             android:paddingTop="5dp"
-            android:text="社区"
+            android:tag="2"
+            android:text="壁纸"
             android:textColor="@drawable/home_bottom_menu_item_text_color"
             android:textSize="13dp"/>
 
@@ -56,22 +72,10 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/home_bottom_menu_item_bg_selector"
-            android:drawableTop="@drawable/home_menu_3_selector"
-            android:gravity="center"
-            android:paddingTop="5dp"
-            android:text="壁纸"
-            android:textColor="@drawable/home_bottom_menu_item_text_color"
-            android:textSize="13dp"/>
-
-        <TextView
-            android:id="@+id/home_menu_tv_4"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/home_bottom_menu_item_bg_selector"
             android:drawableTop="@drawable/home_menu_4_selector"
             android:gravity="center"
             android:paddingTop="5dp"
+            android:tag="3"
             android:text="资料"
             android:textColor="@drawable/home_bottom_menu_item_text_color"
             android:textSize="13dp"/>
