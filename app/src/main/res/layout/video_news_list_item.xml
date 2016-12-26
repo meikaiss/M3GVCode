@@ -82,10 +82,10 @@
         android:layout_height="wrap_content"
         android:layout_weight="3">
 
-        <ImageView
+        <com.m3gv.news.common.view.ScaleImageView
             android:id="@+id/img_video_news_list_thumbs"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="wrap_content"
             android:background="#b0b0b0"
             android:scaleType="centerCrop"/>
 

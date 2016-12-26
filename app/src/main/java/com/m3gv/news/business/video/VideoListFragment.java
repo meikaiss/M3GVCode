@@ -62,7 +62,7 @@ public class VideoListFragment extends NewsListFragment {
 
         AVQuery<AVObject> avQuery = new AVQuery<>("VideoNews");
         avQuery.orderByAscending("videoId").whereEqualTo("enable", true);
-        avQuery.limit(1);
+        avQuery.limit(5);
         avQuery.findInBackground(new FindCallback<AVObject>() {
             @Override
             public void done(List<AVObject> list, AVException e) {
@@ -89,11 +89,11 @@ public class VideoListFragment extends NewsListFragment {
                     @Override
                     public void run() {
                         AVQuery<AVObject> avQuery = new AVQuery<>("VideoNews");
-                        avQuery.orderByAscending("videoId").whereEqualTo("enable", true);
                         if (CollectionUtil.isNotEmpty(dataList)) {
                             avQuery.whereGreaterThan("videoId", dataList.get(0).videoId);
                         }
-                        avQuery.limit(1);
+                        avQuery.orderByAscending("videoId").whereEqualTo("enable", true);
+                        avQuery.limit(2);
                         avQuery.findInBackground(new FindCallback<AVObject>() {
                             @Override
                             public void done(List<AVObject> list, AVException e) {

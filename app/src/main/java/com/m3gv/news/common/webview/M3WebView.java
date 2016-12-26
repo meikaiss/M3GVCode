@@ -2,13 +2,17 @@ package com.m3gv.news.common.webview;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Handler;
 import android.util.AttributeSet;
+import android.view.View;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.m3gv.news.base.M3Config;
 import com.m3gv.news.common.util.LogUtil;
 
 import java.util.Arrays;
@@ -49,7 +53,18 @@ public class M3WebView extends WebView {
     public void init() {
 
         this.getSettings().setJavaScriptEnabled(true);
-        this.setWebViewClient(new WebViewClient());
+        this.setWebViewClient(new WebViewClient(){
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                super.onPageStarted(view, url, favicon);
+
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+            }
+        });
 
         this.m3Protocol = new M3ProtocolV1Router();
 

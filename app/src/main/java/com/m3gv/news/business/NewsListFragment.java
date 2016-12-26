@@ -28,6 +28,8 @@ import java.util.List;
  */
 public class NewsListFragment extends M3gBaseFragment {
 
+    protected static int PAGE_LIMIT = 10;
+
     protected ViewGroup emptyViewGroup;
     protected ViewGroup loadingViewGroup;
     protected ViewGroup noNetViewGroup;

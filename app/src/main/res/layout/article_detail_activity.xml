@@ -24,9 +24,15 @@
         android:layout_height="1px"
         android:background="#aaaaaa"/>
 
-    <com.m3gv.news.common.webview.M3WebView
-        android:id="@+id/article_m3_web_view"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
+
+        <com.m3gv.news.common.webview.M3WebView
+            android:id="@+id/article_m3_web_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </FrameLayout>
 
 </LinearLayout>

@@ -3,15 +3,16 @@ package com.m3gv.news.business.article;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.m3gv.news.R;
 import com.m3gv.news.base.M3Config;
 import com.m3gv.news.base.M3gBaseActivity;
-import com.m3gv.news.common.util.StringUtil;
 import com.m3gv.news.common.webview.M3WebView;
 
 import java.io.ByteArrayInputStream;
@@ -42,23 +43,31 @@ public class ArticleNewsDetailActivity extends M3gBaseActivity implements View.O
 
         articleNewsEntity = getIntent().getParcelableExtra(KEY_ARTICLE_NEWS_ENTITY);
 
-        // 获取完事的 html内容字符串
-        String newsHtmlStr = ArticleHtmlFileUtil.createArticleHtml(this, articleNewsEntity.content);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                // 获取完整的 html内容字符串
+                String newsHtmlStr = ArticleHtmlFileUtil.createArticleHtml(ArticleNewsDetailActivity.this,
+                        articleNewsEntity.content);
 
-        // 将完整的 html内容 写入到 缓存的html文件中
-        String cacheFilePath = ArticleHtmlFileUtil.createNewArticle(this,
-                new ByteArrayInputStream(newsHtmlStr.getBytes()));
+                // 将完整的 html内容 写入到 缓存的html文件中
+                final String cacheFilePath = ArticleHtmlFileUtil.createNewArticle(ArticleNewsDetailActivity.this,
+                        new ByteArrayInputStream(newsHtmlStr.getBytes()));
 
-        if (StringUtil.isNotEmpty(cacheFilePath)) {
-            m3WebView.loadUrl("file://" + cacheFilePath);
-        }
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        m3WebView.loadUrl("file://" + cacheFilePath);
+                    }
+                });
+            }
+        }).start();
 
         m3WebView.onImageClickListener = new M3WebView.OnImageClickListener() {
             @Override
             public void onImageClick(int index, String[] dataTypes) {
                 Toast.makeText(M3Config.getCurrentActivity(), "index=" + index + ", " + Arrays.toString(dataTypes),
-                        Toast.LENGTH_LONG)
-                        .show();
+                        Toast.LENGTH_LONG).show();
             }
         };
     }
@@ -81,4 +90,12 @@ public class ArticleNewsDetailActivity extends M3gBaseActivity implements View.O
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        if (m3WebView.canGoBack()){
+            m3WebView.goBack();
+        }else{
+            super.onBackPressed();
+        }
+    }
 }

@@ -44,6 +44,10 @@ public class ArticleNewsAdapter extends RecyclerView.Adapter<ArticleNewsAdapter.
     @Override
     public void onBindViewHolder(final ArticleNewsViewHolder holder, final int pos) {
 
+        ViewGroup.LayoutParams lp = holder.imgThumbs.getLayoutParams();
+        lp.height = lp.width * 9 / 16;
+        holder.imgThumbs.setLayoutParams(lp);
+
         holder.imgThumbs.setBackgroundColor(Color.GRAY);
         holder.imgLabel.setImageResource(0);
 

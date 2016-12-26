@@ -31,6 +31,7 @@ import com.m3gv.news.common.view.magicindicator.buildins.commonnavigator.titles.
 import com.m3gv.news.common.view.xrecyclerview.XRecyclerView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -60,7 +61,8 @@ public class ArticleListFragment extends NewsListFragment {
         xRecyclerView.setAdapter(articleNewsAdapter);
 
         AVQuery<AVObject> avQuery = new AVQuery<>("ArticleNews");
-        avQuery.limit(1);
+        avQuery.orderByAscending("articleId").whereEqualTo("enable", true);
+        avQuery.limit(PAGE_LIMIT);
         avQuery.findInBackground(new FindCallback<AVObject>() {
             @Override
             public void done(List<AVObject> list, AVException e) {
@@ -70,11 +72,13 @@ public class ArticleListFragment extends NewsListFragment {
                     return;
                 }
 
+                Collections.reverse(list);
+
                 for (int i = 0; i < list.size(); i++) {
                     dataList.add(ArticleNewsEntity.parse((list.get(i))));
                 }
 
-                articleNewsAdapter.notifyItemInserted(dataList.size());
+                articleNewsAdapter.notifyItemRangeInserted(1, list.size());
                 xRecyclerView.setVisibility(View.VISIBLE);
                 loadingViewGroup.setVisibility(View.GONE);
             }
@@ -87,11 +91,11 @@ public class ArticleListFragment extends NewsListFragment {
                     @Override
                     public void run() {
                         AVQuery<AVObject> avQuery = new AVQuery<>("ArticleNews");
-                        avQuery.orderByAscending("videoId").whereEqualTo("enable", true);
                         if (CollectionUtil.isNotEmpty(dataList)) {
-                            avQuery.whereGreaterThan("videoId", dataList.get(0).articleId);
+                            avQuery.whereGreaterThan("articleId", dataList.get(0).articleId);
                         }
-                        avQuery.limit(1);
+                        avQuery.orderByAscending("articleId").whereEqualTo("enable", true);
+                        avQuery.limit(3);
                         avQuery.findInBackground(new FindCallback<AVObject>() {
                             @Override
                             public void done(List<AVObject> list, AVException e) {
@@ -103,14 +107,15 @@ public class ArticleListFragment extends NewsListFragment {
                                     return;
                                 }
 
-                                for (int i = list.size() - 1; i >= 0; i--) {
+                                for (int i = 0; i < list.size(); i++) {
                                     dataList.add(0, ArticleNewsEntity.parse(list.get(i)));
                                 }
 
-                                articleNewsAdapter.notifyItemInserted(1);
+                                articleNewsAdapter.notifyItemRangeInserted(1, list.size());
                                 xRecyclerView.refreshComplete();
                                 showRefreshTip(
-                                        getString(R.string.x_recycler_view_refresh_tip, String.valueOf(list.size()), "视频"));
+                                        getString(R.string.x_recycler_view_refresh_tip, String.valueOf(list.size()),
+                                                "视频"));
                             }
                         });
                     }
