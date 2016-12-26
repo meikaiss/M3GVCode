@@ -34,7 +34,7 @@
                 android:layout_height="match_parent"
                 android:background="@android:color/white"
                 android:scrollbars="vertical"
-                app:pull_img_src="@drawable/home_menu_1_selected"/>
+                app:pull_img_src="@drawable/pull_down_arrow"/>
 
             <TextView
                 android:id="@+id/tv_refresh_result_tip"

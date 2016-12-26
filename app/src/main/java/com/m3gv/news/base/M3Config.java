@@ -23,4 +23,7 @@ public class M3Config {
     public static boolean isDebug(){
         return true;
     }
+
+
+
 }

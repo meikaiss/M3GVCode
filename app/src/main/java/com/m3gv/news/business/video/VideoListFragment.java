@@ -31,6 +31,7 @@ import com.m3gv.news.common.view.magicindicator.buildins.commonnavigator.titles.
 import com.m3gv.news.common.view.xrecyclerview.XRecyclerView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -72,6 +73,8 @@ public class VideoListFragment extends NewsListFragment {
                     return;
                 }
 
+                Collections.reverse(list);
+
                 for (int i = 0; i < list.size(); i++) {
                     dataList.add(VideoNewsEntity.parse(list.get(i)));
                 }
@@ -105,11 +108,11 @@ public class VideoListFragment extends NewsListFragment {
                                     return;
                                 }
 
-                                for (int i = list.size() - 1; i >= 0; i--) {
+                                for (int i = 0; i < list.size(); i++) {
                                     dataList.add(0, VideoNewsEntity.parse(list.get(i)));
                                 }
 
-                                videoNewsAdapter.notifyItemInserted(1);
+                                videoNewsAdapter.notifyItemRangeInserted(1, list.size());
                                 xRecyclerView.refreshComplete();
                                 showRefreshTip(
                                         getString(R.string.x_recycler_view_refresh_tip, String.valueOf(list.size()),

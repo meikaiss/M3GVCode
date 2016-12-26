@@ -3,11 +3,9 @@ package com.m3gv.news.business.article;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.m3gv.news.R;
@@ -48,7 +46,7 @@ public class ArticleNewsDetailActivity extends M3gBaseActivity implements View.O
             public void run() {
                 // 获取完整的 html内容字符串
                 String newsHtmlStr = ArticleHtmlFileUtil.createArticleHtml(ArticleNewsDetailActivity.this,
-                        articleNewsEntity.content);
+                        articleNewsEntity.articleTitle, articleNewsEntity.content);
 
                 // 将完整的 html内容 写入到 缓存的html文件中
                 final String cacheFilePath = ArticleHtmlFileUtil.createNewArticle(ArticleNewsDetailActivity.this,
@@ -92,9 +90,9 @@ public class ArticleNewsDetailActivity extends M3gBaseActivity implements View.O
 
     @Override
     public void onBackPressed() {
-        if (m3WebView.canGoBack()){
+        if (m3WebView.canGoBack()) {
             m3WebView.goBack();
-        }else{
+        } else {
             super.onBackPressed();
         }
     }

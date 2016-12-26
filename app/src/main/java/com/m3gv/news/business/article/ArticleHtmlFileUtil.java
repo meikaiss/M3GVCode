@@ -70,9 +70,9 @@ public class ArticleHtmlFileUtil {
         return cacheFilePath;
     }
 
-    public static String createArticleHtml(Context context, String body) {
+    public static String createArticleHtml(Context context, String title, String body) {
         //模板的绝对路径为： assests/article/news.html
-        return createArticleHtml(context, "article/news.html", body);
+        return createArticleHtml(context, "article/news.html", title, body);
     }
 
     /**
@@ -83,7 +83,7 @@ public class ArticleHtmlFileUtil {
      * @param body html的body内容
      * @return 返回新闻完事的html实体
      */
-    public static String createArticleHtml(Context context, String fileName, String body) {
+    public static String createArticleHtml(Context context, String fileName, String title, String body) {
         InputStream is = null;
         BufferedReader br = null;
         String str = "";
@@ -95,7 +95,8 @@ public class ArticleHtmlFileUtil {
             while ((tempStr = br.readLine()) != null) {
                 str = str + tempStr;
             }
-            newStr = str.replace("###body###", body);
+            newStr = str.replace("###title###", title);
+            newStr = newStr.replace("###body###", body);
             return newStr;
         } catch (Exception e) {
             LogUtil.e("createArticleHtml", e.getMessage());
@@ -105,4 +106,5 @@ public class ArticleHtmlFileUtil {
         }
         return null;
     }
+
 }
