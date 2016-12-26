@@ -33,8 +33,6 @@ public class NewsListFragment extends M3gBaseFragment {
     protected ViewGroup emptyViewGroup;
     protected ViewGroup loadingViewGroup;
     protected ViewGroup noNetViewGroup;
-    protected MagicIndicator magicIndicator;
-    protected CommonNavigator commonNavigator;
     protected XRecyclerView xRecyclerView;
     protected TextView tvRefreshResultTip;
 
@@ -48,7 +46,6 @@ public class NewsListFragment extends M3gBaseFragment {
 
         rootView = inflater.inflate(R.layout.news_list_fragment, container, false);
 
-        magicIndicator = f(R.id.magic_indicator);
         xRecyclerView = f(R.id.base_x_recycler_view);
         xRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
 

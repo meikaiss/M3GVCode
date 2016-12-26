@@ -15,8 +15,6 @@ import com.avos.avoscloud.SaveCallback;
 import com.m3gv.news.R;
 import com.m3gv.news.base.M3gBaseActivity;
 import com.m3gv.news.base.M3gBaseFragment;
-import com.m3gv.news.business.article.ArticleListFragment;
-import com.m3gv.news.business.video.VideoListFragment;
 import com.m3gv.news.common.util.AppUtil;
 import com.m3gv.news.common.util.NetUtil;
 
@@ -104,10 +102,10 @@ public class HomeActivity extends M3gBaseActivity implements View.OnClickListene
         M3gBaseFragment fragment = null;
         switch (index) {
             case 0:
-                fragment = VideoListFragment.newInstance();
+                fragment = VideoHomeFragment.newInstance();
                 break;
             case 1:
-                fragment = ArticleListFragment.newInstance();
+                fragment = ArticleHomeFragment.newInstance();
                 break;
             case 2:
 

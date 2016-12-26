@@ -156,6 +156,9 @@ public class VideoPlayerFragment extends M3gBaseFragment {
             playOrPauseImgv.setBackgroundResource(R.drawable.video_player_pause_icon_selector);
             isVideoPlaying = true;
             playerView.onResume();
+            if (tvRePlay.getVisibility() == View.VISIBLE) {
+                tvRePlay.setVisibility(View.GONE);
+            }
         }
     }
 

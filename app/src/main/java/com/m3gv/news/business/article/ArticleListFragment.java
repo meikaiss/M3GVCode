@@ -1,18 +1,11 @@
 package com.m3gv.news.business.article;
 
-import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.util.Log;
-import android.util.TypedValue;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.DecelerateInterpolator;
 
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
@@ -21,16 +14,11 @@ import com.avos.avoscloud.FindCallback;
 import com.m3gv.news.R;
 import com.m3gv.news.business.NewsListFragment;
 import com.m3gv.news.common.util.CollectionUtil;
-import com.m3gv.news.common.util.DensityUtil;
-import com.m3gv.news.common.view.magicindicator.buildins.commonnavigator.CommonNavigator;
-import com.m3gv.news.common.view.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter;
-import com.m3gv.news.common.view.magicindicator.buildins.commonnavigator.abs.IPagerIndicator;
-import com.m3gv.news.common.view.magicindicator.buildins.commonnavigator.abs.IPagerTitleView;
-import com.m3gv.news.common.view.magicindicator.buildins.commonnavigator.indicators.LinePagerIndicator;
-import com.m3gv.news.common.view.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView;
+import com.m3gv.news.common.util.UIUtil;
 import com.m3gv.news.common.view.xrecyclerview.XRecyclerView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -39,13 +27,16 @@ import java.util.List;
  */
 public class ArticleListFragment extends NewsListFragment {
 
+    private static final String KEY_CATEGORY_ID = "key_category_id";
+
+    private int categoryId;
+
     private List<ArticleNewsEntity> dataList = new ArrayList<>();
     private ArticleNewsAdapter articleNewsAdapter;
-    private List<String> channelList = new ArrayList<>();
 
-    public static ArticleListFragment newInstance() {
+    public static ArticleListFragment newInstance(int categoryId) {
         Bundle args = new Bundle();
-
+        args.putInt(KEY_CATEGORY_ID, categoryId);
         ArticleListFragment fragment = new ArticleListFragment();
         fragment.setArguments(args);
         return fragment;
@@ -57,18 +48,26 @@ public class ArticleListFragment extends NewsListFragment {
             @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
+        categoryId = getArguments().getInt(KEY_CATEGORY_ID);
+
         articleNewsAdapter = new ArticleNewsAdapter(getActivity(), dataList, xRecyclerView.isPullRefreshEnabled());
         xRecyclerView.setAdapter(articleNewsAdapter);
 
         AVQuery<AVObject> avQuery = new AVQuery<>("ArticleNews");
         avQuery.orderByAscending("articleId").whereEqualTo("enable", true);
-        avQuery.limit(PAGE_LIMIT);
-        avQuery.findInBackground(new FindCallback<AVObject>() {
+
+        AVQuery<AVObject> avQueryCategoryId = new AVQuery<>("ArticleNews");
+        avQueryCategoryId.whereEqualTo("categoryId", categoryId);
+
+        AVQuery<AVObject> queryFinal = AVQuery.and(Arrays.asList(avQuery, avQueryCategoryId));
+        queryFinal.limit(PAGE_LIMIT);
+        queryFinal.findInBackground(new FindCallback<AVObject>() {
             @Override
             public void done(List<AVObject> list, AVException e) {
                 if (ArticleListFragment.this == null
                         || ArticleListFragment.this.isDestroyed()
                         || list == null) {
+                    showRefreshTip("没有发现新资讯");
                     return;
                 }
 
@@ -91,12 +90,21 @@ public class ArticleListFragment extends NewsListFragment {
                     @Override
                     public void run() {
                         AVQuery<AVObject> avQuery = new AVQuery<>("ArticleNews");
+                        avQuery.orderByAscending("articleId");
                         if (CollectionUtil.isNotEmpty(dataList)) {
                             avQuery.whereGreaterThan("articleId", dataList.get(0).articleId);
                         }
-                        avQuery.orderByAscending("articleId").whereEqualTo("enable", true);
-                        avQuery.limit(3);
-                        avQuery.findInBackground(new FindCallback<AVObject>() {
+
+                        AVQuery<AVObject> avQueryCategoryId = new AVQuery<>("ArticleNews");
+                        avQueryCategoryId.whereEqualTo("categoryId", categoryId);
+
+                        AVQuery<AVObject> avQueryEnable = new AVQuery<>("ArticleNews");
+                        avQueryEnable.whereEqualTo("enable", true);
+
+                        AVQuery<AVObject> queryFinal = AVQuery
+                                .and(Arrays.asList(avQuery, avQueryCategoryId, avQueryEnable));
+                        queryFinal.limit(3);
+                        queryFinal.findInBackground(new FindCallback<AVObject>() {
                             @Override
                             public void done(List<AVObject> list, AVException e) {
                                 if (ArticleListFragment.this == null
@@ -131,60 +139,5 @@ public class ArticleListFragment extends NewsListFragment {
 
         return rootView;
     }
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        commonNavigator = new CommonNavigator(getContext());
-        commonNavigator.setAdjustMode(false);
-        commonNavigator.setScrollPivotX(0.65f);
-
-        magicIndicator.setNavigator(commonNavigator);
-
-        channelList.add("攻略");
-        channelList.add("赛事");
-        channelList.add("英雄");
-
-        commonNavigator.setAdapter(new CommonNavigatorAdapter() {
-            @Override
-            public int getCount() {
-                return channelList.size();
-            }
-
-            @Override
-            public IPagerTitleView getTitleView(Context context, final int index) {
-                SimplePagerTitleView simplePagerTitleView = new SimplePagerTitleView(context);
-                simplePagerTitleView.setText(channelList.get(index));
-                simplePagerTitleView.setNormalColor(Color.parseColor("#9e9e9e"));
-                simplePagerTitleView.setSelectedColor(Color.parseColor("#ff3f3e"));
-                simplePagerTitleView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-                simplePagerTitleView.setGravity(Gravity.CENTER_VERTICAL);
-                simplePagerTitleView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Log.e("commonNavigator", "index=" + index);
-                    }
-                });
-                return simplePagerTitleView;
-            }
-
-            @Override
-            public IPagerIndicator getIndicator(Context context) {
-                LinePagerIndicator indicator = new LinePagerIndicator(context);
-                indicator.setMode(LinePagerIndicator.MODE_EXACTLY);
-                indicator.setLineHeight(DensityUtil.dp2px(context, 2));
-                indicator.setLineWidth(DensityUtil.dp2px(context, 30));
-                indicator.setRoundRadius(DensityUtil.dp2px(context, 1));
-                indicator.setStartInterpolator(new AccelerateInterpolator());
-                indicator.setEndInterpolator(new DecelerateInterpolator(2.0f));
-                List<String> colorList = new ArrayList<>();
-                colorList.add("#ff3f3e");
-                indicator.setColorList(colorList);
-                return indicator;
-            }
-        });
-    }
-
 
 }
