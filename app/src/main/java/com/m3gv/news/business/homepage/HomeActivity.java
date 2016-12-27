@@ -59,10 +59,10 @@ public class HomeActivity extends M3gBaseActivity implements View.OnClickListene
                 tabMenuClick(1);
                 break;
             case R.id.home_menu_tv_2:
-
+                tabMenuClick(2);
                 break;
             case R.id.home_menu_tv_3:
-
+                tabMenuClick(3);
                 break;
             default:
                 break;
@@ -102,13 +102,13 @@ public class HomeActivity extends M3gBaseActivity implements View.OnClickListene
         M3gBaseFragment fragment = null;
         switch (index) {
             case 0:
-                fragment = VideoHomeFragment.newInstance();
+                fragment = HomeVideoFragment.newInstance();
                 break;
             case 1:
-                fragment = ArticleHomeFragment.newInstance();
+                fragment = HomeArticleFragment.newInstance();
                 break;
             case 2:
-
+                fragment = HomeWallPaperFragment.newInstance();
                 break;
             case 3:
 

@@ -34,7 +34,7 @@ import java.util.List;
 /**
  * Created by meikai on 16/12/26.
  */
-public class ArticleHomeFragment extends M3gBaseFragment {
+public class HomeArticleFragment extends M3gBaseFragment {
 
     private MagicIndicator magicIndicator;
     private CommonNavigator commonNavigator;
@@ -42,10 +42,10 @@ public class ArticleHomeFragment extends M3gBaseFragment {
 
     private List<CategoryEntity> categoryList = new ArrayList<>();
 
-    public static ArticleHomeFragment newInstance() {
+    public static HomeArticleFragment newInstance() {
         Bundle args = new Bundle();
 
-        ArticleHomeFragment fragment = new ArticleHomeFragment();
+        HomeArticleFragment fragment = new HomeArticleFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -63,17 +63,17 @@ public class ArticleHomeFragment extends M3gBaseFragment {
         super.onViewCreated(view, savedInstanceState);
 
         categoryList = new ArrayList<>();
-        categoryList.add(new CategoryEntity("攻略", 1));
-        categoryList.add(new CategoryEntity("赛事", 2));
-        categoryList.add(new CategoryEntity("英雄", 3));
+        categoryList.add(new CategoryEntity("攻略", "ArticleNews"));
+        categoryList.add(new CategoryEntity("赛事", "ArticleNews2"));
+        categoryList.add(new CategoryEntity("英雄", "ArticleNews"));
 
         magicIndicator = f(R.id.magic_indicator);
         articleViewPager = f(R.id.article_view_pager);
-        magicIndicator.setViewPager(articleViewPager);
+
         articleViewPager.setAdapter(new FragmentStatePagerAdapter(getChildFragmentManager()) {
             @Override
             public Fragment getItem(int position) {
-                return ArticleListFragment.newInstance(categoryList.get(position).categoryId);
+                return ArticleListFragment.newInstance(categoryList.get(position).tableName);
             }
 
             @Override
@@ -86,6 +86,7 @@ public class ArticleHomeFragment extends M3gBaseFragment {
         commonNavigator.setAdjustMode(false);
         commonNavigator.setScrollPivotX(0.65f);
 
+        magicIndicator.setViewPager(articleViewPager);
         magicIndicator.setNavigator(commonNavigator);
 
         commonNavigator.setAdapter(new CommonNavigatorAdapter() {
@@ -97,7 +98,7 @@ public class ArticleHomeFragment extends M3gBaseFragment {
             @Override
             public IPagerTitleView getTitleView(Context context, final int index) {
                 SimplePagerTitleView simplePagerTitleView = new SimplePagerTitleView(context);
-                simplePagerTitleView.setText(categoryList.get(index).name);
+                simplePagerTitleView.setText(categoryList.get(index).categoryName);
                 simplePagerTitleView.setNormalColor(Color.parseColor("#9e9e9e"));
                 simplePagerTitleView.setSelectedColor(Color.parseColor("#ff3f3e"));
                 simplePagerTitleView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
@@ -105,7 +106,7 @@ public class ArticleHomeFragment extends M3gBaseFragment {
                 simplePagerTitleView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Log.e("commonNavigator", "index=" + index);
+                        articleViewPager.setCurrentItem(index);
                     }
                 });
                 return simplePagerTitleView;

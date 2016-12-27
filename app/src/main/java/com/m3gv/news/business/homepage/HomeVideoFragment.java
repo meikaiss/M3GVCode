@@ -34,7 +34,7 @@ import java.util.List;
 /**
  * Created by meikai on 16/12/26.
  */
-public class VideoHomeFragment extends M3gBaseFragment {
+public class HomeVideoFragment extends M3gBaseFragment {
 
     private MagicIndicator magicIndicator;
     private CommonNavigator commonNavigator;
@@ -42,10 +42,10 @@ public class VideoHomeFragment extends M3gBaseFragment {
 
     private List<CategoryEntity> categoryList = new ArrayList<>();
 
-    public static VideoHomeFragment newInstance() {
+    public static HomeVideoFragment newInstance() {
         Bundle args = new Bundle();
 
-        VideoHomeFragment fragment = new VideoHomeFragment();
+        HomeVideoFragment fragment = new HomeVideoFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -62,8 +62,8 @@ public class VideoHomeFragment extends M3gBaseFragment {
         super.onViewCreated(view, savedInstanceState);
 
         categoryList = new ArrayList<>();
-        categoryList.add(new CategoryEntity("每日精彩", 1));
-        categoryList.add(new CategoryEntity("搞笑视频", 2));
+        categoryList.add(new CategoryEntity("每日精彩", "VideoNews"));
+        categoryList.add(new CategoryEntity("搞笑视频", "VideoNews"));
 
         magicIndicator = f(R.id.magic_indicator);
         videoViewPager = f(R.id.video_view_pager);
@@ -71,7 +71,7 @@ public class VideoHomeFragment extends M3gBaseFragment {
         videoViewPager.setAdapter(new FragmentStatePagerAdapter(getChildFragmentManager()) {
             @Override
             public Fragment getItem(int position) {
-                return VideoListFragment.newInstance(categoryList.get(position).categoryId);
+                return VideoListFragment.newInstance(categoryList.get(position).tableName);
             }
 
             @Override
@@ -95,7 +95,7 @@ public class VideoHomeFragment extends M3gBaseFragment {
             @Override
             public IPagerTitleView getTitleView(Context context, final int index) {
                 SimplePagerTitleView simplePagerTitleView = new SimplePagerTitleView(context);
-                simplePagerTitleView.setText(categoryList.get(index).name);
+                simplePagerTitleView.setText(categoryList.get(index).categoryName);
                 simplePagerTitleView.setNormalColor(Color.parseColor("#9e9e9e"));
                 simplePagerTitleView.setSelectedColor(Color.parseColor("#ff3f3e"));
                 simplePagerTitleView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
@@ -103,7 +103,7 @@ public class VideoHomeFragment extends M3gBaseFragment {
                 simplePagerTitleView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Log.e("commonNavigator", "index=" + index);
+                        videoViewPager.setCurrentItem(index);
                     }
                 });
                 return simplePagerTitleView;

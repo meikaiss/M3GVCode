@@ -8,14 +8,13 @@ import com.avos.avoscloud.AVObject;
 /**
  * Created by meikai on 16/12/18.
  */
-
 public class ArticleNewsEntity implements Parcelable {
 
     public long articleId;
     public String articleTitle;
     public String content;
     public String thumbnail;
-    public int playCount;
+    public int readCount;
     public int zanCount;
     public int caiCount;
 
@@ -53,7 +52,7 @@ public class ArticleNewsEntity implements Parcelable {
         parcel.writeString(articleTitle);
         parcel.writeString(content);
         parcel.writeString(thumbnail);
-        parcel.writeInt(playCount);
+        parcel.writeInt(readCount);
         parcel.writeInt(zanCount);
         parcel.writeInt(caiCount);
     }
@@ -66,7 +65,7 @@ public class ArticleNewsEntity implements Parcelable {
         articleNewsEntity.articleTitle = avObject.getString("articleTitle");
         articleNewsEntity.articleId = avObject.getInt("articleId");
         articleNewsEntity.content = avObject.getString("content");
-        articleNewsEntity.playCount = avObject.getInt("playCount");
+        articleNewsEntity.readCount = avObject.getInt("readCount");
         articleNewsEntity.zanCount = avObject.getInt("zanCount");
         articleNewsEntity.caiCount = avObject.getInt("caiCount");
         if (avObject.getAVFile("thumbnail") != null) {

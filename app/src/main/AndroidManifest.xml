@@ -23,7 +23,6 @@
         android:icon="@mipmap/ic_launcher_96x96"
         android:label="@string/app_name"
         android:largeHeap="true"
-        android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
         <activity android:name=".business.homepage.HomeActivity">

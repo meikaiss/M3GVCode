@@ -29,14 +29,14 @@ public class ArticleListFragment extends NewsListFragment {
 
     private static final String KEY_CATEGORY_ID = "key_category_id";
 
-    private int categoryId;
+    private String tableName;
 
     private List<ArticleNewsEntity> dataList = new ArrayList<>();
     private ArticleNewsAdapter articleNewsAdapter;
 
-    public static ArticleListFragment newInstance(int categoryId) {
+    public static ArticleListFragment newInstance(String tableName) {
         Bundle args = new Bundle();
-        args.putInt(KEY_CATEGORY_ID, categoryId);
+        args.putString(KEY_CATEGORY_ID, tableName);
         ArticleListFragment fragment = new ArticleListFragment();
         fragment.setArguments(args);
         return fragment;
@@ -48,20 +48,16 @@ public class ArticleListFragment extends NewsListFragment {
             @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
-        categoryId = getArguments().getInt(KEY_CATEGORY_ID);
+        tableName = getArguments().getString(KEY_CATEGORY_ID);
 
         articleNewsAdapter = new ArticleNewsAdapter(getActivity(), dataList, xRecyclerView.isPullRefreshEnabled());
         xRecyclerView.setAdapter(articleNewsAdapter);
 
-        AVQuery<AVObject> avQuery = new AVQuery<>("ArticleNews");
+        AVQuery<AVObject> avQuery = new AVQuery<>(tableName);
         avQuery.orderByAscending("articleId").whereEqualTo("enable", true);
+        avQuery.limit(PAGE_LIMIT);
 
-        AVQuery<AVObject> avQueryCategoryId = new AVQuery<>("ArticleNews");
-        avQueryCategoryId.whereEqualTo("categoryId", categoryId);
-
-        AVQuery<AVObject> queryFinal = AVQuery.and(Arrays.asList(avQuery, avQueryCategoryId));
-        queryFinal.limit(PAGE_LIMIT);
-        queryFinal.findInBackground(new FindCallback<AVObject>() {
+        avQuery.findInBackground(new FindCallback<AVObject>() {
             @Override
             public void done(List<AVObject> list, AVException e) {
                 if (ArticleListFragment.this == null
@@ -89,22 +85,14 @@ public class ArticleListFragment extends NewsListFragment {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        AVQuery<AVObject> avQuery = new AVQuery<>("ArticleNews");
+                        AVQuery<AVObject> avQuery = new AVQuery<>(tableName);
                         avQuery.orderByAscending("articleId");
                         if (CollectionUtil.isNotEmpty(dataList)) {
                             avQuery.whereGreaterThan("articleId", dataList.get(0).articleId);
                         }
-
-                        AVQuery<AVObject> avQueryCategoryId = new AVQuery<>("ArticleNews");
-                        avQueryCategoryId.whereEqualTo("categoryId", categoryId);
-
-                        AVQuery<AVObject> avQueryEnable = new AVQuery<>("ArticleNews");
-                        avQueryEnable.whereEqualTo("enable", true);
-
-                        AVQuery<AVObject> queryFinal = AVQuery
-                                .and(Arrays.asList(avQuery, avQueryCategoryId, avQueryEnable));
-                        queryFinal.limit(3);
-                        queryFinal.findInBackground(new FindCallback<AVObject>() {
+                        avQuery.whereEqualTo("enable", true);
+                        avQuery.limit(3);
+                        avQuery.findInBackground(new FindCallback<AVObject>() {
                             @Override
                             public void done(List<AVObject> list, AVException e) {
                                 if (ArticleListFragment.this == null
@@ -123,7 +111,7 @@ public class ArticleListFragment extends NewsListFragment {
                                 xRecyclerView.refreshComplete();
                                 showRefreshTip(
                                         getString(R.string.x_recycler_view_refresh_tip, String.valueOf(list.size()),
-                                                "视频"));
+                                                "资讯"));
                             }
                         });
                     }

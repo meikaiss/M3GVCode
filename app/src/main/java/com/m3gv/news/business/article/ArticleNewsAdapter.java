@@ -48,7 +48,7 @@ public class ArticleNewsAdapter extends RecyclerView.Adapter<ArticleNewsAdapter.
         holder.imgLabel.setImageResource(0);
 
         holder.tvTitle.setText(dataList.get(pos).articleTitle);
-        holder.tvPlayCount.setText(UnitUtil.toWan(dataList.get(pos).playCount));
+        holder.tvPlayCount.setText(UnitUtil.toWan(dataList.get(pos).readCount));
         holder.tvZanCount.setText("" + dataList.get(pos).zanCount);
         holder.tvCaiCount.setText("" + dataList.get(pos).caiCount);
 

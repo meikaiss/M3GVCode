@@ -8,17 +8,17 @@ import android.os.Parcelable;
  */
 public class CategoryEntity implements Parcelable {
 
-    public String name;
-    public int categoryId;
+    public String categoryName;
+    public String tableName;
 
-    public CategoryEntity(String name, int categoryId) {
-        this.name = name;
-        this.categoryId = categoryId;
+    public CategoryEntity(String categoryName, String tableName) {
+        this.categoryName = categoryName;
+        this.tableName = tableName;
     }
 
     protected CategoryEntity(Parcel in) {
-        name = in.readString();
-        categoryId = in.readInt();
+        categoryName = in.readString();
+        tableName = in.readString();
     }
 
     public static final Creator<CategoryEntity> CREATOR = new Creator<CategoryEntity>() {
@@ -40,8 +40,8 @@ public class CategoryEntity implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(name);
-        dest.writeInt(categoryId);
+        dest.writeString(categoryName);
+        dest.writeString(tableName);
     }
 
 }

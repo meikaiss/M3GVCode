@@ -28,7 +28,7 @@ public class VideoListFragment extends NewsListFragment {
     private List<VideoNewsEntity> dataList = new ArrayList<>();
     private VideoNewsAdapter videoNewsAdapter;
 
-    public static VideoListFragment newInstance(int categoryId) {
+    public static VideoListFragment newInstance(String tableName) {
         Bundle args = new Bundle();
 
         VideoListFragment fragment = new VideoListFragment();
