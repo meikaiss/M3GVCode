@@ -4,7 +4,6 @@ import android.animation.ObjectAnimator;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +17,9 @@ import android.widget.TextView;
 
 import com.m3gv.news.R;
 import com.m3gv.news.base.M3gBaseFragment;
+import com.m3gv.news.common.util.LogUtil;
 import com.m3gv.news.common.util.TimeUtil;
+import com.m3gv.news.common.util.UnitUtil;
 import com.tencent.rtmp.ITXLivePlayListener;
 import com.tencent.rtmp.TXLiveConstants;
 import com.tencent.rtmp.TXLivePlayConfig;
@@ -42,7 +43,8 @@ public class VideoPlayerFragment extends M3gBaseFragment {
     private TXCloudVideoView playerView;
     private ProgressBar progressBarLoading;
     private TextView tvRePlay;
-    private LinearLayout videoPlayerControllerBar;
+    private LinearLayout videoPlayerControllerBarTop;
+    private LinearLayout videoPlayerControllerBarBottom;
     /**
      * 必须使用 视频的时长（单位：秒）来作为进度条的数据
      */
@@ -51,6 +53,8 @@ public class VideoPlayerFragment extends M3gBaseFragment {
     private TextView tvCurrent;
     private TextView tvTotal;
     private ImageButton fullscreenImgBtn;
+
+    private TextView tvSpeed;
 
     private boolean isControllerBarShowing = true;
     private boolean isVideoPlaying;
@@ -90,7 +94,8 @@ public class VideoPlayerFragment extends M3gBaseFragment {
 
         realVideoContainer = f(view, R.id.real_video_container);
         realVideoContainer.setOnClickListener(clickListener);
-        videoPlayerControllerBar = f(view, R.id.video_player_controller_bar);
+        videoPlayerControllerBarTop = f(view, R.id.video_player_controller_bar_top);
+        videoPlayerControllerBarBottom = f(view, R.id.video_player_controller_bar_bottom);
         playOrPauseImgv = f(view, R.id.play_or_pause);
         playOrPauseImgv.setOnClickListener(clickListener);
         playerView = f(rootView, R.id.m3_video_view);
@@ -102,6 +107,8 @@ public class VideoPlayerFragment extends M3gBaseFragment {
         tvTotal = f(view, R.id.time_total);
         fullscreenImgBtn = f(view, R.id.fullscreen);
         fullscreenImgBtn.setOnClickListener(clickListener);
+
+        tvSpeed = f(view, R.id.tv_speed);
 
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -222,16 +229,26 @@ public class VideoPlayerFragment extends M3gBaseFragment {
             switch (view.getId()) {
                 case R.id.real_video_container:
                     if (isControllerBarShowing) {
-                        ObjectAnimator animator = ObjectAnimator.ofFloat(videoPlayerControllerBar, "translationY", 0,
-                                videoPlayerControllerBar.getMeasuredHeight())
+                        ObjectAnimator animatorTop = ObjectAnimator.ofFloat(videoPlayerControllerBarTop,
+                                "translationY", 0,
+                                -videoPlayerControllerBarTop.getMeasuredHeight())
                                 .setDuration(ANIMATOR_DURATION_CONTROLLER_BAR);
-                        animator.start();
+                        ObjectAnimator animatorBottom = ObjectAnimator
+                                .ofFloat(videoPlayerControllerBarBottom, "translationY", 0,
+                                        videoPlayerControllerBarBottom.getMeasuredHeight())
+                                .setDuration(ANIMATOR_DURATION_CONTROLLER_BAR);
+                        animatorTop.start();
+                        animatorBottom.start();
                         isControllerBarShowing = false;
                     } else {
-                        ObjectAnimator animator = ObjectAnimator.ofFloat(videoPlayerControllerBar, "translationY",
-                                videoPlayerControllerBar.getMeasuredHeight(), 0)
+                        ObjectAnimator animatorTop = ObjectAnimator.ofFloat(videoPlayerControllerBarTop, "translationY",
+                                -videoPlayerControllerBarTop.getMeasuredHeight(), 0)
                                 .setDuration(ANIMATOR_DURATION_CONTROLLER_BAR);
-                        animator.start();
+                        ObjectAnimator animatorBottom = ObjectAnimator.ofFloat(videoPlayerControllerBarBottom, "translationY",
+                                videoPlayerControllerBarBottom.getMeasuredHeight(), 0)
+                                .setDuration(ANIMATOR_DURATION_CONTROLLER_BAR);
+                        animatorTop.start();
+                        animatorBottom.start();
                         isControllerBarShowing = true;
                     }
                     break;
@@ -299,13 +316,15 @@ public class VideoPlayerFragment extends M3gBaseFragment {
 
         @Override
         public void onNetStatus(Bundle status) {
-            Log.d("status", "Current status, CPU:" + status.getString(TXLiveConstants.NET_STATUS_CPU_USAGE) +
+            LogUtil.e("status", "Current status, CPU:" + status.getString(TXLiveConstants.NET_STATUS_CPU_USAGE) +
                     ", RES:" + status.getInt(TXLiveConstants.NET_STATUS_VIDEO_WIDTH) + "*" + status
                     .getInt(TXLiveConstants.NET_STATUS_VIDEO_HEIGHT) +
                     ", SPD:" + status.getInt(TXLiveConstants.NET_STATUS_NET_SPEED) + "Kbps" +
                     ", FPS:" + status.getInt(TXLiveConstants.NET_STATUS_VIDEO_FPS) +
                     ", ARA:" + status.getInt(TXLiveConstants.NET_STATUS_AUDIO_BITRATE) + "Kbps" +
                     ", VRA:" + status.getInt(TXLiveConstants.NET_STATUS_VIDEO_BITRATE) + "Kbps");
+
+            tvSpeed.setText(UnitUtil.toKByteSpeed(status.getInt(TXLiveConstants.NET_STATUS_NET_SPEED)));
         }
     };
 }

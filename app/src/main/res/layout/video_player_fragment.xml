@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/root_video_player_container"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -46,12 +46,47 @@
 
     <FrameLayout
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent">
+
+        <LinearLayout
+            android:id="@+id/video_player_controller_bar_top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_video_player_controller_bg"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingBottom="3dp"
+            android:paddingTop="3dp">
+
+            <TextView
+                android:id="@+id/tv_speed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:text="0"
+                android:textColor="#eee"
+                android:textSize="13sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" KB/s"
+                android:textColor="#eee"
+                android:textSize="13sp"/>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_alignParentBottom="true"
         android:background="@android:color/transparent">
 
         <LinearLayout
-            android:id="@+id/video_player_controller_bar"
+            android:id="@+id/video_player_controller_bar_bottom"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:background="@color/color_video_player_controller_bg"

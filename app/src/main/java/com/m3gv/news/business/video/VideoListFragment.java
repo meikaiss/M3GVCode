@@ -47,7 +47,7 @@ public class VideoListFragment extends NewsListFragment {
 
         AVQuery<AVObject> avQuery = new AVQuery<>("VideoNews");
         avQuery.orderByAscending("videoId").whereEqualTo("enable", true);
-        avQuery.limit(5);
+        avQuery.limit(PAGE_LIMIT);
         avQuery.findInBackground(new FindCallback<AVObject>() {
             @Override
             public void done(List<AVObject> list, AVException e) {

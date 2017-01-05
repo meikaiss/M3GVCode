@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -65,7 +64,8 @@ public class HomeArticleFragment extends M3gBaseFragment {
         categoryList = new ArrayList<>();
         categoryList.add(new CategoryEntity("攻略", "ArticleNews"));
         categoryList.add(new CategoryEntity("赛事", "ArticleNews2"));
-        categoryList.add(new CategoryEntity("英雄", "ArticleNews"));
+        categoryList.add(new CategoryEntity("英雄", "ArticleNews3"));
+        categoryList.add(new CategoryEntity("历史", "ArticleNews4"));
 
         magicIndicator = f(R.id.magic_indicator);
         articleViewPager = f(R.id.article_view_pager);
