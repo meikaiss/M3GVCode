@@ -111,7 +111,7 @@ public class HomeActivity extends M3gBaseActivity implements View.OnClickListene
                 fragment = HomeWallPaperFragment.newInstance();
                 break;
             case 3:
-
+                fragment = HomeDataFragment.newInstance();
                 break;
             default:
                 break;

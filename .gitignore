@@ -10,3 +10,6 @@
 
 /src/androidTest
 /src/test
+src/main/java/com/m3gv/news/business/homepage/HomeDataFragment.java
+src/main/java/com/m3gv/news/business/wallpaper/
+src/main/res/layout/home_data_fragment.xml
