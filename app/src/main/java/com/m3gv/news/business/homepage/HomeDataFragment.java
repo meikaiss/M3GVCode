@@ -17,7 +17,7 @@ import android.view.animation.DecelerateInterpolator;
 
 import com.m3gv.news.R;
 import com.m3gv.news.base.M3gBaseFragment;
-import com.m3gv.news.business.data.HeroFragment;
+import com.m3gv.news.business.data.HeroListFragment;
 import com.m3gv.news.common.util.DensityUtil;
 import com.m3gv.news.common.view.magicindicator.MagicIndicator;
 import com.m3gv.news.common.view.magicindicator.buildins.commonnavigator.CommonNavigator;
@@ -73,7 +73,7 @@ public class HomeDataFragment extends M3gBaseFragment {
         articleViewPager.setAdapter(new FragmentStatePagerAdapter(getChildFragmentManager()) {
             @Override
             public Fragment getItem(int position) {
-                return HeroFragment.newInstance();
+                return HeroListFragment.newInstance();
             }
 
             @Override

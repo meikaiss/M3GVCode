@@ -24,16 +24,16 @@ import java.util.List;
  * Created by meikai on 17/1/12.
  */
 
-public class HeroFragment extends NewsListFragment {
+public class HeroListFragment extends NewsListFragment {
 
     private List<HeroEntity> dataList = new ArrayList<>();
     private HeroAdapter heroAdapter;
 
-    public static HeroFragment newInstance() {
+    public static HeroListFragment newInstance() {
 
         Bundle args = new Bundle();
 
-        HeroFragment fragment = new HeroFragment();
+        HeroListFragment fragment = new HeroListFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -48,15 +48,15 @@ public class HeroFragment extends NewsListFragment {
         heroAdapter = new HeroAdapter(getActivity(), dataList, xRecyclerView.isPullRefreshEnabled());
         xRecyclerView.setAdapter(heroAdapter);
 
-        AVQuery<AVObject> avQuery = new AVQuery<>("HeroInfo");
+        AVQuery<AVObject> avQuery = new AVQuery<>("HeroData");
         avQuery.orderByAscending("heroId").whereEqualTo("enable", true);
         avQuery.limit(PAGE_LIMIT);
 
         avQuery.findInBackground(new FindCallback<AVObject>() {
             @Override
             public void done(List<AVObject> list, AVException e) {
-                if (HeroFragment.this == null
-                        || HeroFragment.this.isDestroyed()
+                if (HeroListFragment.this == null
+                        || HeroListFragment.this.isDestroyed()
                         || list == null) {
                     showRefreshTip("没有发现新英雄");
                     return;
@@ -80,18 +80,18 @@ public class HeroFragment extends NewsListFragment {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        AVQuery<AVObject> avQuery = new AVQuery<>("HeroInfo");
+                        AVQuery<AVObject> avQuery = new AVQuery<>("HeroData");
                         avQuery.orderByAscending("heroId");
                         if (CollectionUtil.isNotEmpty(dataList)) {
                             avQuery.whereGreaterThan("heroId", dataList.get(0).heroId);
                         }
                         avQuery.whereEqualTo("enable", true);
-                        avQuery.limit(3);
+                        avQuery.limit(PAGE_LIMIT);
                         avQuery.findInBackground(new FindCallback<AVObject>() {
                             @Override
                             public void done(List<AVObject> list, AVException e) {
-                                if (HeroFragment.this == null
-                                        || HeroFragment.this.isDestroyed()
+                                if (HeroListFragment.this == null
+                                        || HeroListFragment.this.isDestroyed()
                                         || CollectionUtil.isEmpty(list)) {
                                     showRefreshTip("没有发现新英雄");
                                     xRecyclerView.refreshComplete();

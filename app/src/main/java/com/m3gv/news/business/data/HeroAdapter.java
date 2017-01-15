@@ -47,7 +47,8 @@ public class HeroAdapter extends RecyclerView.Adapter<HeroAdapter.HeroViewHolder
         holder.imgLabel.setImageResource(0);
 
         holder.tvHeroName.setText(dataList.get(pos).heroName);
-        holder.tvHeroDesc.setText(dataList.get(pos).heroDesc);
+        holder.tvHeroCountry.setText(dataList.get(pos).UNationType);
+        holder.tvHeroPlayType.setText(dataList.get(pos).Fbattle);
 
         Glide.with(activity).load(dataList.get(pos).heroIcon).centerCrop().into(new GlideDrawableImageViewTarget
                 (holder.imgThumbs) {
@@ -76,14 +77,16 @@ public class HeroAdapter extends RecyclerView.Adapter<HeroAdapter.HeroViewHolder
 
         public TextView tvHeroName;
         public ImageView imgThumbs;
-        public TextView tvHeroDesc;
+        public TextView tvHeroCountry;
+        public TextView tvHeroPlayType;
         public ImageView imgLabel;
 
         public HeroViewHolder(View itemView) {
             super(itemView);
-            tvHeroName = (TextView) itemView.findViewById(R.id.tv_hero_name_list_title);
+            tvHeroName = (TextView) itemView.findViewById(R.id.tv_hero_name);
+            tvHeroCountry = (TextView) itemView.findViewById(R.id.tv_hero_county);
+            tvHeroPlayType = (TextView) itemView.findViewById(R.id.tv_hero_play_type);
             imgThumbs = (ImageView) itemView.findViewById(R.id.img_hero_list_thumbs);
-            tvHeroDesc = (TextView) itemView.findViewById(R.id.tv_hero_desc_list_title);
             imgLabel = (ImageView) itemView.findViewById(R.id.img_label);
         }
     }

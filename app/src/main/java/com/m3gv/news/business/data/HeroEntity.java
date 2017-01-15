@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.avos.avoscloud.AVObject;
-import com.m3gv.news.business.article.ArticleNewsEntity;
 
 /**
  * Created by meikai on 17/1/12.
@@ -14,9 +13,42 @@ public class HeroEntity implements Parcelable {
 
     public long heroId;
     public String heroName;
+    public String UNationType;
     public String heroIcon;
-    public String heroDesc;
-    public String country;
+    public String Fdifficulty;
+    public String Fbattle;
+    public String Fposition;
+    public String Type1;
+    public String Type2;
+    public int Difficulty;
+    public int Survial;
+    public int Physics;
+    public int Technology;
+
+
+    public static HeroEntity parse(AVObject avObject) {
+        if (avObject == null) {
+            return null;
+        }
+        HeroEntity heroEntity = new HeroEntity();
+        heroEntity.heroId = avObject.getLong("heroId");
+        heroEntity.heroName = avObject.getString("heroName");
+        heroEntity.UNationType = avObject.getString("UNationType");
+        heroEntity.Fdifficulty = avObject.getString("Fdifficulty");
+        heroEntity.Fbattle = avObject.getString("Fbattle");
+        heroEntity.Fposition = avObject.getString("Fposition");
+        heroEntity.Type1 = avObject.getString("Type1");
+        heroEntity.Type2 = avObject.getString("Type2");
+        heroEntity.Difficulty = avObject.getInt("Difficulty");
+        heroEntity.Survial = avObject.getInt("Survial");
+        heroEntity.Physics = avObject.getInt("Physics");
+        heroEntity.Technology = avObject.getInt("Technology");
+        if (avObject.getAVFile("heroIcon") != null) {
+            heroEntity.heroIcon = avObject.getAVFile("heroIcon").getUrl();
+        }
+
+        return heroEntity;
+    }
 
     public HeroEntity() {
     }
@@ -24,9 +56,17 @@ public class HeroEntity implements Parcelable {
     protected HeroEntity(Parcel in) {
         heroId = in.readLong();
         heroName = in.readString();
+        UNationType = in.readString();
         heroIcon = in.readString();
-        heroDesc = in.readString();
-        country = in.readString();
+        Fdifficulty = in.readString();
+        Fbattle = in.readString();
+        Fposition = in.readString();
+        Type1 = in.readString();
+        Type2 = in.readString();
+        Difficulty = in.readInt();
+        Survial = in.readInt();
+        Physics = in.readInt();
+        Technology = in.readInt();
     }
 
     public static final Creator<HeroEntity> CREATOR = new Creator<HeroEntity>() {
@@ -50,23 +90,16 @@ public class HeroEntity implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeLong(heroId);
         dest.writeString(heroName);
+        dest.writeString(UNationType);
         dest.writeString(heroIcon);
-        dest.writeString(heroDesc);
-        dest.writeString(country);
-    }
-
-    public static HeroEntity parse(AVObject avObject) {
-        if (avObject == null) {
-            return null;
-        }
-        HeroEntity heroEntity = new HeroEntity();
-        heroEntity.heroId = avObject.getLong("heroId");
-        heroEntity.heroName = avObject.getString("heroName");
-        heroEntity.heroDesc = avObject.getString("heroDesc");
-        if (avObject.getAVFile("heroIcon") != null) {
-            heroEntity.heroIcon = avObject.getAVFile("heroIcon").getUrl();
-        }
-
-        return heroEntity;
+        dest.writeString(Fdifficulty);
+        dest.writeString(Fbattle);
+        dest.writeString(Fposition);
+        dest.writeString(Type1);
+        dest.writeString(Type2);
+        dest.writeInt(Difficulty);
+        dest.writeInt(Survial);
+        dest.writeInt(Physics);
+        dest.writeInt(Technology);
     }
 }

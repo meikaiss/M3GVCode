@@ -2,7 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
+    android:layout_height="120dp"
     android:background="@drawable/list_item_selector"
     android:orientation="horizontal"
     android:padding="15dp">
@@ -14,23 +14,50 @@
         android:layout_weight="7"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tv_hero_name_list_title"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:includeFontPadding="false"
-            android:text="标题"
-            android:textColor="@color/text_color_normal_gray"
-            android:textSize="@dimen/text_size_title_big"/>
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_hero_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:includeFontPadding="false"
+                android:text="标题"
+                android:textColor="@color/text_color_normal_gray"
+                android:textSize="@dimen/text_size_title_big"/>
+
+            <TextView
+                android:id="@+id/tv_hero_county"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:text="--"
+                android:textColor="#999999"
+                android:textSize="14dp"/>
+
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/tv_hero_desc_list_title"
+            android:id="@+id/tv_hero_play_type"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:ellipsize="end"
             android:includeFontPadding="false"
-            android:maxLines="2"
+            android:lines="1"
+            android:text="标题"
+            android:textColor="@color/text_color_mini_description"
+            android:textSize="@dimen/text_size_sub_title_big"/>
+
+        <TextView
+            android:id="@+id/tv_hero_play_diffcult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:ellipsize="end"
+            android:includeFontPadding="false"
+            android:lines="1"
             android:text="标题"
             android:textColor="@color/text_color_mini_description"
             android:textSize="@dimen/text_size_sub_title_big"/>
@@ -42,19 +69,22 @@
         android:layout_height="wrap_content"
         android:layout_weight="3">
 
-        <com.m3gv.news.common.view.ScaleImageView
-            android:id="@+id/img_hero_list_thumbs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#b0b0b0"
-            android:scaleType="centerCrop"/>
-
         <ImageView
             android:id="@+id/img_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:scaleType="centerInside"/>
+
+        <ImageView
+            android:id="@+id/img_hero_list_thumbs"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:background="#b0b0b0"
+            android:scaleType="centerCrop"/>
 
     </RelativeLayout>
 
