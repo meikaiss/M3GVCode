@@ -3,7 +3,7 @@
 
     <item android:state_pressed="true">
         <layer-list>
-            <item android:drawable="@color/color_video_player_play_pause_pressed"/>
+            <item android:drawable="@color/color_video_player_play_controller_pressed"/>
             <item>
                 <bitmap android:gravity="center" android:src="@drawable/video__fullscreen_exit" android:tileMode="disabled"/>
             </item>

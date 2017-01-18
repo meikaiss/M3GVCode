@@ -48,7 +48,10 @@ public class HeroAdapter extends RecyclerView.Adapter<HeroAdapter.HeroViewHolder
 
         holder.tvHeroName.setText(dataList.get(pos).heroName);
         holder.tvHeroCountry.setText(dataList.get(pos).UNationType);
-        holder.tvHeroPlayType.setText(dataList.get(pos).Fbattle);
+        holder.tvHeroDesc.setText(dataList.get(pos).desc);
+        holder.tvHeroPlayType1.setText(dataList.get(pos).Type2);
+        holder.tvHeroPlayType2.setText(dataList.get(pos).Type1);
+        holder.tvHeroPlayType3.setText(dataList.get(pos).Fposition);
 
         Glide.with(activity).load(dataList.get(pos).heroIcon).centerCrop().into(new GlideDrawableImageViewTarget
                 (holder.imgThumbs) {
@@ -61,8 +64,8 @@ public class HeroAdapter extends RecyclerView.Adapter<HeroAdapter.HeroViewHolder
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                ArticleNewsDetailActivity.start(activity,
-//                        dataList.get(holder.getAdapterPosition() - (isPullRefreshEnable ? 1 : 0)));
+                HeroDetailActivity
+                        .start(activity, dataList.get(holder.getAdapterPosition() - (isPullRefreshEnable ? 1 : 0)));
                 //是因为头部下拉刷新占了一个位置
             }
         });
@@ -78,14 +81,20 @@ public class HeroAdapter extends RecyclerView.Adapter<HeroAdapter.HeroViewHolder
         public TextView tvHeroName;
         public ImageView imgThumbs;
         public TextView tvHeroCountry;
-        public TextView tvHeroPlayType;
+        public TextView tvHeroDesc;
+        public TextView tvHeroPlayType1;
+        public TextView tvHeroPlayType2;
+        public TextView tvHeroPlayType3;
         public ImageView imgLabel;
 
         public HeroViewHolder(View itemView) {
             super(itemView);
             tvHeroName = (TextView) itemView.findViewById(R.id.tv_hero_name);
             tvHeroCountry = (TextView) itemView.findViewById(R.id.tv_hero_county);
-            tvHeroPlayType = (TextView) itemView.findViewById(R.id.tv_hero_play_type);
+            tvHeroDesc = (TextView) itemView.findViewById(R.id.tv_hero_desc);
+            tvHeroPlayType1 = (TextView) itemView.findViewById(R.id.tv_hero_play_type_1);
+            tvHeroPlayType2 = (TextView) itemView.findViewById(R.id.tv_hero_play_type_2);
+            tvHeroPlayType3 = (TextView) itemView.findViewById(R.id.tv_hero_play_type_3);
             imgThumbs = (ImageView) itemView.findViewById(R.id.img_hero_list_thumbs);
             imgLabel = (ImageView) itemView.findViewById(R.id.img_label);
         }

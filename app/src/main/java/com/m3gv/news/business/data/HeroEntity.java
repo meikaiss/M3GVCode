@@ -25,6 +25,15 @@ public class HeroEntity implements Parcelable {
     public int Physics;
     public int Technology;
 
+    public String attack;
+    public String armor;
+    public String speed;
+    public String strength;
+    public String agility;
+    public String intelligence;
+
+    public String desc;
+
 
     public static HeroEntity parse(AVObject avObject) {
         if (avObject == null) {
@@ -33,7 +42,7 @@ public class HeroEntity implements Parcelable {
         HeroEntity heroEntity = new HeroEntity();
         heroEntity.heroId = avObject.getLong("heroId");
         heroEntity.heroName = avObject.getString("heroName");
-        heroEntity.UNationType = avObject.getString("UNationType");
+        heroEntity.UNationType = avObject.getString("country");
         heroEntity.Fdifficulty = avObject.getString("Fdifficulty");
         heroEntity.Fbattle = avObject.getString("Fbattle");
         heroEntity.Fposition = avObject.getString("Fposition");
@@ -43,9 +52,18 @@ public class HeroEntity implements Parcelable {
         heroEntity.Survial = avObject.getInt("Survial");
         heroEntity.Physics = avObject.getInt("Physics");
         heroEntity.Technology = avObject.getInt("Technology");
+        heroEntity.attack = avObject.getString("attack");
+        heroEntity.armor = avObject.getString("armor");
+        heroEntity.speed = avObject.getString("speed");
+        heroEntity.strength = avObject.getString("strength");
+        heroEntity.agility = avObject.getString("agility");
+        heroEntity.intelligence = avObject.getString("intelligence");
+
         if (avObject.getAVFile("heroIcon") != null) {
             heroEntity.heroIcon = avObject.getAVFile("heroIcon").getUrl();
         }
+
+        heroEntity.desc = avObject.getString("heroDesc");
 
         return heroEntity;
     }
@@ -67,6 +85,14 @@ public class HeroEntity implements Parcelable {
         Survial = in.readInt();
         Physics = in.readInt();
         Technology = in.readInt();
+        attack = in.readString();
+        armor = in.readString();
+        speed = in.readString();
+        strength = in.readString();
+        agility = in.readString();
+        intelligence = in.readString();
+
+        desc = in.readString();
     }
 
     public static final Creator<HeroEntity> CREATOR = new Creator<HeroEntity>() {
@@ -101,5 +127,13 @@ public class HeroEntity implements Parcelable {
         dest.writeInt(Survial);
         dest.writeInt(Physics);
         dest.writeInt(Technology);
+        dest.writeString(attack);
+        dest.writeString(armor);
+        dest.writeString(speed);
+        dest.writeString(strength);
+        dest.writeString(agility);
+        dest.writeString(intelligence);
+
+        dest.writeString(desc);
     }
 }

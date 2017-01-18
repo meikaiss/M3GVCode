@@ -37,6 +37,9 @@
         <activity
             android:name=".business.article.ArticleNewsDetailActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"/>
+        <activity
+            android:name=".business.data.HeroDetailActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"/>
 
 
         <!-- 实时通信模块、推送（均需要加入以下声明） START -->

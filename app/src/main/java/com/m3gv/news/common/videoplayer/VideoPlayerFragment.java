@@ -244,8 +244,9 @@ public class VideoPlayerFragment extends M3gBaseFragment {
                         ObjectAnimator animatorTop = ObjectAnimator.ofFloat(videoPlayerControllerBarTop, "translationY",
                                 -videoPlayerControllerBarTop.getMeasuredHeight(), 0)
                                 .setDuration(ANIMATOR_DURATION_CONTROLLER_BAR);
-                        ObjectAnimator animatorBottom = ObjectAnimator.ofFloat(videoPlayerControllerBarBottom, "translationY",
-                                videoPlayerControllerBarBottom.getMeasuredHeight(), 0)
+                        ObjectAnimator animatorBottom = ObjectAnimator
+                                .ofFloat(videoPlayerControllerBarBottom, "translationY",
+                                        videoPlayerControllerBarBottom.getMeasuredHeight(), 0)
                                 .setDuration(ANIMATOR_DURATION_CONTROLLER_BAR);
                         animatorTop.start();
                         animatorBottom.start();

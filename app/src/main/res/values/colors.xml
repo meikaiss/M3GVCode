@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">#d33d3c</color>
     <color name="colorAccent">#FFB72424</color>
 
-    <color name="color_video_player_play_pause_pressed">#333333</color>
+    <color name="color_video_player_play_controller_pressed">#333333</color>
     <color name="color_video_player_controller_bg">#aa000000</color>
 
     <color name="text_color_normal_gray">#333333</color>
