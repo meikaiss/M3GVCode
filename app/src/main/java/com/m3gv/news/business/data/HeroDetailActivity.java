@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -62,6 +63,13 @@ public class HeroDetailActivity extends M3gBaseActivity {
         textViewAttr6 = f(R.id.tv_attr_6);
 
         init();
+
+        f(R.id.img_btn_back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                HeroDetailActivity.this.finish();
+            }
+        });
     }
 
     private void init() {

@@ -19,10 +19,9 @@
 
         <ProgressBar
             android:id="@+id/progress_video_loading"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_gravity="center"
-            android:layout_marginBottom="20dp"
             android:indeterminateDrawable="@drawable/progress_bar_animator"/>
 
         <TextView
@@ -103,16 +102,15 @@
 
             <SeekBar
                 android:id="@+id/controller_seek_bar"
-                android:layout_width="0dip"
-                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:max="100"
                 android:maxHeight="2dp"
                 android:minHeight="2dp"
                 android:progress="0"
                 android:progressDrawable="@drawable/video_seekbar_selector"
-                android:thumb="@drawable/video__seekbar_thumb"
-                android:thumbOffset="0dp"/>
+                android:thumb="@drawable/video__seekbar_thumb"/>
 
             <TextView
                 android:id="@+id/time_current"

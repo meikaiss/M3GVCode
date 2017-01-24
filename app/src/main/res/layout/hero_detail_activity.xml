@@ -5,6 +5,28 @@
               android:background="@android:color/white"
               android:orientation="vertical">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorPrimary">
+
+        <ImageView
+            android:id="@+id/img_btn_back"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:scaleType="center"
+            android:src="@drawable/btn_back_normal_night"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="英雄介绍"
+            android:textColor="@android:color/white"
+            android:textSize="18dp"/>
+
+    </RelativeLayout>
+
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -13,7 +35,7 @@
         android:paddingBottom="10dp"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
-        android:paddingTop="10dp">
+        android:paddingTop="20dp">
 
         <RelativeLayout
             android:layout_width="0dp"
@@ -50,6 +72,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginRight="5dp"
+            android:layout_marginTop="10dp"
             android:layout_weight="7"
             android:orientation="vertical">
 
@@ -157,7 +180,7 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="5">
+            android:layout_weight="10">
 
             <ImageView
                 android:layout_width="30dp"
@@ -179,7 +202,7 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="5">
+            android:layout_weight="10">
 
             <ImageView
                 android:layout_width="30dp"
@@ -201,7 +224,7 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="5">
+            android:layout_weight="10">
 
             <ImageView
                 android:layout_width="30dp"
@@ -242,7 +265,7 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="5">
+            android:layout_weight="10">
 
             <ImageView
                 android:layout_width="30dp"
@@ -264,7 +287,7 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="5">
+            android:layout_weight="10">
 
             <ImageView
                 android:layout_width="30dp"
@@ -286,7 +309,7 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="5">
+            android:layout_weight="10">
 
             <ImageView
                 android:layout_width="30dp"

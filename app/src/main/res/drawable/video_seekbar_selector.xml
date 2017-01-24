@@ -1,16 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:id="@android:id/background"
-        android:drawable="@drawable/video_progress_background">
+    <item android:id="@android:id/background">
+        <shape android:shape="rectangle">
+            <corners android:radius="2dp"/>
+            <solid android:color="#7e7e7e"/>
+            <size
+                android:width="197dp"
+                android:height="2dp"/>
+        </shape>
     </item>
-    <item
-        android:id="@android:id/secondaryProgress"
-        android:drawable="@drawable/video_secondary_progress">
+    <item android:id="@android:id/secondaryProgress">
+        <clip>
+            <shape android:shape="rectangle">
+                <corners android:radius="2dp"/>
+                <solid android:color="#e3e3e3"/>
+                <size
+                    android:width="197dp"
+                    android:height="2dp"/>
+            </shape>
+        </clip>
     </item>
-    <item
-        android:id="@android:id/progress"
-        android:drawable="@drawable/video_progress">
+    <item android:id="@android:id/progress">
+        <clip>
+            <shape android:shape="rectangle">
+                <corners android:radius="2dp"/>
+                <solid android:color="@color/colorPrimary"/>
+                <size
+                    android:width="197dp"
+                    android:height="2dp"/>
+            </shape>
+        </clip>
     </item>
 </layer-list>

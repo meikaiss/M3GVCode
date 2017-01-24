@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.avos.avoscloud.AVOSCloud;
+import com.m3gv.news.common.db.RealmDbHelper;
 import com.m3gv.news.common.util.SystemUtil;
 import com.tencent.bugly.crashreport.CrashReport;
 
@@ -25,6 +26,9 @@ public class M3gApplication extends Application {
 
         // 初始化参数依次为 this, AppId, AppKey
         AVOSCloud.initialize(this, "VKBQghTRDUmF2zhvEtJrRgDD-gzGzoHsz", "0RnczmpwiB0uRefLRVfIvXEQ");
+
+        RealmDbHelper.getInstance().init(this);
+
     }
 
 

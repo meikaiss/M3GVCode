@@ -5,13 +5,20 @@ import android.os.Parcelable;
 
 import com.avos.avoscloud.AVObject;
 
+import io.realm.RealmModel;
+import io.realm.annotations.PrimaryKey;
+import io.realm.annotations.RealmClass;
+import io.realm.annotations.Required;
+
 /**
  * Created by meikai on 17/1/12.
  */
+@RealmClass
+public class HeroEntity implements Parcelable, RealmModel {
 
-public class HeroEntity implements Parcelable {
-
+    @PrimaryKey
     public long heroId;
+    @Required
     public String heroName;
     public String UNationType;
     public String heroIcon;
@@ -91,7 +98,6 @@ public class HeroEntity implements Parcelable {
         strength = in.readString();
         agility = in.readString();
         intelligence = in.readString();
-
         desc = in.readString();
     }
 
@@ -133,7 +139,6 @@ public class HeroEntity implements Parcelable {
         dest.writeString(strength);
         dest.writeString(agility);
         dest.writeString(intelligence);
-
         dest.writeString(desc);
     }
 }
