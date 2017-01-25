@@ -35,7 +35,8 @@ public class PagerTitleContainerView extends FrameLayout implements IMeasurableP
         titleTv.setSingleLine();
         titleTv.setEllipsize(TextUtils.TruncateAt.END);
 
-        FrameLayout.LayoutParams lp = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        FrameLayout.LayoutParams lp = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT);
         lp.gravity = Gravity.CENTER;
 
         addView(titleTv, lp);
@@ -90,7 +91,6 @@ public class PagerTitleContainerView extends FrameLayout implements IMeasurableP
     }
 
 
-
     @Override
     public void onLeave(int index, int totalCount, float leavePercent, boolean leftToRight) {
 
@@ -100,7 +100,6 @@ public class PagerTitleContainerView extends FrameLayout implements IMeasurableP
     public void onEnter(int index, int totalCount, float enterPercent, boolean leftToRight) {
 
     }
-
 
 
     public int getSelectedColor() {

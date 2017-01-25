@@ -4,6 +4,10 @@ import android.app.Application;
 import android.content.Context;
 
 import com.avos.avoscloud.AVOSCloud;
+import com.bumptech.glide.GenericRequestBuilder;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
+import com.bumptech.glide.load.DecodeFormat;
 import com.m3gv.news.common.db.RealmDbHelper;
 import com.m3gv.news.common.util.SystemUtil;
 import com.tencent.bugly.crashreport.CrashReport;

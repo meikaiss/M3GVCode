@@ -48,7 +48,7 @@ public class HeroAdapter extends RecyclerView.Adapter<HeroAdapter.HeroViewHolder
 
         holder.tvHeroName.setText(dataList.get(pos).heroName);
         holder.tvHeroCountry.setText(dataList.get(pos).UNationType);
-        holder.tvHeroDesc.setText(dataList.get(pos).desc);
+        holder.tvHeroDesc.setText(dataList.get(pos).heroDesc);
         holder.tvHeroPlayType1.setText(dataList.get(pos).Type2);
         holder.tvHeroPlayType2.setText(dataList.get(pos).Type1);
         holder.tvHeroPlayType3.setText(dataList.get(pos).Fposition);

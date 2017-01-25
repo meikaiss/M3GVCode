@@ -109,7 +109,7 @@
                 android:maxHeight="2dp"
                 android:minHeight="2dp"
                 android:progress="0"
-                android:progressDrawable="@drawable/video_seekbar_selector"
+                android:progressDrawable="@drawable/video_seek_bar_selector"
                 android:thumb="@drawable/video__seekbar_thumb"/>
 
             <TextView

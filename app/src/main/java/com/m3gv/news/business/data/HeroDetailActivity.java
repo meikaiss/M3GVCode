@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -34,6 +37,15 @@ public class HeroDetailActivity extends M3gBaseActivity {
     private TextView textViewAttr5;
     private TextView textViewAttr6;
 
+    private RatingBar ratingBarDifficulty;
+    private ProgressBar progressBarSurvial;
+    private ProgressBar progressBarPhysics;
+    private ProgressBar progressBarSkill;
+
+    private TextView tvHeroDesc;
+
+    private SkillLayoutRender skillLayoutRender;
+
     private HeroEntity heroEntity;
 
     public static void start(Activity activity, HeroEntity heroEntity) {
@@ -61,6 +73,13 @@ public class HeroDetailActivity extends M3gBaseActivity {
         textViewAttr4 = f(R.id.tv_attr_4);
         textViewAttr5 = f(R.id.tv_attr_5);
         textViewAttr6 = f(R.id.tv_attr_6);
+
+        ratingBarDifficulty = f(R.id.rating_bar_difficulty);
+        progressBarSurvial = f(R.id.progress_bar_survial);
+        progressBarPhysics = f(R.id.progress_bar_physics);
+        progressBarSkill = f(R.id.progress_bar_skill);
+
+        tvHeroDesc = f(R.id.tv_hero_detail_desc);
 
         init();
 
@@ -92,5 +111,14 @@ public class HeroDetailActivity extends M3gBaseActivity {
         textViewAttr4.setText(heroEntity.strength);
         textViewAttr5.setText(heroEntity.agility);
         textViewAttr6.setText(heroEntity.intelligence);
+
+        ratingBarDifficulty.setRating(heroEntity.Difficulty / 2f);
+        progressBarSurvial.setProgress(heroEntity.Survial);
+        progressBarPhysics.setProgress(heroEntity.Physics);
+        progressBarSkill.setProgress(heroEntity.Technology);
+
+        tvHeroDesc.setText(heroEntity.heroDesc);
+
+        skillLayoutRender = new SkillLayoutRender((LinearLayout) f(R.id.skill_root_layout), heroEntity);
     }
 }
