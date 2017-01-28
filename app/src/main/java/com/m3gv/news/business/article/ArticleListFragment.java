@@ -14,11 +14,9 @@ import com.avos.avoscloud.FindCallback;
 import com.m3gv.news.R;
 import com.m3gv.news.business.NewsListFragment;
 import com.m3gv.news.common.util.CollectionUtil;
-import com.m3gv.news.common.util.UIUtil;
 import com.m3gv.news.common.view.xrecyclerview.XRecyclerView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -61,7 +59,7 @@ public class ArticleListFragment extends NewsListFragment {
                 @Override
                 public void done(List<AVObject> list, AVException e) {
                     if (ArticleListFragment.this == null
-                            || ArticleListFragment.this.isDestroyed()
+                            || ArticleListFragment.this.hasDestroyed()
                             || list == null) {
                         showRefreshTip("没有发现新资讯");
                         return;
@@ -96,7 +94,7 @@ public class ArticleListFragment extends NewsListFragment {
                                 @Override
                                 public void done(List<AVObject> list, AVException e) {
                                     if (ArticleListFragment.this == null
-                                            || ArticleListFragment.this.isDestroyed()
+                                            || ArticleListFragment.this.hasDestroyed()
                                             || CollectionUtil.isEmpty(list)) {
                                         showRefreshTip("没有发现新资讯");
                                         xRecyclerView.refreshComplete();

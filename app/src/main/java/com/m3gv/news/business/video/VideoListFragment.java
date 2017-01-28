@@ -52,7 +52,7 @@ public class VideoListFragment extends NewsListFragment {
             @Override
             public void done(List<AVObject> list, AVException e) {
                 if (VideoListFragment.this == null
-                        || VideoListFragment.this.isDestroyed()
+                        || VideoListFragment.this.hasDestroyed()
                         || list == null) {
                     return;
                 }
@@ -85,7 +85,7 @@ public class VideoListFragment extends NewsListFragment {
                             @Override
                             public void done(List<AVObject> list, AVException e) {
                                 if (VideoListFragment.this == null
-                                        || VideoListFragment.this.isDestroyed()
+                                        || VideoListFragment.this.hasDestroyed()
                                         || CollectionUtil.isEmpty(list)) {
                                     showRefreshTip("没有发现新视频");
                                     xRecyclerView.refreshComplete();

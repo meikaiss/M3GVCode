@@ -67,6 +67,7 @@ public class HomeVideoFragment extends M3gBaseFragment {
 
         magicIndicator = f(R.id.magic_indicator);
         videoViewPager = f(R.id.video_view_pager);
+        videoViewPager.setOffscreenPageLimit(categoryList.size());
         magicIndicator.setViewPager(videoViewPager);
         videoViewPager.setAdapter(new FragmentStatePagerAdapter(getChildFragmentManager()) {
             @Override

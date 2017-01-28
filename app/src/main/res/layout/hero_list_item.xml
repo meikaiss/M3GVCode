@@ -68,12 +68,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="2dp"
                 android:layout_marginLeft="15dp"
-                android:background="#999999"
+                android:background="@drawable/hero_country_bg"
                 android:includeFontPadding="false"
-                android:padding="1dp"
-                android:text="中立"
-                android:textColor="#ffffff"
-                android:textSize="13dp"/>
+                android:paddingBottom="1dp"
+                android:paddingLeft="3dp"
+                android:paddingRight="3dp"
+                android:paddingTop="1dp"
+                android:text="国"
+                android:textColor="#999999"
+                android:textSize="12dp"/>
 
         </LinearLayout>
 

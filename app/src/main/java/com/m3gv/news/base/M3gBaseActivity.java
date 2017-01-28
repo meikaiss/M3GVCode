@@ -41,7 +41,7 @@ public class M3gBaseActivity extends AppCompatActivity {
         }
     }
 
-    public boolean getDestroyedFlag() {
+    public boolean hasDestroyed() {
         return isDestroyed;
     }
 }

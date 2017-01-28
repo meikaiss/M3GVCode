@@ -31,7 +31,6 @@ import java.util.List;
 /**
  * Created by meikai on 17/1/24.
  */
-
 public class SkillLayoutRender {
 
     private HeroEntity heroEntity;
@@ -53,7 +52,7 @@ public class SkillLayoutRender {
     public void initSkillView() {
         skillMagicIndicator = (MagicIndicator) rootLinearLayout.findViewById(R.id.skill_magic_indicator);
         skillViewPager = (ViewPager) rootLinearLayout.findViewById(R.id.skill_view_pager);
-
+        skillViewPager.setOffscreenPageLimit(4);
         skillViewPager.setAdapter(new PagerAdapter() {
 
             //用于存储回收掉的View

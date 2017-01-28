@@ -69,7 +69,7 @@ public class HomeDataFragment extends M3gBaseFragment {
 
         magicIndicator = f(R.id.magic_indicator);
         articleViewPager = f(R.id.article_view_pager);
-
+        articleViewPager.setOffscreenPageLimit(categoryList.size());
         articleViewPager.setAdapter(new FragmentStatePagerAdapter(getChildFragmentManager()) {
             @Override
             public Fragment getItem(int position) {

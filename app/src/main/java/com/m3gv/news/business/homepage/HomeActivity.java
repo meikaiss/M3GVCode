@@ -77,7 +77,7 @@ public class HomeActivity extends M3gBaseActivity implements View.OnClickListene
         Fragment fragment = getSupportFragmentManager().findFragmentByTag("tab_" + clickIndex);
         if (fragment == null) {
             fragment = createTabFragment(clickIndex);
-            getSupportFragmentManager().beginTransaction().replace(R.id.home_frame_container, fragment, "tab_" + clickIndex)
+            getSupportFragmentManager().beginTransaction().add(R.id.home_frame_container, fragment, "tab_" + clickIndex)
                     .commitAllowingStateLoss();
         } else {
             getSupportFragmentManager().beginTransaction().show(fragment).commitAllowingStateLoss();

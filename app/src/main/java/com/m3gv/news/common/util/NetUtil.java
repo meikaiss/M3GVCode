@@ -18,9 +18,6 @@ public class NetUtil {
 
     /**
      * 判断网络是否连接
-     *
-     * @param context
-     * @return
      */
     public static boolean isConnected(Context context) {
 
@@ -46,8 +43,7 @@ public class NetUtil {
         ConnectivityManager cm = (ConnectivityManager) context
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
 
-        if (cm == null)
-            return false;
+        if (cm == null || cm.getActiveNetworkInfo() == null) { return false; }
         return cm.getActiveNetworkInfo().getType() == ConnectivityManager.TYPE_WIFI;
 
     }

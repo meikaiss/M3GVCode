@@ -9,6 +9,7 @@ import java.util.List;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import io.realm.RealmModel;
+import io.realm.RealmQuery;
 import io.realm.RealmResults;
 
 /**
@@ -17,8 +18,6 @@ import io.realm.RealmResults;
 public class RealmDbHelper {
 
     private static RealmDbHelper instance = new RealmDbHelper();
-
-    private Realm realm;
 
     public static RealmDbHelper getInstance() {
         return instance;
@@ -37,12 +36,11 @@ public class RealmDbHelper {
                 .schemaVersion(1)
                 .migration(new RealmUpdateMigration());
         Realm.setDefaultConfiguration(builder.build());
-
-        realm = Realm.getDefaultInstance();
     }
 
     public boolean save(RealmModel realmModel) {
         try {
+            Realm realm = Realm.getDefaultInstance();
             realm.beginTransaction();
             realm.insert(realmModel);
             realm.commitTransaction();
@@ -55,6 +53,7 @@ public class RealmDbHelper {
 
     public boolean saveList(List<? extends RealmModel> realmObjectList) {
         try {
+            Realm realm = Realm.getDefaultInstance();
             realm.beginTransaction();
             realm.insert(realmObjectList);
             realm.commitTransaction();
@@ -65,9 +64,26 @@ public class RealmDbHelper {
         }
     }
 
-    public RealmResults<? extends RealmModel> findAll(Class<? extends RealmModel> clazz) {
+    public List<? extends RealmModel> findAll(Class<? extends RealmModel> clazz) {
         try {
-            return Realm.getDefaultInstance().where(clazz).findAll();
+            RealmResults<? extends RealmModel> realmResults = Realm.getDefaultInstance().where(clazz).findAll();
+
+            List<? extends RealmModel> realmModels = Realm.getDefaultInstance().copyFromRealm(realmResults);
+
+            return realmModels;
+        } catch (Exception e) {
+            LogUtil.e("RealmDbHelper", "findAll:" + e.getMessage());
+            return null;
+        }
+    }
+
+    public List<? extends RealmModel> findAll(RealmQuery<? extends RealmModel> realmQuery) {
+        try {
+            RealmResults<? extends RealmModel> realmResults = realmQuery.findAll();
+
+            List<? extends RealmModel> realmModels = Realm.getDefaultInstance().copyFromRealm(realmResults);
+
+            return realmModels;
         } catch (Exception e) {
             LogUtil.e("RealmDbHelper", "findAll:" + e.getMessage());
             return null;

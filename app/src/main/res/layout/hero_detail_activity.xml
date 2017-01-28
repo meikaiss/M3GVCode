@@ -116,7 +116,7 @@
                             android:paddingTop="1dp"
                             android:text="国"
                             android:textColor="#999999"
-                            android:textSize="13dp"/>
+                            android:textSize="12dp"/>
 
                     </LinearLayout>
 

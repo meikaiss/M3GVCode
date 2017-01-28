@@ -15,7 +15,7 @@ import io.realm.annotations.Required;
  * Created by meikai on 17/1/12.
  */
 @RealmClass
-public class HeroEntity implements Parcelable, RealmModel {
+public class HeroEntity implements Parcelable, RealmModel, Cloneable {
 
     @PrimaryKey public long heroId;
     @Required public String heroName;
@@ -326,6 +326,13 @@ public class HeroEntity implements Parcelable, RealmModel {
         heroEntity.skill4Level4Effect = avObject.getString("skill4Level4Effect");
 
         heroEntity.assembleInnerData();
+        return heroEntity;
+    }
+
+    @Override
+    protected HeroEntity clone() throws CloneNotSupportedException {
+        HeroEntity heroEntity = new HeroEntity();
+        heroEntity.skill1Level1Effect = skill1Level1Effect;
         return heroEntity;
     }
 

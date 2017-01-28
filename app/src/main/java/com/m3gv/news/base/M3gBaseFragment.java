@@ -44,7 +44,7 @@ public abstract class M3gBaseFragment extends Fragment {
         isDestroyed = true;
     }
 
-    public boolean isDestroyed() {
+    public boolean hasDestroyed() {
         return isDestroyed;
     }
 

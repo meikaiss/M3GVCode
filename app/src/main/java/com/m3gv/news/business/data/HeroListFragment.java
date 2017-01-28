@@ -1,7 +1,7 @@
 package com.m3gv.news.business.data;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,34 +10,28 @@ import android.view.ViewGroup;
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVQuery;
-import com.avos.avoscloud.FindCallback;
-import com.m3gv.news.R;
 import com.m3gv.news.business.NewsListFragment;
+import com.m3gv.news.common.db.RealmDbHelper;
 import com.m3gv.news.common.util.CollectionUtil;
 import com.m3gv.news.common.view.xrecyclerview.XRecyclerView;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import io.realm.Realm;
+import io.realm.RealmQuery;
+import io.realm.RealmResults;
+import io.realm.Sort;
+
 /**
  * Created by meikai on 17/1/12.
  */
-
 public class HeroListFragment extends NewsListFragment {
 
     private List<HeroEntity> dataList = new ArrayList<>();
     private HeroAdapter heroAdapter;
-
-    public static HeroListFragment newInstance() {
-
-        Bundle args = new Bundle();
-
-        HeroListFragment fragment = new HeroListFragment();
-        fragment.setArguments(args);
-        return fragment;
-    }
-
 
     @Nullable
     @Override
@@ -48,70 +42,12 @@ public class HeroListFragment extends NewsListFragment {
         heroAdapter = new HeroAdapter(getActivity(), dataList, xRecyclerView.isPullRefreshEnabled());
         xRecyclerView.setAdapter(heroAdapter);
 
-        AVQuery<AVObject> avQuery = new AVQuery<>("HeroData");
-        avQuery.orderByAscending("heroId").whereEqualTo("enable", true);
-        avQuery.limit(PAGE_LIMIT);
-
-        avQuery.findInBackground(new FindCallback<AVObject>() {
-            @Override
-            public void done(List<AVObject> list, AVException e) {
-                if (HeroListFragment.this == null
-                        || HeroListFragment.this.isDestroyed()
-                        || list == null) {
-                    showRefreshTip("没有发现新英雄");
-                    return;
-                }
-
-                Collections.reverse(list);
-
-                for (int i = 0; i < list.size(); i++) {
-                    dataList.add(HeroEntity.parse((list.get(i))));
-                }
-
-                heroAdapter.notifyItemRangeInserted(1, list.size());
-                xRecyclerView.setVisibility(View.VISIBLE);
-                loadingViewGroup.setVisibility(View.GONE);
-            }
-        });
+        new GetHeroListAsyncTask(this, false).execute(dataList);
 
         xRecyclerView.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        AVQuery<AVObject> avQuery = new AVQuery<>("HeroData");
-                        avQuery.orderByAscending("heroId");
-                        if (CollectionUtil.isNotEmpty(dataList)) {
-                            avQuery.whereGreaterThan("heroId", dataList.get(0).heroId);
-                        }
-                        avQuery.whereEqualTo("enable", true);
-                        avQuery.limit(PAGE_LIMIT);
-                        avQuery.findInBackground(new FindCallback<AVObject>() {
-                            @Override
-                            public void done(List<AVObject> list, AVException e) {
-                                if (HeroListFragment.this == null
-                                        || HeroListFragment.this.isDestroyed()
-                                        || CollectionUtil.isEmpty(list)) {
-                                    showRefreshTip("没有发现新英雄");
-                                    xRecyclerView.refreshComplete();
-                                    return;
-                                }
-
-                                for (int i = 0; i < list.size(); i++) {
-                                    dataList.add(0, HeroEntity.parse(list.get(i)));
-                                }
-
-                                heroAdapter.notifyItemRangeInserted(1, list.size());
-                                xRecyclerView.refreshComplete();
-                                showRefreshTip(
-                                        getString(R.string.x_recycler_view_refresh_tip, String.valueOf(list.size()),
-                                                "英雄"));
-                            }
-                        });
-                    }
-                }, 200);
-
+                new GetHeroListAsyncTask(HeroListFragment.this, true).execute(dataList);
             }
 
             @Override
@@ -121,5 +57,98 @@ public class HeroListFragment extends NewsListFragment {
         });
 
         return rootView;
+    }
+
+    public static HeroListFragment newInstance() {
+
+        Bundle args = new Bundle();
+
+        HeroListFragment fragment = new HeroListFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    private void onGetDataSuccess(List<HeroEntity> heroEntities, boolean isPullRefresh) {
+        if (isPullRefresh) {
+            xRecyclerView.refreshComplete();
+        }
+
+        if (CollectionUtil.isEmpty(heroEntities)) {
+            showRefreshTip("没有发现新英雄");
+            return;
+        }
+
+        dataList.addAll(0, heroEntities);
+        heroAdapter.notifyItemRangeInserted(1, heroEntities.size());
+        xRecyclerView.setVisibility(View.VISIBLE);
+        loadingViewGroup.setVisibility(View.GONE);
+    }
+
+    private static class GetHeroListAsyncTask extends AsyncTask<Object, Integer, List<HeroEntity>> {
+
+        private WeakReference<HeroListFragment> heroListFragmentWeakReference;
+        private boolean isPullRefresh;
+
+        public GetHeroListAsyncTask(HeroListFragment heroListFragment, boolean isPullRefresh) {
+            this.heroListFragmentWeakReference = new WeakReference<>(heroListFragment);
+            this.isPullRefresh = isPullRefresh;
+        }
+
+        @Override
+        protected List<HeroEntity> doInBackground(Object[] params) {
+            List<HeroEntity> inShowDataList = (List<HeroEntity>) params[0];
+
+            List<HeroEntity> heroEntityAbstractList = new ArrayList<>();
+
+            //第一步：查询本地数据库是否缓存的数据
+            RealmQuery<HeroEntity> realmQuery = Realm.getDefaultInstance().where(HeroEntity.class);
+            if (CollectionUtil.isNotEmpty(inShowDataList)) {
+                realmQuery.greaterThan("heroId", inShowDataList.get(0).heroId);
+            }
+            RealmResults<HeroEntity> realmQueryAll = realmQuery.findAllSorted("heroId", Sort.DESCENDING);
+            List<HeroEntity> dbHeroEntityList = Realm.getDefaultInstance().copyFromRealm(realmQueryAll);
+
+            if (CollectionUtil.isEmpty(dbHeroEntityList)) {
+                //第二步：如果本地数据库没有缓存，则从服务器请求，并保存到本地数据库
+                AVQuery<AVObject> avQuery = new AVQuery<>("HeroData");
+                avQuery.orderByAscending("heroId");
+                if (CollectionUtil.isNotEmpty(inShowDataList)) {
+                    avQuery.whereGreaterThan("heroId", inShowDataList.get(0).heroId);
+                }
+                avQuery.whereEqualTo("enable", true);
+                avQuery.limit(PAGE_LIMIT);
+                List<AVObject> list = null;
+                try {
+                    list = avQuery.find();
+                } catch (AVException e) {
+                    e.printStackTrace();
+                }
+
+                if (CollectionUtil.isNotEmpty(list)) {
+                    Collections.reverse(list); // 反转，保证 heroId 最小的显示在最下面
+                    for (int i = 0; i < list.size(); i++) {
+                        heroEntityAbstractList.add(HeroEntity.parse((list.get(i))));
+                    }
+                }
+
+                //保存到本地数据库
+                RealmDbHelper.getInstance().saveList(heroEntityAbstractList);
+
+            } else {
+                //第三步：如果本地数据库有缓存，则将缓存的realm格式的数据转为内存数据
+                heroEntityAbstractList.addAll(dbHeroEntityList);
+            }
+
+            return heroEntityAbstractList;
+        }
+
+        @Override
+        protected void onPostExecute(List<HeroEntity> heroEntities) {
+            super.onPostExecute(heroEntities);
+            HeroListFragment heroListFragment = heroListFragmentWeakReference.get();
+            if (heroListFragment != null && !heroListFragment.hasDestroyed()) {
+                heroListFragment.onGetDataSuccess(heroEntities, isPullRefresh);
+            }
+        }
     }
 }
