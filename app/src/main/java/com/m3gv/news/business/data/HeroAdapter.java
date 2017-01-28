@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -48,10 +50,13 @@ public class HeroAdapter extends RecyclerView.Adapter<HeroAdapter.HeroViewHolder
 
         holder.tvHeroName.setText(dataList.get(pos).heroName);
         holder.tvHeroCountry.setText(dataList.get(pos).UNationType);
-        holder.tvHeroDesc.setText(dataList.get(pos).heroDesc);
         holder.tvHeroPlayType1.setText(dataList.get(pos).Type2);
         holder.tvHeroPlayType2.setText(dataList.get(pos).Type1);
         holder.tvHeroPlayType3.setText(dataList.get(pos).Fposition);
+        holder.rbDifficulty.setRating(dataList.get(pos).Difficulty / 2f);
+        holder.pbSurvival.setProgress(dataList.get(pos).Survial);
+        holder.pbPhysics.setProgress(dataList.get(pos).Physics);
+        holder.pbSkill.setProgress(dataList.get(pos).Technology);
 
         Glide.with(activity).load(dataList.get(pos).heroIcon).centerCrop().into(new GlideDrawableImageViewTarget
                 (holder.imgThumbs) {
@@ -81,22 +86,29 @@ public class HeroAdapter extends RecyclerView.Adapter<HeroAdapter.HeroViewHolder
         public TextView tvHeroName;
         public ImageView imgThumbs;
         public TextView tvHeroCountry;
-        public TextView tvHeroDesc;
         public TextView tvHeroPlayType1;
         public TextView tvHeroPlayType2;
         public TextView tvHeroPlayType3;
         public ImageView imgLabel;
+        public RatingBar rbDifficulty;
+        public ProgressBar pbSurvival;
+        public ProgressBar pbPhysics;
+        public ProgressBar pbSkill;
+
 
         public HeroViewHolder(View itemView) {
             super(itemView);
             tvHeroName = (TextView) itemView.findViewById(R.id.tv_hero_name);
             tvHeroCountry = (TextView) itemView.findViewById(R.id.tv_hero_county);
-            tvHeroDesc = (TextView) itemView.findViewById(R.id.tv_hero_desc);
             tvHeroPlayType1 = (TextView) itemView.findViewById(R.id.tv_hero_play_type_1);
             tvHeroPlayType2 = (TextView) itemView.findViewById(R.id.tv_hero_play_type_2);
             tvHeroPlayType3 = (TextView) itemView.findViewById(R.id.tv_hero_play_type_3);
             imgThumbs = (ImageView) itemView.findViewById(R.id.img_hero_list_thumbs);
             imgLabel = (ImageView) itemView.findViewById(R.id.img_label);
+            rbDifficulty = (RatingBar) itemView.findViewById(R.id.rating_bar_difficulty);
+            pbSurvival = (ProgressBar) itemView.findViewById(R.id.progress_bar_survival);
+            pbPhysics = (ProgressBar) itemView.findViewById(R.id.progress_bar_physics);
+            pbSkill = (ProgressBar) itemView.findViewById(R.id.progress_bar_skill);
         }
     }
 }

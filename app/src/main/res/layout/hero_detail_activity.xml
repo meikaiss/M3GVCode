@@ -181,6 +181,7 @@
 
             </LinearLayout>
 
+            <!--难度、生存、物理、技能-->
             <include layout="@layout/custom_view_hero_summary"/>
 
             <android.support.v4.widget.Space

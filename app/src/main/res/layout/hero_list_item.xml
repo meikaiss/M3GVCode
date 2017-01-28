@@ -2,7 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="110dp"
+    android:layout_height="100dp"
     android:background="@drawable/list_item_selector"
     android:orientation="horizontal"
     android:paddingBottom="10dp"
@@ -11,9 +11,8 @@
     android:paddingTop="10dp">
 
     <RelativeLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="2">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/img_label"
@@ -23,67 +22,47 @@
             android:scaleType="centerInside"/>
 
         <FrameLayout
-            android:layout_width="63dp"
-            android:layout_height="63dp"
-            android:layout_marginTop="5dp"
+            android:id="@+id/layout_hero_list_thumbs"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="2dp"
             android:background="#999155">
 
             <ImageView
                 android:id="@+id/img_hero_list_thumbs"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="58dp"
+                android:layout_height="58dp"
                 android:layout_alignParentLeft="true"
                 android:layout_gravity="center"
                 android:background="#b0b0b0"
                 android:scaleType="centerCrop"/>
         </FrameLayout>
 
+        <TextView
+            android:id="@+id/tv_hero_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layout_hero_list_thumbs"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="3dp"
+            android:includeFontPadding="false"
+            android:text="标题"
+            android:textColor="@color/text_color_normal_gray"
+            android:textSize="14dp"/>
 
     </RelativeLayout>
 
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
         android:layout_marginRight="5dp"
-        android:layout_weight="7"
         android:orientation="vertical">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="bottom">
-
-            <TextView
-                android:id="@+id/tv_hero_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:includeFontPadding="false"
-                android:text="标题"
-                android:textColor="@color/text_color_normal_gray"
-                android:textSize="@dimen/text_size_title_big"/>
-
-            <TextView
-                android:id="@+id/tv_hero_county"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="2dp"
-                android:layout_marginLeft="15dp"
-                android:background="@drawable/hero_country_bg"
-                android:includeFontPadding="false"
-                android:paddingBottom="1dp"
-                android:paddingLeft="3dp"
-                android:paddingRight="3dp"
-                android:paddingTop="1dp"
-                android:text="国"
-                android:textColor="#999999"
-                android:textSize="12dp"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="5dp">
 
             <TextView
                 android:id="@+id/tv_hero_play_type_1"
@@ -97,7 +76,7 @@
                 android:paddingLeft="2dp"
                 android:paddingRight="2dp"
                 android:paddingTop="1dp"
-                android:text="类型1"
+                android:text="力量"
                 android:textColor="#ffffff"
                 android:textSize="12dp"/>
 
@@ -105,50 +84,165 @@
                 android:id="@+id/tv_hero_play_type_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
                 android:background="#336699"
                 android:ellipsize="end"
+                android:ems="2"
                 android:includeFontPadding="false"
                 android:lines="1"
                 android:paddingBottom="1dp"
                 android:paddingLeft="2dp"
                 android:paddingRight="2dp"
                 android:paddingTop="1dp"
-                android:text="类型2"
-                android:textColor="#ffffff"
-                android:textSize="12dp"/>
-
-            <TextView
-                android:id="@+id/tv_hero_play_type_3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:background="#66cc99"
-                android:ellipsize="end"
-                android:includeFontPadding="false"
-                android:lines="1"
-                android:paddingBottom="1dp"
-                android:paddingLeft="2dp"
-                android:paddingRight="2dp"
-                android:paddingTop="1dp"
-                android:text="类型3"
+                android:text="近战"
                 android:textColor="#ffffff"
                 android:textSize="12dp"/>
 
         </LinearLayout>
 
         <TextView
-            android:id="@+id/tv_hero_desc"
-            android:layout_width="match_parent"
+            android:id="@+id/tv_hero_play_type_3"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
+            android:background="#66cc99"
             android:ellipsize="end"
             android:includeFontPadding="false"
-            android:maxLines="2"
-            android:text="描述"
-            android:textColor="@color/text_color_mini_description"
-            android:textSize="14dp"/>
+            android:lines="1"
+            android:paddingBottom="1dp"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
+            android:paddingTop="1dp"
+            android:text="定位"
+            android:textColor="#ffffff"
+            android:textSize="12dp"/>
 
+        <TextView
+            android:id="@+id/tv_hero_county"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/hero_country_bg"
+            android:includeFontPadding="false"
+            android:paddingBottom="1dp"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
+            android:paddingTop="1dp"
+            android:text="国"
+            android:textColor="#999999"
+            android:textSize="11dp"/>
+
+    </LinearLayout>
+
+    <!--难度、生存、物理、技能-->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="难度"
+                android:textColor="#666666"
+                android:textSize="12dp"/>
+
+            <RatingBar
+                android:id="@+id/rating_bar_difficulty"
+                style="?android:attr/ratingBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:isIndicator="true"
+                android:numStars="5"
+                android:stepSize="0.1"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="生存"
+                android:textColor="#666666"
+                android:textSize="12dp"/>
+
+            <ProgressBar
+                android:id="@+id/progress_bar_survival"
+                style="@android:style/Widget.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:layout_marginLeft="10dp"
+                android:max="100"
+                android:progress="0"
+                android:progressDrawable="@drawable/hero_list_summary_progress_bar_selector"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="物理"
+                android:textColor="#666666"
+                android:textSize="12dp"/>
+
+            <ProgressBar
+                android:id="@+id/progress_bar_physics"
+                style="@android:style/Widget.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:layout_marginLeft="10dp"
+                android:max="100"
+                android:progress="0"
+                android:progressDrawable="@drawable/hero_list_summary_progress_bar_selector"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="技能"
+                android:textColor="#666666"
+                android:textSize="12dp"/>
+
+            <ProgressBar
+                android:id="@+id/progress_bar_skill"
+                style="@android:style/Widget.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:layout_marginLeft="10dp"
+                android:max="100"
+                android:progress="0"
+                android:progressDrawable="@drawable/hero_list_summary_progress_bar_selector"/>
+
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>
