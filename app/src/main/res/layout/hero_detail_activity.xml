@@ -84,7 +84,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="15dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:layout_weight="7"
                     android:orientation="vertical">
 
@@ -123,7 +123,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp">
+                        android:layout_marginTop="8dp">
 
                         <TextView
                             android:id="@+id/tv_hero_play_type_1"
@@ -145,7 +145,7 @@
                             android:id="@+id/tv_hero_play_type_2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
+                            android:layout_marginLeft="8dp"
                             android:background="#336699"
                             android:ellipsize="end"
                             android:includeFontPadding="false"
@@ -158,24 +158,24 @@
                             android:textColor="#ffffff"
                             android:textSize="12dp"/>
 
-                        <TextView
-                            android:id="@+id/tv_hero_play_type_3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:background="#66cc99"
-                            android:ellipsize="end"
-                            android:includeFontPadding="false"
-                            android:lines="1"
-                            android:paddingBottom="1dp"
-                            android:paddingLeft="2dp"
-                            android:paddingRight="2dp"
-                            android:paddingTop="1dp"
-                            android:text="类型3"
-                            android:textColor="#ffffff"
-                            android:textSize="12dp"/>
-
                     </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tv_hero_play_type_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:background="#66cc99"
+                        android:ellipsize="end"
+                        android:includeFontPadding="false"
+                        android:lines="1"
+                        android:paddingBottom="1dp"
+                        android:paddingLeft="2dp"
+                        android:paddingRight="2dp"
+                        android:paddingTop="1dp"
+                        android:text="类型3"
+                        android:textColor="#ffffff"
+                        android:textSize="12dp"/>
 
                 </LinearLayout>
 

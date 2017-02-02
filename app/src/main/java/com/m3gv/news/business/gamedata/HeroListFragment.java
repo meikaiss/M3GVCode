@@ -140,13 +140,14 @@ public class HeroListFragment extends NewsListFragment {
                 heroEntityAbstractList.addAll(dbHeroEntityList);
             }
 
-            // 第四步：每隔三个位置插入一条广告item标记
+            // 第四步：每隔 N 个位置插入一条广告item标记
+            int N = 4;
             if (CollectionUtil.isNotEmpty(heroEntityAbstractList)) {
-                int groupCount = heroEntityAbstractList.size() / 3;
+                int groupCount = heroEntityAbstractList.size() / N;
                 for (int i = 0; i < groupCount; i++) {
                     HeroEntity adHeroEntity = new HeroEntity();
                     adHeroEntity.itemType = ItemType.YOUMI_AD_DATA;
-                    heroEntityAbstractList.add((i + 1) * 3 + i, adHeroEntity);
+                    heroEntityAbstractList.add((i + 1) * N + i, adHeroEntity);
                 }
             }
 
