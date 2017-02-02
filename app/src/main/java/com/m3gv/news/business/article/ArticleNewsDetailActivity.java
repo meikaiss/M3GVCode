@@ -90,10 +90,6 @@ public class ArticleNewsDetailActivity extends M3gBaseActivity implements View.O
 
     @Override
     public void onBackPressed() {
-        if (m3WebView.canGoBack()) {
-            m3WebView.goBack();
-        } else {
-            super.onBackPressed();
-        }
+        super.onBackPressed();
     }
 }

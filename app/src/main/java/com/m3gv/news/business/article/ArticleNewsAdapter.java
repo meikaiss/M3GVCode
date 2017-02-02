@@ -14,6 +14,7 @@ import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 import com.m3gv.news.R;
+import com.m3gv.news.common.util.StringUtil;
 import com.m3gv.news.common.util.UnitUtil;
 
 import java.util.List;
@@ -48,17 +49,20 @@ public class ArticleNewsAdapter extends RecyclerView.Adapter<ArticleNewsAdapter.
         holder.imgLabel.setImageResource(0);
 
         holder.tvTitle.setText(dataList.get(pos).articleTitle);
+        holder.tvSource.setText(dataList.get(pos).source);
         holder.tvPlayCount.setText(UnitUtil.toWan(dataList.get(pos).readCount));
-        holder.tvZanCount.setText("" + dataList.get(pos).zanCount);
-        holder.tvCaiCount.setText("" + dataList.get(pos).caiCount);
 
-        Glide.with(activity).load(dataList.get(pos).thumbnail).centerCrop().into(new GlideDrawableImageViewTarget
-                (holder.imgThumbs) {
-            @Override
-            public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> animation) {
-                super.onResourceReady(resource, animation);
-            }
-        });
+        if (StringUtil.isNotEmpty(dataList.get(pos).thumbnail)) {
+            Glide.with(activity).load(dataList.get(pos).thumbnail).centerCrop().into(new GlideDrawableImageViewTarget
+                    (holder.imgThumbs) {
+                @Override
+                public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> animation) {
+                    super.onResourceReady(resource, animation);
+                }
+            });
+        } else {
+            holder.imgThumbs.setImageResource(R.drawable.default_image);
+        }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,18 +83,16 @@ public class ArticleNewsAdapter extends RecyclerView.Adapter<ArticleNewsAdapter.
 
         public TextView tvTitle;
         public ImageView imgThumbs;
+        public TextView tvSource;
         public TextView tvPlayCount;
-        public TextView tvZanCount;
-        public TextView tvCaiCount;
         public ImageView imgLabel;
 
         public ArticleNewsViewHolder(View itemView) {
             super(itemView);
             tvTitle = (TextView) itemView.findViewById(R.id.tv_article_news_list_title);
             imgThumbs = (ImageView) itemView.findViewById(R.id.img_article_news_list_thumbs);
+            tvSource = (TextView) itemView.findViewById(R.id.tv_source);
             tvPlayCount = (TextView) itemView.findViewById(R.id.tv_play_count);
-            tvZanCount = (TextView) itemView.findViewById(R.id.tv_zan_count);
-            tvCaiCount = (TextView) itemView.findViewById(R.id.tv_cai_count);
             imgLabel = (ImageView) itemView.findViewById(R.id.img_label);
         }
     }

@@ -12,19 +12,21 @@ public class ArticleNewsEntity implements Parcelable {
 
     public long articleId;
     public String articleTitle;
+    public String source;
     public String content;
     public String thumbnail;
     public int readCount;
     public int zanCount;
     public int caiCount;
 
-    public ArticleNewsEntity(){
+    public ArticleNewsEntity() {
 
     }
 
     protected ArticleNewsEntity(Parcel in) {
         articleId = in.readLong();
         articleTitle = in.readString();
+        source = in.readString();
         content = in.readString();
         thumbnail = in.readString();
     }
@@ -50,6 +52,7 @@ public class ArticleNewsEntity implements Parcelable {
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeLong(articleId);
         parcel.writeString(articleTitle);
+        parcel.writeString(source);
         parcel.writeString(content);
         parcel.writeString(thumbnail);
         parcel.writeInt(readCount);
@@ -63,6 +66,7 @@ public class ArticleNewsEntity implements Parcelable {
         }
         ArticleNewsEntity articleNewsEntity = new ArticleNewsEntity();
         articleNewsEntity.articleTitle = avObject.getString("articleTitle");
+        articleNewsEntity.source = avObject.getString("source");
         articleNewsEntity.articleId = avObject.getInt("articleId");
         articleNewsEntity.content = avObject.getString("content");
         articleNewsEntity.readCount = avObject.getInt("readCount");
@@ -70,8 +74,6 @@ public class ArticleNewsEntity implements Parcelable {
         articleNewsEntity.caiCount = avObject.getInt("caiCount");
         if (avObject.getAVFile("thumbnail") != null) {
             articleNewsEntity.thumbnail = avObject.getAVFile("thumbnail").getUrl();
-        }else{
-            articleNewsEntity.thumbnail = "http://ac-vkbqghtr.clouddn.com/b066aee7e8202d014e3a.jpg";
         }
 
         return articleNewsEntity;

@@ -51,6 +51,27 @@
             android:layout_marginTop="10dp">
 
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="来源："
+                android:textColor="@color/text_color_mini_description"
+                android:textSize="@dimen/text_size_mini_description"/>
+
+            <TextView
+                android:id="@+id/tv_source"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
+                android:text="官方网站"
+                android:textColor="@color/text_color_mini_description"
+                android:textSize="@dimen/text_size_mini_description"/>
+
+            <android.support.v4.widget.Space
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <TextView
                 android:id="@+id/tv_play_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -62,36 +83,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="15dp"
                 android:text="次阅读"
-                android:textColor="@color/text_color_mini_description"
-                android:textSize="@dimen/text_size_mini_description"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="赞:"
-                android:textColor="@color/text_color_mini_description"
-                android:textSize="@dimen/text_size_mini_description"/>
-
-            <TextView
-                android:id="@+id/tv_zan_count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="15dp"
-                android:textColor="@color/text_color_mini_description"
-                android:textSize="@dimen/text_size_mini_description"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="踩:"
-                android:textColor="@color/text_color_mini_description"
-                android:textSize="@dimen/text_size_mini_description"/>
-
-            <TextView
-                android:id="@+id/tv_cai_count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="15dp"
                 android:textColor="@color/text_color_mini_description"
                 android:textSize="@dimen/text_size_mini_description"/>
 

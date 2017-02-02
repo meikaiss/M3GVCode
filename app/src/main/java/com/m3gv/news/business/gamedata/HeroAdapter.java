@@ -102,7 +102,12 @@ public class HeroAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
             } else {
                 final ViewGroup adContainer = (ViewGroup) holder.itemView;
-                adContainer.setClickable(true);
+                adContainer.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                });
                 final View adView = BannerManager.getInstance(adContainer.getContext())
                         .getBannerView(adContainer.getContext(), new BannerViewListener() {
                             @Override
