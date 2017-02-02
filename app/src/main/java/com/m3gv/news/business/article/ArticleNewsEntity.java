@@ -70,6 +70,8 @@ public class ArticleNewsEntity implements Parcelable {
         articleNewsEntity.caiCount = avObject.getInt("caiCount");
         if (avObject.getAVFile("thumbnail") != null) {
             articleNewsEntity.thumbnail = avObject.getAVFile("thumbnail").getUrl();
+        }else{
+            articleNewsEntity.thumbnail = "http://ac-vkbqghtr.clouddn.com/b066aee7e8202d014e3a.jpg";
         }
 
         return articleNewsEntity;

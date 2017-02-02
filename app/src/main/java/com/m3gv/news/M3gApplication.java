@@ -12,6 +12,8 @@ import com.m3gv.news.common.db.RealmDbHelper;
 import com.m3gv.news.common.util.SystemUtil;
 import com.tencent.bugly.crashreport.CrashReport;
 
+import net.youmi.android.AdManager;
+
 /**
  * Created by meikai on 16/12/3.
  */
@@ -32,6 +34,8 @@ public class M3gApplication extends Application {
         AVOSCloud.initialize(this, "VKBQghTRDUmF2zhvEtJrRgDD-gzGzoHsz", "0RnczmpwiB0uRefLRVfIvXEQ");
 
         RealmDbHelper.getInstance().init(this);
+
+        AdManager.getInstance(this).init("a182bedcefb2b082", "8b2aba7abaf9d605", true, true);
 
     }
 

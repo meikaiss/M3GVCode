@@ -62,6 +62,7 @@
             android:drawableTop="@drawable/home_menu_3_selector"
             android:gravity="center"
             android:paddingTop="5dp"
+            android:visibility="gone"
             android:tag="2"
             android:text="壁纸"
             android:textColor="@drawable/home_bottom_menu_item_text_color"
