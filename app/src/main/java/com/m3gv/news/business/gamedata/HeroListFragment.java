@@ -1,4 +1,4 @@
-package com.m3gv.news.business.data;
+package com.m3gv.news.business.gamedata;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -11,6 +11,7 @@ import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVQuery;
 import com.m3gv.news.business.NewsListFragment;
+import com.m3gv.news.business.youmiAd.ItemType;
 import com.m3gv.news.common.db.RealmDbHelper;
 import com.m3gv.news.common.util.CollectionUtil;
 import com.m3gv.news.common.view.xrecyclerview.XRecyclerView;
@@ -137,6 +138,16 @@ public class HeroListFragment extends NewsListFragment {
             } else {
                 //第三步：如果本地数据库有缓存，则将缓存的realm格式的数据转为内存数据
                 heroEntityAbstractList.addAll(dbHeroEntityList);
+            }
+
+            // 第四步：每隔三个位置插入一条广告item标记
+            if (CollectionUtil.isNotEmpty(heroEntityAbstractList)) {
+                int groupCount = heroEntityAbstractList.size() / 3;
+                for (int i = 0; i < groupCount; i++) {
+                    HeroEntity adHeroEntity = new HeroEntity();
+                    adHeroEntity.itemType = ItemType.YOUMI_AD_DATA;
+                    heroEntityAbstractList.add((i + 1) * 3 + i, adHeroEntity);
+                }
             }
 
             return heroEntityAbstractList;

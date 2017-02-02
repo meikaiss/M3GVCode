@@ -1,9 +1,10 @@
-package com.m3gv.news.business.data;
+package com.m3gv.news.business.gamedata;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.avos.avoscloud.AVObject;
+import com.m3gv.news.business.youmiAd.ItemType;
 
 import io.realm.RealmModel;
 import io.realm.annotations.Ignore;
@@ -82,6 +83,8 @@ public class HeroEntity implements Parcelable, RealmModel, Cloneable {
     @Required public String skill4Level2Effect;
     @Required public String skill4Level3Effect;
     @Required public String skill4Level4Effect;
+
+    @Ignore public ItemType itemType = ItemType.REAL_DATA;
 
     @Ignore public String[] skillName;
     @Ignore public String[] skillIcon;

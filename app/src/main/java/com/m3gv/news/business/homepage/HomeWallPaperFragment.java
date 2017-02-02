@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 import com.m3gv.news.R;
 import com.m3gv.news.base.M3gBaseFragment;
-import com.m3gv.news.business.data.HeroEntity;
+import com.m3gv.news.business.gamedata.HeroEntity;
 import com.m3gv.news.common.db.RealmDbHelper;
 import com.m3gv.news.common.util.CollectionUtil;
 import com.m3gv.news.common.util.LogUtil;

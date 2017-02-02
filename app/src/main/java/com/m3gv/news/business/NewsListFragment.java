@@ -12,16 +12,11 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.m3gv.news.R;
 import com.m3gv.news.base.M3gBaseFragment;
-import com.m3gv.news.common.util.LogUtil;
 import com.m3gv.news.common.view.xrecyclerview.XRecyclerView;
-
-import net.youmi.android.normal.banner.BannerManager;
-import net.youmi.android.normal.banner.BannerViewListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +31,6 @@ public class NewsListFragment extends M3gBaseFragment {
     protected ViewGroup emptyViewGroup;
     protected ViewGroup loadingViewGroup;
     protected ViewGroup noNetViewGroup;
-    protected FrameLayout adFrameLayout;
     protected XRecyclerView xRecyclerView;
     protected TextView tvRefreshResultTip;
 
@@ -49,37 +43,6 @@ public class NewsListFragment extends M3gBaseFragment {
             @Nullable Bundle savedInstanceState) {
 
         rootView = inflater.inflate(R.layout.news_list_fragment, container, false);
-
-        adFrameLayout = f(R.id.ad_frame_layout);
-
-        View nativeSpotView = BannerManager.getInstance(getContext())
-                .getBannerView(getContext(), new BannerViewListener() {
-                    @Override
-                    public void onRequestSuccess() {
-
-                    }
-
-                    @Override
-                    public void onSwitchBanner() {
-
-                    }
-
-                    @Override
-                    public void onRequestFailed() {
-
-                    }
-                });
-        if (nativeSpotView != null) {
-            FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,
-                    FrameLayout.LayoutParams.MATCH_PARENT);
-            if (adFrameLayout != null) {
-                adFrameLayout.removeAllViews();
-                adFrameLayout.addView(nativeSpotView, layoutParams);
-                if (adFrameLayout.getVisibility() != View.VISIBLE) {
-                    adFrameLayout.setVisibility(View.VISIBLE);
-                }
-            }
-        }
 
         xRecyclerView = f(R.id.base_x_recycler_view);
         xRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));

@@ -9,7 +9,7 @@
 
     <LinearLayout
         android:layout_width="0dp"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginRight="5dp"
         android:layout_weight="7"
         android:orientation="vertical">
@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:includeFontPadding="false"
-            android:text="标题"
+            android:text="标题两行标题两行标题两行标题两行标题两行标题两行标题两行"
             android:textColor="@color/text_color_normal_gray"
             android:textSize="@dimen/text_size_title_big"/>
 

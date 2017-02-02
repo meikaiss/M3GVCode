@@ -1,4 +1,4 @@
-package com.m3gv.news.business.data;
+package com.m3gv.news.business.gamedata;
 
 import android.app.Activity;
 import android.content.Intent;
