@@ -1,6 +1,6 @@
 p {line-height:150%}
 
-img {width:100%;height:auto;border:1}
+img {max-width:100%;text-align:center;height:auto;border:1}
 
 body {padding:2px}
 

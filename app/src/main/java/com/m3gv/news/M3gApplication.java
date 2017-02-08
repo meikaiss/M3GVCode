@@ -31,8 +31,6 @@ public class M3gApplication extends Application {
 
         RealmDbHelper.getInstance().init(this);
 
-        AdManager.getInstance(this).init("a182bedcefb2b082", "8b2aba7abaf9d605", true, true);
-
     }
 
 

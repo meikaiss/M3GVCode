@@ -12,6 +12,7 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.m3gv.news.R;
@@ -31,6 +32,8 @@ public class NewsListFragment extends M3gBaseFragment {
     protected ViewGroup emptyViewGroup;
     protected ViewGroup loadingViewGroup;
     protected ViewGroup noNetViewGroup;
+
+    protected FrameLayout adFrameLayout;
     protected XRecyclerView xRecyclerView;
     protected TextView tvRefreshResultTip;
 
@@ -43,6 +46,8 @@ public class NewsListFragment extends M3gBaseFragment {
             @Nullable Bundle savedInstanceState) {
 
         rootView = inflater.inflate(R.layout.news_list_fragment, container, false);
+
+        adFrameLayout = f(R.id.ad_frame_layout);
 
         xRecyclerView = f(R.id.base_x_recycler_view);
         xRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));

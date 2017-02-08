@@ -11,10 +11,12 @@ import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVQuery;
 import com.m3gv.news.business.NewsListFragment;
-import com.m3gv.news.business.youmiAd.ItemType;
 import com.m3gv.news.common.db.RealmDbHelper;
 import com.m3gv.news.common.util.CollectionUtil;
 import com.m3gv.news.common.view.xrecyclerview.XRecyclerView;
+
+import net.youmi.android.normal.banner.BannerManager;
+import net.youmi.android.normal.banner.BannerViewListener;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -33,6 +35,15 @@ public class HeroListFragment extends NewsListFragment {
 
     private List<HeroEntity> dataList = new ArrayList<>();
     private HeroAdapter heroAdapter;
+
+    public static HeroListFragment newInstance() {
+
+        Bundle args = new Bundle();
+
+        HeroListFragment fragment = new HeroListFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Nullable
     @Override
@@ -60,13 +71,10 @@ public class HeroListFragment extends NewsListFragment {
         return rootView;
     }
 
-    public static HeroListFragment newInstance() {
 
-        Bundle args = new Bundle();
-
-        HeroListFragment fragment = new HeroListFragment();
-        fragment.setArguments(args);
-        return fragment;
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 
     private void onGetDataSuccess(List<HeroEntity> heroEntities, boolean isPullRefresh) {
@@ -141,15 +149,15 @@ public class HeroListFragment extends NewsListFragment {
             }
 
             // 第四步：每隔 N 个位置插入一条广告item标记
-            int N = 4;
-            if (CollectionUtil.isNotEmpty(heroEntityAbstractList)) {
-                int groupCount = heroEntityAbstractList.size() / N;
-                for (int i = 0; i < groupCount; i++) {
-                    HeroEntity adHeroEntity = new HeroEntity();
-                    adHeroEntity.itemType = ItemType.YOUMI_AD_DATA;
-                    heroEntityAbstractList.add((i + 1) * N + i, adHeroEntity);
-                }
-            }
+//            int N = 4;
+//            if (CollectionUtil.isNotEmpty(heroEntityAbstractList)) {
+//                int groupCount = heroEntityAbstractList.size() / N;
+//                for (int i = 0; i < groupCount; i++) {
+//                    HeroEntity adHeroEntity = new HeroEntity();
+//                    adHeroEntity.itemType = ItemType.YOUMI_AD_DATA;
+//                    heroEntityAbstractList.add((i + 1) * N + i, adHeroEntity);
+//                }
+//            }
 
             return heroEntityAbstractList;
         }

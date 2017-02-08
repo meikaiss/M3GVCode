@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -11,7 +12,12 @@ import android.widget.Toast;
 import com.m3gv.news.R;
 import com.m3gv.news.base.M3Config;
 import com.m3gv.news.base.M3gBaseActivity;
+import com.m3gv.news.common.util.UIUtil;
 import com.m3gv.news.common.webview.M3WebView;
+
+import net.youmi.android.normal.common.ErrorCode;
+import net.youmi.android.normal.spot.SpotListener;
+import net.youmi.android.normal.spot.SpotManager;
 
 import java.io.ByteArrayInputStream;
 import java.util.Arrays;
@@ -68,6 +74,10 @@ public class ArticleNewsDetailActivity extends M3gBaseActivity implements View.O
                         Toast.LENGTH_LONG).show();
             }
         };
+
+        if (Math.random() > 0.5) {
+            setupSlideableSpotAd();
+        }
     }
 
     public static void start(Activity activity, ArticleNewsEntity articleNewsEntity) {
@@ -90,6 +100,100 @@ public class ArticleNewsDetailActivity extends M3gBaseActivity implements View.O
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        // 点击后退关闭轮播插屏广告
+        if (SpotManager.getInstance(this).isSlideableSpotShowing()) {
+            SpotManager.getInstance(this).hideSlideableSpot();
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // 轮播插屏广告
+        SpotManager.getInstance(this).onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        // 轮播插屏广告
+        SpotManager.getInstance(this).onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // 轮播插屏广告
+        SpotManager.getInstance(this).onDestroy();
+    }
+
+    /**
+     * 设置轮播插屏广告
+     */
+    private void setupSlideableSpotAd() {
+        // 设置插屏图片类型，默认竖图
+        //		// 横图
+        //		SpotManager.getInstance(mContext).setImageType(SpotManager
+        // .IMAGE_TYPE_HORIZONTAL);
+        // 竖图
+        SpotManager.getInstance(this).setImageType(SpotManager.IMAGE_TYPE_VERTICAL);
+
+        // 设置动画类型，默认高级动画
+        //		// 无动画
+        //		SpotManager.getInstance(mContext).setAnimationType(SpotManager
+        // .ANIMATION_TYPE_NONE);
+        //		// 简单动画
+        //		SpotManager.getInstance(mContext).setAnimationType(SpotManager
+        // .ANIMATION_TYPE_SIMPLE);
+        // 高级动画
+        SpotManager.getInstance(this)
+                .setAnimationType(SpotManager.ANIMATION_TYPE_ADVANCED);
+
+        SpotManager.getInstance(this)
+                .showSlideableSpot(this, new SpotListener() {
+
+                    @Override
+                    public void onShowSuccess() {
+                        Log.e("", "轮播插屏展示成功");
+                    }
+
+                    @Override
+                    public void onShowFailed(int errorCode) {
+                        Log.e("", "轮播插屏展示失败");
+                        switch (errorCode) {
+                            case ErrorCode.NON_NETWORK:
+                                UIUtil.showToast("网络异常");
+                                break;
+                            case ErrorCode.NON_AD:
+                                UIUtil.showToast("暂无轮播插屏广告");
+                                break;
+                            case ErrorCode.RESOURCE_NOT_READY:
+                                UIUtil.showToast("轮播插屏资源还没准备好");
+                                break;
+                            case ErrorCode.SHOW_INTERVAL_LIMITED:
+                                UIUtil.showToast("请勿频繁展示");
+                                break;
+                            case ErrorCode.WIDGET_NOT_IN_VISIBILITY_STATE:
+                                UIUtil.showToast("请设置插屏为可见状态");
+                                break;
+                            default:
+                                UIUtil.showToast("请稍后再试");
+                                break;
+                        }
+                    }
+
+                    @Override
+                    public void onSpotClosed() {
+                        Log.e("", "轮播插屏被关闭");
+                    }
+
+                    @Override
+                    public void onSpotClicked(boolean isWebPage) {
+                        Log.e("", "轮播插屏被点击");
+                        Log.e("", String.format("是否是网页广告？%s", isWebPage ? "是" : "不是"));
+                    }
+                });
     }
 }

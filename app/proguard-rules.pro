@@ -88,3 +88,7 @@
 
 -keepattributes *Annotation*
 #leanClound  end
+
+-keep public class android.support.**{
+    *;
+}

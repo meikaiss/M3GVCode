@@ -63,7 +63,7 @@ public class HomeVideoFragment extends M3gBaseFragment {
 
         categoryList = new ArrayList<>();
         categoryList.add(new CategoryEntity("每日精彩", "VideoNews"));
-        categoryList.add(new CategoryEntity("搞笑视频", "VideoNews"));
+//        categoryList.add(new CategoryEntity("搞笑视频", "VideoNews"));
 
         magicIndicator = f(R.id.magic_indicator);
         videoViewPager = f(R.id.video_view_pager);
