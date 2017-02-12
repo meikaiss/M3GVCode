@@ -199,22 +199,22 @@ public class HeroDetailActivity extends M3gBaseActivity {
                         Log.e("", "轮播插屏展示失败");
                         switch (errorCode) {
                             case ErrorCode.NON_NETWORK:
-                                UIUtil.showToast("网络异常");
+//                                UIUtil.showToast("网络异常");
                                 break;
                             case ErrorCode.NON_AD:
-                                UIUtil.showToast("暂无轮播插屏广告");
+//                                UIUtil.showToast("暂无轮播插屏广告");
                                 break;
                             case ErrorCode.RESOURCE_NOT_READY:
-                                UIUtil.showToast("轮播插屏资源还没准备好");
+//                                UIUtil.showToast("轮播插屏资源还没准备好");
                                 break;
                             case ErrorCode.SHOW_INTERVAL_LIMITED:
-                                UIUtil.showToast("请勿频繁展示");
+//                                UIUtil.showToast("请勿频繁展示");
                                 break;
                             case ErrorCode.WIDGET_NOT_IN_VISIBILITY_STATE:
-                                UIUtil.showToast("请设置插屏为可见状态");
+//                                UIUtil.showToast("请设置插屏为可见状态");
                                 break;
                             default:
-                                UIUtil.showToast("请稍后再试");
+//                                UIUtil.showToast("请稍后再试");
                                 break;
                         }
                     }

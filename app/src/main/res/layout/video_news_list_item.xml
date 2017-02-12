@@ -84,10 +84,13 @@
 
         <com.m3gv.news.common.view.ScaleImageView
             android:id="@+id/img_video_news_list_thumbs"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#b0b0b0"
-            android:scaleType="centerCrop"/>
+            android:scaleType="centerCrop"
+            app:height_scale="3"
+            app:width_scale="4"/>
 
         <ImageView
             android:id="@+id/img_label"

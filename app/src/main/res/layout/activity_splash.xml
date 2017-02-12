@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:gravity="center"
-            android:text="copyright @2017 卖客科技"
+            android:text="十人梦三家，九个用梦三国宝典"
             android:textColor="#333333"
             android:textSize="12dp"/>
 

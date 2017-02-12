@@ -129,10 +129,17 @@ public class HomeActivity extends M3gBaseActivity implements View.OnClickListene
         userInfo.put("MODEL", Build.MODEL);
         userInfo.put("SDK_VERSION", Build.VERSION.SDK);
         userInfo.put("SDK_INT", Build.VERSION.SDK_INT);
+
+        String imei;
         if (tm.getDeviceId() != null) {
-            userInfo.put("IMEI", tm.getDeviceId());
+            imei = tm.getDeviceId();
         } else {
-            userInfo.put("IMEI", "null");
+            imei = "null";
+        }
+
+        userInfo.put("IMEI", imei);
+        if ("861414038624178".equals(imei)) {
+            return;
         }
 
         userInfo.saveInBackground(new SaveCallback() {

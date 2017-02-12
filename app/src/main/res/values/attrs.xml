@@ -6,4 +6,10 @@
     </declare-styleable>
 
 
+    <declare-styleable name="ScaleImageView">
+        <attr name="width_scale" format="integer"/>
+        <attr name="height_scale" format="integer"/>
+    </declare-styleable>
+
+
 </resources>
