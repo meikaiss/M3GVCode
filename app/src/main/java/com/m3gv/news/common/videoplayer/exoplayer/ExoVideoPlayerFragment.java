@@ -9,10 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.SeekBar;
 
 import com.github.rubensousa.previewseekbar.PreviewSeekBar;
-import com.github.rubensousa.previewseekbar.PreviewSeekBarLayout;
 import com.m3gv.news.R;
 import com.m3gv.news.base.M3gBaseFragment;
 import com.m3gv.news.common.videoplayer.VideoEntity;
@@ -21,17 +21,19 @@ import com.m3gv.news.common.videoplayer.VideoPlayerActivity;
 /**
  * Created by meikai on 17/2/15.
  */
-
 public class ExoVideoPlayerFragment extends M3gBaseFragment {
 
     private static String KEY_VIDEO_ENTITY = "key_video_entity";
 
     private ExoPlayerManager exoPlayerManager;
-    private PreviewSeekBar seekBar;
 
+    private PreviewSeekBar seekBar;
+    private ProgressBar circleProgressBar;
     private ImageButton fullscreenImgBtn;
 
     private boolean isInFullScreen;
+
+    private VideoEntity videoEntity;
 
     public static ExoVideoPlayerFragment newInstance(VideoEntity videoEntity) {
         ExoVideoPlayerFragment exoVideoPlayerFragment = new ExoVideoPlayerFragment();
@@ -58,6 +60,7 @@ public class ExoVideoPlayerFragment extends M3gBaseFragment {
         super.onViewCreated(view, savedInstanceState);
 
         SimpleExoPlayerView playerView = (SimpleExoPlayerView) view.findViewById(R.id.player_view);
+        circleProgressBar = (ProgressBar) playerView.findViewById(R.id.progress_video_loading);
         seekBar = (PreviewSeekBar) playerView.findViewById(R.id.exo_progress);
 
         seekBar.addOnSeekBarChangeListener(onSeekBarChangeListener);
@@ -65,9 +68,9 @@ public class ExoVideoPlayerFragment extends M3gBaseFragment {
         fullscreenImgBtn = f(view, R.id.imgb_fullscreen);
         fullscreenImgBtn.setOnClickListener(clickListener);
 
-        String videoUrl = "http://ac-vkbqghtr.clouddn.com/86760493b02a6307f8ed.mp4";
-        exoPlayerManager = new ExoPlayerManager(playerView, videoUrl);
+        videoEntity = getArguments().getParcelable(KEY_VIDEO_ENTITY);
 
+        exoPlayerManager = new ExoPlayerManager(rootView, playerView, circleProgressBar, videoEntity.url);
     }
 
     @Override
