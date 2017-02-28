@@ -14,7 +14,7 @@ import com.m3gv.news.R;
 import com.m3gv.news.common.videoplayer.VideoDurationEntity;
 import com.m3gv.news.common.videoplayer.VideoEntity;
 import com.m3gv.news.common.videoplayer.VideoPlayerActivity;
-import com.m3gv.news.common.videoplayer.VideoPlayerFragment;
+import com.m3gv.news.common.videoplayer.exoplayer.ExoVideoPlayerFragment;
 
 /**
  * Created by meikai on 16/12/3.
@@ -51,7 +51,7 @@ public class VideoDetailActivity extends VideoPlayerActivity implements View.OnC
         videoEntity.durationEntity = new VideoDurationEntity(videoNewsEntity.videoDuration);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_video_container,
-                VideoPlayerFragment.newInstance(videoEntity))
+                ExoVideoPlayerFragment.newInstance(videoEntity))
                 .commitAllowingStateLoss();
 
         tvVideoTitle = f(R.id.tv_video_detail_title);
@@ -64,6 +64,10 @@ public class VideoDetailActivity extends VideoPlayerActivity implements View.OnC
         imgvCai.setOnClickListener(this);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 
     @Override
     public void onClick(View view) {

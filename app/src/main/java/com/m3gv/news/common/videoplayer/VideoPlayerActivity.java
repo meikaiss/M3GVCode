@@ -5,6 +5,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.m3gv.news.base.M3gBaseActivity;
+import com.m3gv.news.common.videoplayer.exoplayer.ExoVideoPlayerFragment;
 
 import java.lang.ref.WeakReference;
 
@@ -13,10 +14,9 @@ import java.lang.ref.WeakReference;
  */
 public class VideoPlayerActivity extends M3gBaseActivity {
 
-    private WeakReference<VideoPlayerFragment> videoPlayerFragmentRef;
+    private WeakReference<ExoVideoPlayerFragment> videoPlayerFragmentRef;
 
-
-    public void bindVideoPlayerFragment(VideoPlayerFragment videoPlayerFragment) {
+    public void bindVideoPlayerFragment(ExoVideoPlayerFragment videoPlayerFragment) {
         if (videoPlayerFragmentRef == null || videoPlayerFragmentRef.get() != videoPlayerFragment) {
             videoPlayerFragmentRef = new WeakReference<>(videoPlayerFragment);
         }
@@ -25,7 +25,7 @@ public class VideoPlayerActivity extends M3gBaseActivity {
     @Override
     public void onBackPressed() {
         if (videoPlayerFragmentRef != null) {
-            VideoPlayerFragment videoPlayerFragment = videoPlayerFragmentRef.get();
+            ExoVideoPlayerFragment videoPlayerFragment = videoPlayerFragmentRef.get();
             if (videoPlayerFragment != null) {
                 if (videoPlayerFragment.onBackPressed()) {
                     return;

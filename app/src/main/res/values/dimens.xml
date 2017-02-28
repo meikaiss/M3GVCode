@@ -3,8 +3,13 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
-    <dimen name="text_size_title_big">18dp</dimen>
-    <dimen name="text_size_sub_title_big">16dp</dimen>
+    <dimen name="text_size_title_big">16dp</dimen>
+    <dimen name="text_size_sub_title_big">14dp</dimen>
 
     <dimen name="text_size_mini_description">12dp</dimen>
+
+    <dimen name="video_preview_width">100dp</dimen>
+    <dimen name="video_preview_height">56dp</dimen>
+    <dimen name="video_frame_width">2dp</dimen>
+
 </resources>
