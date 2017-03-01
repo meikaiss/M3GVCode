@@ -11,9 +11,11 @@ import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVQuery;
 import com.avos.avoscloud.FindCallback;
+import com.avos.avoscloud.SaveCallback;
 import com.m3gv.news.R;
 import com.m3gv.news.business.NewsListFragment;
 import com.m3gv.news.common.util.CollectionUtil;
+import com.m3gv.news.common.util.UIUtil;
 import com.m3gv.news.common.view.xrecyclerview.XRecyclerView;
 
 import java.util.ArrayList;
