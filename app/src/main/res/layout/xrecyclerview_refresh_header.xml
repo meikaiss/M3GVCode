@@ -35,7 +35,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="让用户更懂车"
+                    android:text="用梦三宝典，天天五杀爽翻天"
                     android:textSize="12sp"/>
 
                 <TextView

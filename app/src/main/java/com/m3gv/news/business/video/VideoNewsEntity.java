@@ -10,6 +10,8 @@ import com.avos.avoscloud.AVObject;
  */
 public class VideoNewsEntity implements Parcelable {
 
+    public AVObject avObject;
+
     public int videoDuration;
     public String videoTitle;
     public int playCount;
@@ -35,6 +37,7 @@ public class VideoNewsEntity implements Parcelable {
         videoResolution = in.readInt();
         videoId = in.readInt();
         categoryId = in.readInt();
+        avObject = in.readParcelable(AVObject.class.getClassLoader());
     }
 
     public static final Creator<VideoNewsEntity> CREATOR = new Creator<VideoNewsEntity>() {
@@ -66,6 +69,7 @@ public class VideoNewsEntity implements Parcelable {
         parcel.writeInt(videoResolution);
         parcel.writeInt(videoId);
         parcel.writeInt(categoryId);
+        parcel.writeParcelable(avObject, 0);
     }
 
     public static VideoNewsEntity parse(AVObject avObject) {
@@ -87,6 +91,8 @@ public class VideoNewsEntity implements Parcelable {
         videoNewsEntity.videoResolution = avObject.getInt("videoResolution");
         videoNewsEntity.videoId = avObject.getInt("videoId");
         videoNewsEntity.categoryId = avObject.getInt("categoryId");
+
+        videoNewsEntity.avObject = avObject;
 
         return videoNewsEntity;
     }
