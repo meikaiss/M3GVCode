@@ -9,6 +9,7 @@ import java.util.List;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import io.realm.RealmModel;
+import io.realm.RealmObject;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;
 
@@ -38,7 +39,20 @@ public class RealmDbHelper {
         Realm.setDefaultConfiguration(builder.build());
     }
 
-    public boolean save(RealmModel realmModel) {
+    public boolean insertOrUpdate(RealmModel realmModel) {
+        try {
+            Realm realm = Realm.getDefaultInstance();
+            realm.beginTransaction();
+            realm.insertOrUpdate(realmModel);
+            realm.commitTransaction();
+            return true;
+        } catch (Exception e) {
+            LogUtil.e("RealmDbHelper", "save:" + e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean insert(RealmModel realmModel) {
         try {
             Realm realm = Realm.getDefaultInstance();
             realm.beginTransaction();
@@ -51,7 +65,7 @@ public class RealmDbHelper {
         }
     }
 
-    public boolean saveList(List<? extends RealmModel> realmObjectList) {
+    public boolean insertList(List<? extends RealmModel> realmObjectList) {
         try {
             Realm realm = Realm.getDefaultInstance();
             realm.beginTransaction();
@@ -60,6 +74,21 @@ public class RealmDbHelper {
             return true;
         } catch (Exception e) {
             LogUtil.e("RealmDbHelper", "saveList:" + e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean delete(RealmModel realmModel) {
+        try {
+            Realm realm = Realm.getDefaultInstance();
+            realm.beginTransaction();
+            if (realmModel instanceof RealmObject) {
+                ((RealmObject) realmModel).deleteFromRealm();
+            }
+            realm.commitTransaction();
+            return true;
+        } catch (Exception e) {
+            LogUtil.e("RealmDbHelper", "delete:" + e.getMessage());
             return false;
         }
     }

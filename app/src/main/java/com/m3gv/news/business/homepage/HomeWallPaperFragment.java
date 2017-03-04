@@ -73,7 +73,7 @@ public class HomeWallPaperFragment extends M3gBaseFragment {
                     HeroEntity heroEntity = new HeroEntity();
                     heroEntity.heroId = 123;
                     heroEntity.heroName = "meikai";
-                    if (RealmDbHelper.getInstance().save(heroEntity)) {
+                    if (RealmDbHelper.getInstance().insert(heroEntity)) {
                         UIUtil.showToast("保存成功");
                     } else {
                         UIUtil.showToast("保存失败");

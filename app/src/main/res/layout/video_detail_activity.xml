@@ -44,7 +44,7 @@
                 android:src="@drawable/zan_no"/>
 
             <TextView
-                android:id="@+id/tv_zan_count"
+                android:id="@+id/tv_zan_video_detail_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -72,7 +72,7 @@
                 android:src="@drawable/cai_no"/>
 
             <TextView
-                android:id="@+id/tv_cai_count"
+                android:id="@+id/tv_cai_video_detail_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"

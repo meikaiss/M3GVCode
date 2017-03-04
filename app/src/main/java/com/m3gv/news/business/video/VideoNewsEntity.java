@@ -5,10 +5,12 @@ import android.os.Parcelable;
 
 import com.avos.avoscloud.AVObject;
 
+import io.realm.RealmModel;
+
 /**
  * Created by meikai on 16/12/3.
  */
-public class VideoNewsEntity implements Parcelable {
+public class VideoNewsEntity implements Parcelable, RealmModel {
 
     public AVObject avObject;
 

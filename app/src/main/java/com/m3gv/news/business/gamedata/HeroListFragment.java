@@ -15,9 +15,6 @@ import com.m3gv.news.common.db.RealmDbHelper;
 import com.m3gv.news.common.util.CollectionUtil;
 import com.m3gv.news.common.view.xrecyclerview.XRecyclerView;
 
-import net.youmi.android.normal.banner.BannerManager;
-import net.youmi.android.normal.banner.BannerViewListener;
-
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -141,7 +138,7 @@ public class HeroListFragment extends NewsListFragment {
                 }
 
                 //保存到本地数据库
-                RealmDbHelper.getInstance().saveList(heroEntityAbstractList);
+                RealmDbHelper.getInstance().insertList(heroEntityAbstractList);
 
             } else {
                 //第三步：如果本地数据库有缓存，则将缓存的realm格式的数据转为内存数据

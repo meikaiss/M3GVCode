@@ -1,7 +1,5 @@
 package com.m3gv.news.business.video;
 
-import android.animation.ObjectAnimator;
-import android.animation.PropertyValuesHolder;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,10 +8,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.avos.avoscloud.AVException;
-import com.avos.avoscloud.SaveCallback;
 import com.m3gv.news.R;
-import com.m3gv.news.common.util.UIUtil;
+import com.m3gv.news.business.zanCai.ZanCaiVideoHelper;
 import com.m3gv.news.common.videoplayer.VideoDurationEntity;
 import com.m3gv.news.common.videoplayer.VideoEntity;
 import com.m3gv.news.common.videoplayer.VideoPlayerActivity;
@@ -42,7 +38,6 @@ public class VideoDetailActivity extends VideoPlayerActivity implements View.OnC
         activity.startActivity(intent);
     }
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,8 +59,8 @@ public class VideoDetailActivity extends VideoPlayerActivity implements View.OnC
 
         imgvZan = f(R.id.img_zan);
         imgvCai = f(R.id.img_cai);
-        tvZanCount = f(R.id.tv_zan_count);
-        tvCaiCount = f(R.id.tv_cai_count);
+        tvZanCount = f(R.id.tv_zan_video_detail_count);
+        tvCaiCount = f(R.id.tv_cai_video_detail_count);
 
         tvZanCount.setText(videoNewsEntity.zanCount + "");
         tvCaiCount.setText(videoNewsEntity.caiCount + "");
@@ -83,60 +78,16 @@ public class VideoDetailActivity extends VideoPlayerActivity implements View.OnC
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.layout_zan:
-                zanClick();
+                new ZanCaiVideoHelper().zanClick("video", imgvZan, tvZanCount,
+                        imgvCai, tvCaiCount, videoNewsEntity);
                 break;
             case R.id.layout_cai:
-                caiClick();
+                new ZanCaiVideoHelper().caiClick("video", imgvZan, tvZanCount,
+                        imgvCai, tvCaiCount, videoNewsEntity);
                 break;
             default:
                 break;
         }
-    }
-
-    private void zanClick() {
-        PropertyValuesHolder valuesHolder = PropertyValuesHolder.ofFloat("scaleX", 0.0f, 1.5f, 1.0f);
-        PropertyValuesHolder valuesHolder1 = PropertyValuesHolder.ofFloat("scaleY", 0.0f, 1.5f, 1.0f);
-        ObjectAnimator objectAnimator = ObjectAnimator
-                .ofPropertyValuesHolder(imgvZan, valuesHolder, valuesHolder1);
-        objectAnimator.setDuration(300);
-        objectAnimator.start();
-
-        videoNewsEntity.avObject.increment("zanCount");
-        videoNewsEntity.avObject.saveInBackground(new SaveCallback() {
-            @Override
-            public void done(AVException e) {
-                if (e == null) {
-                    UIUtil.showToast("赞+1");
-                    videoNewsEntity.zanCount++;
-                    tvZanCount.setText(videoNewsEntity.zanCount + "");
-                } else {
-                    UIUtil.showToast(e.getMessage());
-                }
-            }
-        });
-    }
-
-    private void caiClick() {
-        PropertyValuesHolder valuesHolder = PropertyValuesHolder.ofFloat("scaleX", 0.0f, 1.5f, 1.0f);
-        PropertyValuesHolder valuesHolder1 = PropertyValuesHolder.ofFloat("scaleY", 0.0f, 1.5f, 1.0f);
-        ObjectAnimator objectAnimator = ObjectAnimator
-                .ofPropertyValuesHolder(imgvCai, valuesHolder, valuesHolder1);
-        objectAnimator.setDuration(300);
-        objectAnimator.start();
-
-        videoNewsEntity.avObject.increment("caiCount");
-        videoNewsEntity.avObject.saveInBackground(new SaveCallback() {
-            @Override
-            public void done(AVException e) {
-                if (e == null) {
-                    UIUtil.showToast("踩+1");
-                    videoNewsEntity.caiCount++;
-                    tvCaiCount.setText(videoNewsEntity.caiCount + "");
-                } else {
-                    UIUtil.showToast(e.getMessage());
-                }
-            }
-        });
     }
 
 }
