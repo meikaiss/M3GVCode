@@ -1,4 +1,4 @@
-package com.m3gv.news.business.homepage;
+package com.m3gv.news.business.home;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -15,6 +15,7 @@ import com.avos.avoscloud.SaveCallback;
 import com.m3gv.news.R;
 import com.m3gv.news.base.M3gBaseActivity;
 import com.m3gv.news.base.M3gBaseFragment;
+import com.m3gv.news.business.cartoon.CartoonListFragment;
 import com.m3gv.news.common.util.AppUtil;
 import com.m3gv.news.common.util.NetUtil;
 
@@ -29,6 +30,9 @@ public class HomeActivity extends M3gBaseActivity implements View.OnClickListene
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_activity);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+        }
 
         tvMenuArr = new TextView[4];
         tvMenuArr[0] = f(R.id.home_menu_tv_0);
@@ -108,7 +112,7 @@ public class HomeActivity extends M3gBaseActivity implements View.OnClickListene
                 fragment = HomeArticleFragment.newInstance();
                 break;
             case 2:
-                fragment = HomeWallPaperFragment.newInstance();
+                fragment = CartoonListFragment.newInstance("Cartoon");
                 break;
             case 3:
                 fragment = HomeDataFragment.newInstance();

@@ -97,7 +97,7 @@ public class ZanCaiVideoHelper {
 
                     // 已经踩过，则需要自动取消踩
                     caiImgv.setImageResource(R.drawable.cai_no);
-                    playAnimator(caiImgv);
+//                    playAnimator(caiImgv);
                 }
             }
 
@@ -179,7 +179,7 @@ public class ZanCaiVideoHelper {
 
                     // 已经赞过，则需要自动取消赞
                     zanImgv.setImageResource(R.drawable.zan_no);
-                    playAnimator(zanImgv);
+//                    playAnimator(zanImgv);
                 }
             }
 

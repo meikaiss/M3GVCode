@@ -22,8 +22,8 @@
         android:id="@+id/layout_bottom_menu"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@android:color/white"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/white">
 
         <TextView
             android:id="@+id/home_menu_tv_0"
@@ -62,9 +62,8 @@
             android:drawableTop="@drawable/home_menu_3_selector"
             android:gravity="center"
             android:paddingTop="5dp"
-            android:visibility="gone"
             android:tag="2"
-            android:text="壁纸"
+            android:text="漫画"
             android:textColor="@drawable/home_bottom_menu_item_text_color"
             android:textSize="13dp"/>
 

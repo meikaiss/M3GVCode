@@ -18,7 +18,7 @@ import java.io.InputStreamReader;
  * Created by meikai on 16/12/18.
  */
 
-public class ArticleHtmlFileUtil {
+public class WebViewHtmlFileUtil {
 
 
     /**

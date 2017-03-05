@@ -31,7 +31,8 @@
         <com.m3gv.news.common.webview.M3WebView
             android:id="@+id/article_m3_web_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:overScrollMode="never"/>
 
     </FrameLayout>
 

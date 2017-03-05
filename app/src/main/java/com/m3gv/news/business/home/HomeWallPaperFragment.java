@@ -1,4 +1,4 @@
-package com.m3gv.news.business.homepage;
+package com.m3gv.news.business.home;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

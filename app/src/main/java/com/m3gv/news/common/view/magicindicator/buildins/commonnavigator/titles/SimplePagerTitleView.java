@@ -3,7 +3,9 @@ package com.m3gv.news.common.view.magicindicator.buildins.commonnavigator.titles
 import android.content.Context;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.support.v7.widget.AppCompatTextView;
 import android.text.TextUtils;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.widget.TextView;
 
@@ -13,9 +15,11 @@ import com.m3gv.news.common.view.magicindicator.buildins.commonnavigator.abs.IMe
 /**
  * 带文本的指示器标题
  */
-public class SimplePagerTitleView extends TextView implements IMeasurablePagerTitleView {
+public class SimplePagerTitleView extends AppCompatTextView implements IMeasurablePagerTitleView {
     private int mSelectedColor;
     private int mNormalColor;
+    private int mSelectedTextSize;
+    private int mNormalTextSize;
 
     public SimplePagerTitleView(Context context) {
         super(context, null);
@@ -33,11 +37,13 @@ public class SimplePagerTitleView extends TextView implements IMeasurablePagerTi
     @Override
     public void onSelected(int index, int totalCount) {
         setTextColor(mSelectedColor);
+        setTextSize(TypedValue.COMPLEX_UNIT_SP, mSelectedTextSize);
     }
 
     @Override
     public void onDeselected(int index, int totalCount) {
         setTextColor(mNormalColor);
+        setTextSize(TypedValue.COMPLEX_UNIT_SP, mNormalTextSize);
     }
 
     @Override
@@ -84,6 +90,14 @@ public class SimplePagerTitleView extends TextView implements IMeasurablePagerTi
 
     public void setSelectedColor(int selectedColor) {
         mSelectedColor = selectedColor;
+    }
+
+    public void setSelectedTextSize(int mSelectedTextSize) {
+        this.mSelectedTextSize = mSelectedTextSize;
+    }
+
+    public void setNormalTextSize(int mNormalTextSize) {
+        this.mNormalTextSize = mNormalTextSize;
     }
 
     public int getNormalColor() {

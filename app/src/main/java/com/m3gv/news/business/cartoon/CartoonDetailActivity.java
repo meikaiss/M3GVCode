@@ -1,4 +1,4 @@
-package com.m3gv.news.business.article;
+package com.m3gv.news.business.cartoon;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.m3gv.news.R;
 import com.m3gv.news.base.M3Config;
 import com.m3gv.news.base.M3gBaseActivity;
+import com.m3gv.news.business.article.WebViewHtmlFileUtil;
 import com.m3gv.news.common.webview.M3WebView;
 
 import net.youmi.android.normal.common.ErrorCode;
@@ -24,13 +25,13 @@ import java.util.Arrays;
 /**
  * Created by meikai on 16/12/15.
  */
-public class ArticleNewsDetailActivity extends M3gBaseActivity implements View.OnClickListener {
+public class CartoonDetailActivity extends M3gBaseActivity implements View.OnClickListener {
 
     private static String KEY_ARTICLE_NEWS_ENTITY = "key_article_news_entity";
 
     private ImageView imageViewBack;
     private M3WebView m3WebView;
-    private ArticleNewsEntity articleNewsEntity;
+    private CartoonEntity articleNewsEntity;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,11 +51,11 @@ public class ArticleNewsDetailActivity extends M3gBaseActivity implements View.O
             @Override
             public void run() {
                 // 获取完整的 html内容字符串
-                String newsHtmlStr = WebViewHtmlFileUtil.createArticleHtml(ArticleNewsDetailActivity.this,
-                        articleNewsEntity.articleTitle, articleNewsEntity.content);
+                String newsHtmlStr = WebViewHtmlFileUtil.createArticleHtml(CartoonDetailActivity.this,
+                        articleNewsEntity.cartoonTitle, articleNewsEntity.content);
 
                 // 将完整的 html内容 写入到 缓存的html文件中
-                final String cacheFilePath = WebViewHtmlFileUtil.createNewArticle(ArticleNewsDetailActivity.this,
+                final String cacheFilePath = WebViewHtmlFileUtil.createNewArticle(CartoonDetailActivity.this,
                         new ByteArrayInputStream(newsHtmlStr.getBytes()));
 
                 runOnUiThread(new Runnable() {
@@ -79,9 +80,9 @@ public class ArticleNewsDetailActivity extends M3gBaseActivity implements View.O
         }
     }
 
-    public static void start(Activity activity, ArticleNewsEntity articleNewsEntity) {
-        Intent intent = new Intent(activity, ArticleNewsDetailActivity.class);
-        intent.putExtra(KEY_ARTICLE_NEWS_ENTITY, articleNewsEntity);
+    public static void start(Activity activity, CartoonEntity cartoonEntity) {
+        Intent intent = new Intent(activity, CartoonDetailActivity.class);
+        intent.putExtra(KEY_ARTICLE_NEWS_ENTITY, cartoonEntity);
         activity.startActivity(intent);
     }
 

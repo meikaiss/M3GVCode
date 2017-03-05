@@ -1,4 +1,4 @@
-package com.m3gv.news.business.homepage;
+package com.m3gv.news.business.home;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -100,9 +99,10 @@ public class HomeArticleFragment extends M3gBaseFragment {
             public IPagerTitleView getTitleView(Context context, final int index) {
                 SimplePagerTitleView simplePagerTitleView = new SimplePagerTitleView(context);
                 simplePagerTitleView.setText(categoryList.get(index).categoryName);
-                simplePagerTitleView.setNormalColor(Color.parseColor("#9e9e9e"));
-                simplePagerTitleView.setSelectedColor(Color.parseColor("#ff3f3e"));
-                simplePagerTitleView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+                simplePagerTitleView.setNormalColor(0xaaffffff);
+                simplePagerTitleView.setSelectedColor(Color.WHITE);
+                simplePagerTitleView.setSelectedTextSize(16);
+                simplePagerTitleView.setNormalTextSize(14);
                 simplePagerTitleView.setGravity(Gravity.CENTER_VERTICAL);
                 simplePagerTitleView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -123,7 +123,7 @@ public class HomeArticleFragment extends M3gBaseFragment {
                 indicator.setStartInterpolator(new AccelerateInterpolator());
                 indicator.setEndInterpolator(new DecelerateInterpolator(2.0f));
                 List<String> colorList = new ArrayList<>();
-                colorList.add("#ff3f3e");
+                colorList.add("#ffffff");
                 indicator.setColorList(colorList);
                 return indicator;
             }

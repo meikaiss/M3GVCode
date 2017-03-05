@@ -11,7 +11,7 @@ import android.view.WindowManager;
 import android.widget.RelativeLayout;
 
 import com.m3gv.news.base.M3gBaseActivity;
-import com.m3gv.news.business.homepage.HomeActivity;
+import com.m3gv.news.business.home.HomeActivity;
 import com.m3gv.news.business.youmiAd.PermissionHelper;
 import com.m3gv.news.common.util.LogUtil;
 

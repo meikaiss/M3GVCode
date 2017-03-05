@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/list_item_selector"
+    android:orientation="vertical"
+    android:padding="15dp">
+
+    <TextView
+        android:id="@+id/tv_article_news_list_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:includeFontPadding="false"
+        android:text="标题两行标题两行标题两行标题两行标题两行标题两行标题两行"
+        android:textColor="@color/text_color_normal_gray"
+        android:textSize="@dimen/text_size_title_big"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <com.m3gv.news.common.view.ScaleImageView
+            android:id="@+id/img_article_news_list_thumbs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#b0b0b0"
+            android:scaleType="centerCrop"
+            app:height_scale="9"
+            app:width_scale="16"/>
+
+        <ImageView
+            android:id="@+id/img_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/list_image_stroke"
+            android:scaleType="centerInside"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="来源："
+                android:textColor="@color/text_color_mini_description"
+                android:textSize="@dimen/text_size_mini_description"/>
+
+            <TextView
+                android:id="@+id/tv_source"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
+                android:text="官方网站"
+                android:textColor="@color/text_color_mini_description"
+                android:textSize="@dimen/text_size_mini_description"/>
+
+            <android.support.v4.widget.Space
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:id="@+id/tv_play_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_color_mini_description"
+                android:textSize="@dimen/text_size_mini_description"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="次阅读"
+                android:textColor="@color/text_color_mini_description"
+                android:textSize="@dimen/text_size_mini_description"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
