@@ -4,11 +4,12 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.avos.avoscloud.AVObject;
+import com.m3gv.news.base.M3bBaseEntity;
 
 /**
  * Created by meikai on 16/12/18.
  */
-public class ArticleNewsEntity implements Parcelable {
+public class ArticleNewsEntity extends M3bBaseEntity implements Parcelable {
 
     public long articleId;
     public String articleTitle;

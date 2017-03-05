@@ -14,6 +14,9 @@ import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 import com.m3gv.news.R;
+import com.m3gv.news.base.M3bBaseEntity;
+import com.m3gv.news.business.banner.BannerEntity;
+import com.m3gv.news.business.banner.BannerViewHolder;
 import com.m3gv.news.common.util.StringUtil;
 import com.m3gv.news.common.util.UnitUtil;
 
@@ -22,56 +25,76 @@ import java.util.List;
 /**
  * Created by meikai on 16/12/3.
  */
-public class ArticleNewsAdapter extends RecyclerView.Adapter<ArticleNewsAdapter.ArticleNewsViewHolder> {
+public class ArticleNewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Activity activity;
-    private List<ArticleNewsEntity> dataList;
+    private List<M3bBaseEntity> dataList;
     private boolean isPullRefreshEnable;
 
-    public ArticleNewsAdapter(Activity activity, List<ArticleNewsEntity> dataList, boolean isPullRefreshEnable) {
+    public ArticleNewsAdapter(Activity activity, List<M3bBaseEntity> dataList, boolean isPullRefreshEnable) {
         this.activity = activity;
         this.dataList = dataList;
         this.isPullRefreshEnable = isPullRefreshEnable;
     }
 
     @Override
-    public ArticleNewsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.article_news_list_item, parent, false);
-
-        return new ArticleNewsViewHolder(view);
+    public int getItemViewType(int position) {
+        return dataList.get(position).entityType.ordinal();
     }
 
     @Override
-    public void onBindViewHolder(final ArticleNewsViewHolder holder, final int pos) {
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        if (viewType == M3bBaseEntity.EntityType.Normal.ordinal()) {
+            View view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.article_news_list_item, parent, false);
 
-        holder.imgThumbs.setBackgroundColor(Color.GRAY);
-        holder.imgLabel.setImageResource(0);
+            return new ArticleNewsViewHolder(view);
+        } else {
 
-        holder.tvTitle.setText(dataList.get(pos).articleTitle);
-        holder.tvSource.setText(dataList.get(pos).source);
-        holder.tvPlayCount.setText(UnitUtil.toWan(dataList.get(pos).readCount));
+            return new BannerViewHolder(parent);
+        }
+    }
 
-        if (StringUtil.isNotEmpty(dataList.get(pos).thumbnail)) {
-            Glide.with(activity).load(dataList.get(pos).thumbnail).centerCrop().into(new GlideDrawableImageViewTarget
-                    (holder.imgThumbs) {
+    @Override
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int pos) {
+        if (holder instanceof ArticleNewsViewHolder) {
+            ArticleNewsViewHolder articleNewsViewHolder = (ArticleNewsViewHolder) holder;
+
+            ArticleNewsEntity articleNewsEntity = (ArticleNewsEntity) dataList.get(pos);
+
+            articleNewsViewHolder.imgThumbs.setBackgroundColor(Color.GRAY);
+            articleNewsViewHolder.imgLabel.setImageResource(0);
+
+            articleNewsViewHolder.tvTitle.setText(articleNewsEntity.articleTitle);
+            articleNewsViewHolder.tvSource.setText(articleNewsEntity.source);
+            articleNewsViewHolder.tvPlayCount.setText(UnitUtil.toWan(articleNewsEntity.readCount));
+
+            if (StringUtil.isNotEmpty(articleNewsEntity.thumbnail)) {
+                Glide.with(activity).load(articleNewsEntity.thumbnail).centerCrop()
+                        .into(new GlideDrawableImageViewTarget
+                                (articleNewsViewHolder.imgThumbs) {
+                            @Override
+                            public void onResourceReady(GlideDrawable resource,
+                                    GlideAnimation<? super GlideDrawable> animation) {
+                                super.onResourceReady(resource, animation);
+                            }
+                        });
+            } else {
+                articleNewsViewHolder.imgThumbs.setImageResource(R.drawable.default_image);
+            }
+
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> animation) {
-                    super.onResourceReady(resource, animation);
+                public void onClick(View view) {
+                    ArticleNewsDetailActivity.start(activity,
+                            (ArticleNewsEntity) dataList
+                                    .get(holder.getAdapterPosition() - (isPullRefreshEnable ? 1 : 0)));
+                    //是因为头部下拉刷新占了一个位置
                 }
             });
-        } else {
-            holder.imgThumbs.setImageResource(R.drawable.default_image);
+        } else if (holder instanceof BannerViewHolder) {
+            ((BannerViewHolder) holder).onBindViewHolder((BannerEntity) dataList.get(pos));
         }
-
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ArticleNewsDetailActivity.start(activity,
-                        dataList.get(holder.getAdapterPosition() - (isPullRefreshEnable ? 1 : 0)));
-                //是因为头部下拉刷新占了一个位置
-            }
-        });
     }
 
     @Override

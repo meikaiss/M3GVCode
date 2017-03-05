@@ -31,11 +31,11 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/home_bottom_menu_item_bg_selector"
-            android:drawableTop="@drawable/home_menu_1_selector"
+            android:drawableTop="@drawable/home_menu_2_selector"
             android:gravity="center"
             android:paddingTop="5dp"
             android:tag="0"
-            android:text="视频"
+            android:text="资讯"
             android:textColor="@drawable/home_bottom_menu_item_text_color"
             android:textSize="13dp"/>
 
@@ -45,11 +45,11 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/home_bottom_menu_item_bg_selector"
-            android:drawableTop="@drawable/home_menu_2_selector"
+            android:drawableTop="@drawable/home_menu_1_selector"
             android:gravity="center"
             android:paddingTop="5dp"
             android:tag="1"
-            android:text="资讯"
+            android:text="视频"
             android:textColor="@drawable/home_bottom_menu_item_text_color"
             android:textSize="13dp"/>
 

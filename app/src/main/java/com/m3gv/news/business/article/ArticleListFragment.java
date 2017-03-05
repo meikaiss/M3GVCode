@@ -6,19 +6,17 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVQuery;
 import com.avos.avoscloud.FindCallback;
 import com.m3gv.news.R;
+import com.m3gv.news.base.M3bBaseEntity;
 import com.m3gv.news.business.NewsListFragment;
+import com.m3gv.news.business.banner.BannerEntity;
 import com.m3gv.news.common.util.CollectionUtil;
 import com.m3gv.news.common.view.xrecyclerview.XRecyclerView;
-
-import net.youmi.android.normal.banner.BannerManager;
-import net.youmi.android.normal.banner.BannerViewListener;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -33,7 +31,7 @@ public class ArticleListFragment extends NewsListFragment {
 
     private String tableName;
 
-    private List<ArticleNewsEntity> dataList = new ArrayList<>();
+    private List<M3bBaseEntity> dataList = new ArrayList<>();
     private ArticleNewsAdapter articleNewsAdapter;
 
     public static ArticleListFragment newInstance(String tableName) {
@@ -55,6 +53,36 @@ public class ArticleListFragment extends NewsListFragment {
         articleNewsAdapter = new ArticleNewsAdapter(getActivity(), dataList, xRecyclerView.isPullRefreshEnabled());
         xRecyclerView.setAdapter(articleNewsAdapter);
 
+        loadNewsList();
+
+        return rootView;
+    }
+
+    private void loadBanner() {
+        AVQuery<AVObject> avQuery = new AVQuery<>("Banner");
+        avQuery.whereEqualTo("ChannelName", tableName).whereEqualTo("enable", true);
+
+        avQuery.findInBackground(new FindCallback<AVObject>() {
+            @Override
+            public void done(List<AVObject> list, AVException e) {
+                if (ArticleListFragment.this == null
+                        || ArticleListFragment.this.hasDestroyed()
+                        || CollectionUtil.isEmpty(list)) {
+                    return;
+                }
+
+                Collections.reverse(list);
+
+                for (int i = 0; i < list.size(); i++) {
+                    dataList.add(0, BannerEntity.parse(list.get(i)));
+                }
+
+                articleNewsAdapter.notifyItemRangeInserted(1, list.size());
+            }
+        });
+    }
+
+    private void loadNewsList() {
         AVQuery<AVObject> avQuery = new AVQuery<>(tableName);
         avQuery.orderByAscending("articleId").whereEqualTo("enable", true);
         avQuery.limit(PAGE_LIMIT);
@@ -78,6 +106,8 @@ public class ArticleListFragment extends NewsListFragment {
                 articleNewsAdapter.notifyItemRangeInserted(1, list.size());
                 xRecyclerView.setVisibility(View.VISIBLE);
                 loadingViewGroup.setVisibility(View.GONE);
+
+                loadBanner();
             }
         });
 
@@ -90,7 +120,13 @@ public class ArticleListFragment extends NewsListFragment {
                         AVQuery<AVObject> avQuery = new AVQuery<>(tableName);
                         avQuery.orderByAscending("articleId");
                         if (CollectionUtil.isNotEmpty(dataList)) {
-                            avQuery.whereGreaterThan("articleId", dataList.get(0).articleId);
+                            if (dataList.get(0) instanceof ArticleNewsEntity) {
+                                avQuery.whereGreaterThan("articleId",
+                                        ((ArticleNewsEntity) (dataList.get(0))).articleId);
+                            } else if (dataList.get(1) instanceof ArticleNewsEntity) {
+                                avQuery.whereGreaterThan("articleId",
+                                        ((ArticleNewsEntity) (dataList.get(1))).articleId);
+                            }
                         }
                         avQuery.whereEqualTo("enable", true);
                         avQuery.limit(PAGE_LIMIT);
@@ -105,20 +141,25 @@ public class ArticleListFragment extends NewsListFragment {
                                     return;
                                 }
 
-                                for (int i = 0; i < list.size(); i++) {
-                                    dataList.add(0, ArticleNewsEntity.parse(list.get(i)));
+                                boolean hasBanner = false;
+                                if (CollectionUtil.isNotEmpty(dataList) && dataList.get(0).entityType ==
+                                        M3bBaseEntity.EntityType.Banner) {
+                                    hasBanner = true;
                                 }
 
-                                articleNewsAdapter.notifyItemRangeInserted(1, list.size());
+                                for (int i = 0; i < list.size(); i++) {
+                                    dataList.add(hasBanner ? 1 : 0, ArticleNewsEntity.parse(list.get(i)));
+                                }
+
+                                articleNewsAdapter.notifyItemRangeInserted(1 + (hasBanner ? 1 : 0), list.size());
                                 xRecyclerView.refreshComplete();
-                                showRefreshTip(
-                                        getString(R.string.x_recycler_view_refresh_tip, String.valueOf(list.size()),
-                                                "资讯"));
+                                showRefreshTip(getString(R.string.x_recycler_view_refresh_tip,
+                                        String.valueOf(list.size()), "资讯"));
+
                             }
                         });
                     }
                 }, 200);
-
             }
 
             @Override
@@ -126,8 +167,6 @@ public class ArticleListFragment extends NewsListFragment {
 
             }
         });
-
-        return rootView;
     }
 
 }

@@ -31,7 +31,7 @@ public class HomeActivity extends M3gBaseActivity implements View.OnClickListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_activity);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
         }
 
         tvMenuArr = new TextView[4];
@@ -106,10 +106,10 @@ public class HomeActivity extends M3gBaseActivity implements View.OnClickListene
         M3gBaseFragment fragment = null;
         switch (index) {
             case 0:
-                fragment = HomeVideoFragment.newInstance();
+                fragment = HomeArticleFragment.newInstance();
                 break;
             case 1:
-                fragment = HomeArticleFragment.newInstance();
+                fragment = HomeVideoFragment.newInstance();
                 break;
             case 2:
                 fragment = CartoonListFragment.newInstance("Cartoon");
