@@ -4,11 +4,11 @@ import android.app.Application;
 import android.content.Context;
 
 import com.avos.avoscloud.AVOSCloud;
-import com.m3gv.news.common.db.RealmDbHelper;
+import com.m3gv.news.base.M3Config;
+import com.m3gv.news.business.db.M3DB;
+import com.m3gv.news.common.realmdb.RealmDbHelper;
 import com.m3gv.news.common.util.SystemUtil;
 import com.tencent.bugly.crashreport.CrashReport;
-
-import net.youmi.android.AdManager;
 
 /**
  * Created by meikai on 16/12/3.
@@ -17,12 +17,11 @@ import net.youmi.android.AdManager;
 public class M3gApplication extends Application {
 
 
-    public static Application application;
-
     @Override
     public void onCreate() {
         super.onCreate();
-        M3gApplication.application = this;
+
+        M3Config.init(this);
 
         initBugly();
 
@@ -31,6 +30,7 @@ public class M3gApplication extends Application {
 
         RealmDbHelper.getInstance().init(this);
 
+        M3DB.getInstance().init();
     }
 
 

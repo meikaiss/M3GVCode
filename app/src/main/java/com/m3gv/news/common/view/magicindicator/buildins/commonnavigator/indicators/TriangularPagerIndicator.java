@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
 
-import com.m3gv.news.common.util.DensityUtil;
+import com.m3gv.news.common.util.DimenUtil;
 import com.m3gv.news.common.view.magicindicator.buildins.commonnavigator.abs.IPagerIndicator;
 import com.m3gv.news.common.view.magicindicator.buildins.commonnavigator.model.PositionData;
 
@@ -37,9 +37,9 @@ public class TriangularPagerIndicator extends View implements IPagerIndicator {
     private void init(Context context) {
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mPaint.setStyle(Paint.Style.FILL);
-        mLineHeight = DensityUtil.dp2px(context, 3);
-        mTriangleWidth = DensityUtil.dp2px(context, 14);
-        mTriangleHeight = DensityUtil.dp2px(context, 8);
+        mLineHeight = DimenUtil.dp2px(context, 3);
+        mTriangleWidth = DimenUtil.dp2px(context, 14);
+        mTriangleHeight = DimenUtil.dp2px(context, 8);
     }
 
     @Override

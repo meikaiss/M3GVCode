@@ -10,7 +10,7 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
 
-import com.m3gv.news.common.util.DensityUtil;
+import com.m3gv.news.common.util.DimenUtil;
 import com.m3gv.news.common.view.magicindicator.ArgbEvaluatorHolder;
 import com.m3gv.news.common.view.magicindicator.buildins.commonnavigator.abs.IPagerIndicator;
 import com.m3gv.news.common.view.magicindicator.buildins.commonnavigator.model.PositionData;
@@ -48,9 +48,9 @@ public class BezierPagerIndicator extends View implements IPagerIndicator {
     private void init(Context context) {
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mPaint.setStyle(Paint.Style.FILL);
-        mMaxCircleRadius = DensityUtil.dp2px(context, 3.5f);
-        mMinCircleRadius = DensityUtil.dp2px(context, 2);
-        mYOffset = DensityUtil.dp2px(context, 1.5f);
+        mMaxCircleRadius = DimenUtil.dp2px(context, 3.5f);
+        mMinCircleRadius = DimenUtil.dp2px(context, 2);
+        mYOffset = DimenUtil.dp2px(context, 1.5f);
     }
 
     @Override

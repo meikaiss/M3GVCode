@@ -73,11 +73,9 @@ public class ArticleListFragment extends NewsListFragment {
 
                 Collections.reverse(list);
 
-                for (int i = 0; i < list.size(); i++) {
-                    dataList.add(0, BannerEntity.parse(list.get(i)));
-                }
+                dataList.add(0, BannerEntity.parse(list));
 
-                articleNewsAdapter.notifyItemRangeInserted(1, list.size());
+                articleNewsAdapter.notifyItemRangeInserted(1, 1);
             }
         });
     }

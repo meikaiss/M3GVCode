@@ -7,9 +7,8 @@ import android.support.v7.widget.AppCompatTextView;
 import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.Gravity;
-import android.widget.TextView;
 
-import com.m3gv.news.common.util.DensityUtil;
+import com.m3gv.news.common.util.DimenUtil;
 import com.m3gv.news.common.view.magicindicator.buildins.commonnavigator.abs.IMeasurablePagerTitleView;
 
 /**
@@ -28,7 +27,7 @@ public class SimplePagerTitleView extends AppCompatTextView implements IMeasurab
 
     private void init(Context context) {
         setGravity(Gravity.CENTER);
-        int padding = DensityUtil.dp2px(context, 10);
+        int padding = DimenUtil.dp2px(context, 10);
         setPadding(padding, 0, padding, 0);
         setSingleLine();
         setEllipsize(TextUtils.TruncateAt.END);

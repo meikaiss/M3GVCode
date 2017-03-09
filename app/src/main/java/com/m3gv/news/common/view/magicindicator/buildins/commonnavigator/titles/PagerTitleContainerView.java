@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.m3gv.news.common.util.DensityUtil;
+import com.m3gv.news.common.util.DimenUtil;
 import com.m3gv.news.common.view.magicindicator.buildins.commonnavigator.abs.IMeasurablePagerTitleView;
 
 
@@ -29,8 +29,8 @@ public class PagerTitleContainerView extends FrameLayout implements IMeasurableP
         super(context);
 
         titleTv = new TextView(context);
-        int paddingHorizontal = DensityUtil.dp2px(context, 8);
-        int paddingVertical = DensityUtil.dp2px(context, 3);
+        int paddingHorizontal = DimenUtil.dp2px(context, 8);
+        int paddingVertical = DimenUtil.dp2px(context, 3);
         titleTv.setPadding(paddingHorizontal, paddingVertical, paddingHorizontal, paddingVertical);
         titleTv.setSingleLine();
         titleTv.setEllipsize(TextUtils.TruncateAt.END);

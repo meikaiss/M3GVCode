@@ -17,7 +17,7 @@ import android.view.animation.DecelerateInterpolator;
 import com.m3gv.news.R;
 import com.m3gv.news.base.M3gBaseFragment;
 import com.m3gv.news.business.article.ArticleListFragment;
-import com.m3gv.news.common.util.DensityUtil;
+import com.m3gv.news.common.util.DimenUtil;
 import com.m3gv.news.common.view.magicindicator.MagicIndicator;
 import com.m3gv.news.common.view.magicindicator.buildins.commonnavigator.CommonNavigator;
 import com.m3gv.news.common.view.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter;
@@ -117,9 +117,9 @@ public class HomeArticleFragment extends M3gBaseFragment {
             public IPagerIndicator getIndicator(Context context) {
                 LinePagerIndicator indicator = new LinePagerIndicator(context);
                 indicator.setMode(LinePagerIndicator.MODE_EXACTLY);
-                indicator.setLineHeight(DensityUtil.dp2px(context, 2));
-                indicator.setLineWidth(DensityUtil.dp2px(context, 30));
-                indicator.setRoundRadius(DensityUtil.dp2px(context, 1));
+                indicator.setLineHeight(DimenUtil.dp2px(context, 2));
+                indicator.setLineWidth(DimenUtil.dp2px(context, 30));
+                indicator.setRoundRadius(DimenUtil.dp2px(context, 1));
                 indicator.setStartInterpolator(new AccelerateInterpolator());
                 indicator.setEndInterpolator(new DecelerateInterpolator(2.0f));
                 List<String> colorList = new ArrayList<>();

@@ -29,6 +29,4 @@ public class StorageUtil {
         long availabelStorage = getAvailableInternalStorageSize();
         return size < 0L?true:(availabelStorage <= 0L?false:availabelStorage >= size);
     }
-
-
 }

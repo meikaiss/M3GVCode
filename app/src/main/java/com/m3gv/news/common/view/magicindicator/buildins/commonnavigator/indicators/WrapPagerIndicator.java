@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
 
-import com.m3gv.news.common.util.DensityUtil;
+import com.m3gv.news.common.util.DimenUtil;
 import com.m3gv.news.common.view.magicindicator.buildins.commonnavigator.abs.IPagerIndicator;
 import com.m3gv.news.common.view.magicindicator.buildins.commonnavigator.model.PositionData;
 
@@ -41,9 +41,9 @@ public class WrapPagerIndicator extends View implements IPagerIndicator {
 
     private void init(Context context) {
         mVerticalPadding = 0;
-        mHorizontalPadding = DensityUtil.dp2px(context, 10);
+        mHorizontalPadding = DimenUtil.dp2px(context, 10);
 
-        strokeWidth = DensityUtil.dp2px(context, 1);
+        strokeWidth = DimenUtil.dp2px(context, 1);
 
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mPaint.setStyle(Paint.Style.STROKE);

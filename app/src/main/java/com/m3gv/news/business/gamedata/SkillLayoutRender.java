@@ -16,7 +16,7 @@ import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 import com.m3gv.news.R;
-import com.m3gv.news.common.util.DensityUtil;
+import com.m3gv.news.common.util.DimenUtil;
 import com.m3gv.news.common.view.magicindicator.MagicIndicator;
 import com.m3gv.news.common.view.magicindicator.buildins.commonnavigator.CommonNavigator;
 import com.m3gv.news.common.view.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter;
@@ -147,9 +147,9 @@ public class SkillLayoutRender {
             public IPagerIndicator getIndicator(Context context) {
                 LinePagerIndicator indicator = new LinePagerIndicator(context);
                 indicator.setMode(LinePagerIndicator.MODE_EXACTLY);
-                indicator.setLineHeight(DensityUtil.dp2px(context, 2));
-                indicator.setLineWidth(DensityUtil.dp2px(context, 50));
-                indicator.setRoundRadius(DensityUtil.dp2px(context, 1));
+                indicator.setLineHeight(DimenUtil.dp2px(context, 2));
+                indicator.setLineWidth(DimenUtil.dp2px(context, 50));
+                indicator.setRoundRadius(DimenUtil.dp2px(context, 1));
                 indicator.setStartInterpolator(new AccelerateInterpolator());
                 indicator.setEndInterpolator(new DecelerateInterpolator(1.0f));
                 List<String> colorList = new ArrayList<>();

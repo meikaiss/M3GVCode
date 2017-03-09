@@ -3,6 +3,7 @@ package com.m3gv.news.business.article;
 import android.content.Context;
 
 import com.m3gv.news.M3gApplication;
+import com.m3gv.news.base.M3Config;
 import com.m3gv.news.common.util.FileUtil;
 import com.m3gv.news.common.util.IOUtil;
 import com.m3gv.news.common.util.LogUtil;
@@ -26,7 +27,7 @@ public class WebViewHtmlFileUtil {
      * 如：/data/data/com.m3gv.news/article/index.html
      */
     public static String getArticleRootPath() {
-        return M3gApplication.application.getFilesDir().getAbsolutePath() + File.separator + "articleCache"
+        return M3Config.getContext().getFilesDir().getAbsolutePath() + File.separator + "articleCache"
                 + File.separator;
     }
 

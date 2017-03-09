@@ -6,6 +6,7 @@ import android.os.Looper;
 import android.widget.Toast;
 
 import com.m3gv.news.M3gApplication;
+import com.m3gv.news.base.M3Config;
 
 /**
  * Created by meikai on 16/12/18.
@@ -16,7 +17,7 @@ public class UIUtil {
     private static final Handler mainHandler = new Handler(Looper.getMainLooper());
 
     public static void showToast(String message) {
-        showToast(M3gApplication.application, message);
+        showToast(M3Config.getContext(), message);
     }
 
     public static void showToast(final Context context, final String message) {

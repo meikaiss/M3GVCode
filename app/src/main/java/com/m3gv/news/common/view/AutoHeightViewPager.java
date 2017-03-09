@@ -8,7 +8,6 @@ import android.view.View;
 /**
  * Created by meikai on 17/1/25.
  */
-
 public class AutoHeightViewPager extends ViewPager {
 
     public AutoHeightViewPager(Context context) {

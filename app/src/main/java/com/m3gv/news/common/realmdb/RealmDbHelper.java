@@ -1,4 +1,4 @@
-package com.m3gv.news.common.db;
+package com.m3gv.news.common.realmdb;
 
 import android.content.Context;
 

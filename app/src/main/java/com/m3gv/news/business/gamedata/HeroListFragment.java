@@ -11,7 +11,7 @@ import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVQuery;
 import com.m3gv.news.business.NewsListFragment;
-import com.m3gv.news.common.db.RealmDbHelper;
+import com.m3gv.news.common.realmdb.RealmDbHelper;
 import com.m3gv.news.common.util.CollectionUtil;
 import com.m3gv.news.common.view.xrecyclerview.XRecyclerView;
 

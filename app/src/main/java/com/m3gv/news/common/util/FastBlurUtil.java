@@ -2,7 +2,7 @@ package com.m3gv.news.common.util;
 
 import android.graphics.Bitmap;
 
-public class FastBlur {
+public class FastBlurUtil {
 
     public static Bitmap doBlur(Bitmap sentBitmap, int radius, boolean canReuseInBitmap) {
 

@@ -6,7 +6,7 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.view.View;
 
-import com.m3gv.news.common.util.DensityUtil;
+import com.m3gv.news.common.util.DimenUtil;
 import com.m3gv.news.common.view.magicindicator.buildins.commonnavigator.abs.IPagerTitleView;
 
 /**
@@ -28,10 +28,10 @@ public class ClipPagerTitleView extends View implements IPagerTitleView {
     }
 
     private void init(Context context) {
-        int textSize = DensityUtil.dp2px(context, 16);
+        int textSize = DimenUtil.dp2px(context, 16);
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mPaint.setTextSize(textSize);
-        int padding = DensityUtil.dp2px(context, 10);
+        int padding = DimenUtil.dp2px(context, 10);
         setPadding(padding, 0, padding, 0);
     }
 

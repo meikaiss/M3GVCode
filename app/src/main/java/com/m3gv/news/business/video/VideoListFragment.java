@@ -11,11 +11,10 @@ import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVQuery;
 import com.avos.avoscloud.FindCallback;
-import com.avos.avoscloud.SaveCallback;
 import com.m3gv.news.R;
 import com.m3gv.news.business.NewsListFragment;
+import com.m3gv.news.business.db.M3DB;
 import com.m3gv.news.common.util.CollectionUtil;
-import com.m3gv.news.common.util.UIUtil;
 import com.m3gv.news.common.view.xrecyclerview.XRecyclerView;
 
 import java.util.ArrayList;
@@ -43,6 +42,12 @@ public class VideoListFragment extends NewsListFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
+
+        ArticleNewsEntity testEntity = new ArticleNewsEntity();
+        testEntity.name = "梅凯";
+        testEntity.pwd = "1234";
+
+        M3DB.getInstance().insert(testEntity);
 
         videoNewsAdapter = new VideoNewsAdapter(getActivity(), dataList, xRecyclerView.isPullRefreshEnabled());
         xRecyclerView.setAdapter(videoNewsAdapter);

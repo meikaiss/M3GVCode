@@ -8,7 +8,6 @@ public class M3bBaseEntity {
 
     public EntityType entityType = EntityType.Normal;
 
-
     public enum EntityType {
         Normal,
         Banner

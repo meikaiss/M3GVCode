@@ -1,0 +1,4 @@
+CREATE TABLE "t_article_news"(
+"_id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+"name" TEXT,
+"pwd" TEXT);
