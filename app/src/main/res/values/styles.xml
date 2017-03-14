@@ -10,4 +10,9 @@
 
     </style>
 
+    <style name="SplashActivityTheme" parent="AppTheme">
+        <!-- Customize your theme here. -->
+        <item name="android:windowBackground">@color/colorAccent</item>
+    </style>
+
 </resources>

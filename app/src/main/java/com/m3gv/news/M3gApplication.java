@@ -7,6 +7,7 @@ import com.avos.avoscloud.AVOSCloud;
 import com.m3gv.news.base.M3Config;
 import com.m3gv.news.business.db.M3DB;
 import com.m3gv.news.common.realmdb.RealmDbHelper;
+import com.m3gv.news.common.util.LogUtil;
 import com.m3gv.news.common.util.SystemUtil;
 import com.tencent.bugly.crashreport.CrashReport;
 
@@ -21,6 +22,7 @@ public class M3gApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
+        long start = System.currentTimeMillis();
         M3Config.init(this);
 
         initBugly();
@@ -31,6 +33,9 @@ public class M3gApplication extends Application {
         RealmDbHelper.getInstance().init(this);
 
         M3DB.getInstance().init();
+
+        long end = System.currentTimeMillis();
+        LogUtil.e("M3gApplication", "onCreate耗时=" + (end - start));
     }
 
 
