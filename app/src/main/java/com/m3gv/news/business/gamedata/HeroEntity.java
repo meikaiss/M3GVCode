@@ -6,96 +6,89 @@ import android.os.Parcelable;
 import com.avos.avoscloud.AVObject;
 import com.m3gv.news.business.youmiAd.ItemType;
 
-import io.realm.RealmModel;
-import io.realm.annotations.Ignore;
-import io.realm.annotations.PrimaryKey;
-import io.realm.annotations.RealmClass;
-import io.realm.annotations.Required;
-
 /**
  * Created by meikai on 17/1/12.
  */
-@RealmClass
-public class HeroEntity implements Parcelable, RealmModel, Cloneable {
+public class HeroEntity implements Parcelable, Cloneable {
 
-    @PrimaryKey public long heroId;
-    @Required public String heroName;
-    @Required public String UNationType;
-    @Required public String heroIcon;
-    @Required public String Fdifficulty;
-    @Required public String Fbattle;
-    @Required public String Fposition;
-    @Required public String Type1;
-    @Required public String Type2;
-    @Required public Integer Difficulty;
-    @Required public Integer Survial;
-    @Required public Integer Physics;
-    @Required public Integer Technology;
+    public long heroId;
+    public String heroName;
+    public String UNationType;
+    public String heroIcon;
+    public String Fdifficulty;
+    public String Fbattle;
+    public String Fposition;
+    public String Type1;
+    public String Type2;
+    public Integer Difficulty;
+    public Integer Survial;
+    public Integer Physics;
+    public Integer Technology;
 
-    @Required public String heroDesc;
-    @Required public String attack;
-    @Required public String armor;
-    @Required public String speed;
-    @Required public String strength;
-    @Required public String agility;
-    @Required public String intelligence;
+    public String heroDesc;
+    public String attack;
+    public String armor;
+    public String speed;
+    public String strength;
+    public String agility;
+    public String intelligence;
 
-    @Required public String skill1Name;
-    @Required public String skill1Icon;
-    @Required public String skill1Scope;
-    @Required public String skill1Effect;
-    @Required public String skill1Magic;
-    @Required public String skill1CD;
-    @Required public String skill1Level1Effect;
-    @Required public String skill1Level2Effect;
-    @Required public String skill1Level3Effect;
-    @Required public String skill1Level4Effect;
+    public String skill1Name;
+    public String skill1Icon;
+    public String skill1Scope;
+    public String skill1Effect;
+    public String skill1Magic;
+    public String skill1CD;
+    public String skill1Level1Effect;
+    public String skill1Level2Effect;
+    public String skill1Level3Effect;
+    public String skill1Level4Effect;
 
-    @Required public String skill2Name;
-    @Required public String skill2Icon;
-    @Required public String skill2Scope;
-    @Required public String skill2Effect;
-    @Required public String skill2Magic;
-    @Required public String skill2CD;
-    @Required public String skill2Level1Effect;
-    @Required public String skill2Level2Effect;
-    @Required public String skill2Level3Effect;
-    @Required public String skill2Level4Effect;
+    public String skill2Name;
+    public String skill2Icon;
+    public String skill2Scope;
+    public String skill2Effect;
+    public String skill2Magic;
+    public String skill2CD;
+    public String skill2Level1Effect;
+    public String skill2Level2Effect;
+    public String skill2Level3Effect;
+    public String skill2Level4Effect;
 
-    @Required public String skill3Name;
-    @Required public String skill3Icon;
-    @Required public String skill3Scope;
-    @Required public String skill3Effect;
-    @Required public String skill3Magic;
-    @Required public String skill3CD;
-    @Required public String skill3Level1Effect;
-    @Required public String skill3Level2Effect;
-    @Required public String skill3Level3Effect;
-    @Required public String skill3Level4Effect;
+    public String skill3Name;
+    public String skill3Icon;
+    public String skill3Scope;
+    public String skill3Effect;
+    public String skill3Magic;
+    public String skill3CD;
+    public String skill3Level1Effect;
+    public String skill3Level2Effect;
+    public String skill3Level3Effect;
+    public String skill3Level4Effect;
 
-    @Required public String skill4Name;
-    @Required public String skill4Icon;
-    @Required public String skill4Scope;
-    @Required public String skill4Effect;
-    @Required public String skill4Magic;
-    @Required public String skill4CD;
-    @Required public String skill4Level1Effect;
-    @Required public String skill4Level2Effect;
-    @Required public String skill4Level3Effect;
-    @Required public String skill4Level4Effect;
+    public String skill4Name;
+    public String skill4Icon;
+    public String skill4Scope;
+    public String skill4Effect;
+    public String skill4Magic;
+    public String skill4CD;
+    public String skill4Level1Effect;
+    public String skill4Level2Effect;
+    public String skill4Level3Effect;
+    public String skill4Level4Effect;
 
-    @Ignore public ItemType itemType = ItemType.REAL_DATA;
+    public ItemType itemType = ItemType.REAL_DATA;
 
-    @Ignore public String[] skillName;
-    @Ignore public String[] skillIcon;
-    @Ignore public String[] skillScope;
-    @Ignore public String[] skillEffect;
-    @Ignore public String[] skillMagic;
-    @Ignore public String[] skillCD;
-    @Ignore public String[] skillLevel1Effect;
-    @Ignore public String[] skillLevel2Effect;
-    @Ignore public String[] skillLevel3Effect;
-    @Ignore public String[] skillLevel4Effect;
+    public String[] skillName;
+    public String[] skillIcon;
+    public String[] skillScope;
+    public String[] skillEffect;
+    public String[] skillMagic;
+    public String[] skillCD;
+    public String[] skillLevel1Effect;
+    public String[] skillLevel2Effect;
+    public String[] skillLevel3Effect;
+    public String[] skillLevel4Effect;
 
     public HeroEntity() {
     }

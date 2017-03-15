@@ -11,7 +11,6 @@ import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVQuery;
 import com.m3gv.news.business.NewsListFragment;
-import com.m3gv.news.common.realmdb.RealmDbHelper;
 import com.m3gv.news.common.util.CollectionUtil;
 import com.m3gv.news.common.view.xrecyclerview.XRecyclerView;
 
@@ -19,11 +18,6 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import io.realm.Realm;
-import io.realm.RealmQuery;
-import io.realm.RealmResults;
-import io.realm.Sort;
 
 /**
  * Created by meikai on 17/1/12.
@@ -107,12 +101,14 @@ public class HeroListFragment extends NewsListFragment {
             List<HeroEntity> heroEntityAbstractList = new ArrayList<>();
 
             //第一步：查询本地数据库是否缓存的数据
-            RealmQuery<HeroEntity> realmQuery = Realm.getDefaultInstance().where(HeroEntity.class);
-            if (CollectionUtil.isNotEmpty(inShowDataList)) {
-                realmQuery.greaterThan("heroId", inShowDataList.get(0).heroId);
-            }
-            RealmResults<HeroEntity> realmQueryAll = realmQuery.findAllSorted("heroId", Sort.DESCENDING);
-            List<HeroEntity> dbHeroEntityList = Realm.getDefaultInstance().copyFromRealm(realmQueryAll);
+//            RealmQuery<HeroEntity> realmQuery = Realm.getDefaultInstance().where(HeroEntity.class);
+//            if (CollectionUtil.isNotEmpty(inShowDataList)) {
+//                realmQuery.greaterThan("heroId", inShowDataList.get(0).heroId);
+//            }
+//            RealmResults<HeroEntity> realmQueryAll = realmQuery.findAllSorted("heroId", Sort.DESCENDING);
+//            List<HeroEntity> dbHeroEntityList = Realm.getDefaultInstance().copyFromRealm(realmQueryAll);
+
+            List<HeroEntity> dbHeroEntityList = new ArrayList<>();
 
             if (CollectionUtil.isEmpty(dbHeroEntityList)) {
                 //第二步：如果本地数据库没有缓存，则从服务器请求，并保存到本地数据库
@@ -138,7 +134,7 @@ public class HeroListFragment extends NewsListFragment {
                 }
 
                 //保存到本地数据库
-                RealmDbHelper.getInstance().insertList(heroEntityAbstractList);
+//                RealmDbHelper.getInstance().insertList(heroEntityAbstractList);
 
             } else {
                 //第三步：如果本地数据库有缓存，则将缓存的realm格式的数据转为内存数据

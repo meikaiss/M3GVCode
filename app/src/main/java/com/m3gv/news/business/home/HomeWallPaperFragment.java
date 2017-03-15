@@ -9,16 +9,10 @@ import android.view.ViewGroup;
 import com.m3gv.news.R;
 import com.m3gv.news.base.M3gBaseFragment;
 import com.m3gv.news.business.gamedata.HeroEntity;
-import com.m3gv.news.common.realmdb.RealmDbHelper;
-import com.m3gv.news.common.util.CollectionUtil;
 import com.m3gv.news.common.util.LogUtil;
-import com.m3gv.news.common.util.UIUtil;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import io.realm.Realm;
-import io.realm.RealmResults;
 
 /**
  * Created by meikai on 16/12/27.
@@ -73,21 +67,21 @@ public class HomeWallPaperFragment extends M3gBaseFragment {
                     HeroEntity heroEntity = new HeroEntity();
                     heroEntity.heroId = 123;
                     heroEntity.heroName = "meikai";
-                    if (RealmDbHelper.getInstance().insert(heroEntity)) {
-                        UIUtil.showToast("保存成功");
-                    } else {
-                        UIUtil.showToast("保存失败");
-                    }
+//                    if (RealmDbHelper.getInstance().insert(heroEntity)) {
+//                        UIUtil.showToast("保存成功");
+//                    } else {
+//                        UIUtil.showToast("保存失败");
+//                    }
                     break;
                 case R.id.btn_save:
 
                     break;
                 case R.id.btn_query:
-                    RealmResults<HeroEntity> realmResults = Realm.getDefaultInstance().where(HeroEntity.class)
-                            .findAll();
-                    if (CollectionUtil.isNotEmpty(realmResults)) {
-                        UIUtil.showToast("查询到:" + realmResults.get(0).heroName);
-                    }
+//                    RealmResults<HeroEntity> realmResults = Realm.getDefaultInstance().where(HeroEntity.class)
+//                            .findAll();
+//                    if (CollectionUtil.isNotEmpty(realmResults)) {
+//                        UIUtil.showToast("查询到:" + realmResults.get(0).heroName);
+//                    }
                     break;
                 case R.id.btn_update:
 
