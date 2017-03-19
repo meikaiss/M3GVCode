@@ -6,43 +6,51 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.m3gv.news.R;
+import com.m3gv.news.business.db.M3DB;
 import com.m3gv.news.business.video.VideoNewsEntity;
 import com.m3gv.news.common.util.CollectionUtil;
 import com.m3gv.news.common.util.LogUtil;
 
-import io.realm.Realm;
-import io.realm.RealmQuery;
-import io.realm.RealmResults;
+import java.util.List;
 
 /**
  * Created by meikai on 17/3/4.
  */
 public class ZanCaiVideoHelper {
 
-    private void playAnimator(ImageView imageView) {
-        PropertyValuesHolder valuesHolder = PropertyValuesHolder.ofFloat("scaleX", 0.0f, 1.5f, 1.0f);
-        PropertyValuesHolder valuesHolder1 = PropertyValuesHolder.ofFloat("scaleY", 0.0f, 1.5f, 1.0f);
-        ObjectAnimator objectAnimator = ObjectAnimator
-                .ofPropertyValuesHolder(imageView, valuesHolder, valuesHolder1);
-        objectAnimator.setDuration(300);
-        objectAnimator.start();
-    }
+    public void init(VideoNewsEntity videoNewsEntity, TextView tvZanCount, ImageView imgvZan, TextView tvCaiCount,
+            ImageView imgvCai) {
 
-    /**
-     * @param hasZan 1
-     */
-    public boolean insertOrUpdate(ZanCaiRecordEntity zanCaiRecordEntity, int hasZan, int hasCai) {
-        try {
-            Realm realm = Realm.getDefaultInstance();
-            realm.beginTransaction();
-            zanCaiRecordEntity.hasZan = hasZan;
-            zanCaiRecordEntity.hasCai = hasCai;
-            realm.insertOrUpdate(zanCaiRecordEntity);
-            realm.commitTransaction();
-            return true;
-        } catch (Exception e) {
-            LogUtil.e("RealmDbHelper", "save:" + e.getMessage());
-            return false;
+        String sql = String.format("select * from t_zan_cai_record where news_type='%s' and news_id='%s'", "video",
+                String.valueOf(videoNewsEntity.videoId));
+        List<ZanCaiRecordEntity> dbHeroEntityList = M3DB.getInstance().selectList(sql, ZanCaiRecordEntity.class);
+
+        if (CollectionUtil.isNotEmpty(dbHeroEntityList)) {
+            ZanCaiRecordEntity zanCaiRecordEntity = dbHeroEntityList.get(0);
+
+            if (zanCaiRecordEntity.hasZan == 1) {
+                videoNewsEntity.zanCount++;
+                tvZanCount.setText(videoNewsEntity.zanCount + "");
+                imgvZan.setImageResource(R.drawable.zan_yes);
+            } else {
+                tvZanCount.setText(videoNewsEntity.zanCount + "");
+                imgvZan.setImageResource(R.drawable.zan_no);
+            }
+
+            if (zanCaiRecordEntity.hasCai == 1) {
+                videoNewsEntity.caiCount++;
+                tvCaiCount.setText(videoNewsEntity.caiCount + "");
+                imgvCai.setImageResource(R.drawable.cai_yes);
+            } else {
+                tvCaiCount.setText(videoNewsEntity.caiCount + "");
+                imgvCai.setImageResource(R.drawable.cai_no);
+            }
+        } else {
+            tvZanCount.setText(videoNewsEntity.zanCount + "");
+            imgvZan.setImageResource(R.drawable.zan_no);
+
+            tvCaiCount.setText(videoNewsEntity.caiCount + "");
+            imgvCai.setImageResource(R.drawable.cai_no);
         }
     }
 
@@ -59,15 +67,14 @@ public class ZanCaiVideoHelper {
     public boolean zanClick(String newsType, ImageView zanImgv, TextView zanTv,
             ImageView caiImgv, TextView caiTv, VideoNewsEntity videoNewsEntity) {
 
-        RealmQuery<ZanCaiRecordEntity> realmQuery = Realm.getDefaultInstance().where(ZanCaiRecordEntity.class);
-        realmQuery.equalTo("newsType", newsType);
-        realmQuery.equalTo("newsId", String.valueOf(videoNewsEntity.videoId));
+        String sql = String.format("select * from t_zan_cai_record where news_type='%s' and news_id='%s'", newsType,
+                String.valueOf(videoNewsEntity.videoId));
+        List<ZanCaiRecordEntity> dbHeroEntityList = M3DB.getInstance().selectList(sql, ZanCaiRecordEntity.class);
 
-        RealmResults<ZanCaiRecordEntity> recordEntities = realmQuery.findAll();
-        if (CollectionUtil.isNotEmpty(recordEntities)) {
+        if (CollectionUtil.isNotEmpty(dbHeroEntityList)) {
             int hasZan, hasCai = 0;
 
-            ZanCaiRecordEntity zanCaiRecordEntity = recordEntities.get(0);
+            ZanCaiRecordEntity zanCaiRecordEntity = dbHeroEntityList.get(0);
             if (zanCaiRecordEntity.hasZan == 1) {
                 // 已经赞过，需要取消赞
                 videoNewsEntity.zanCount--;
@@ -97,7 +104,6 @@ public class ZanCaiVideoHelper {
 
                     // 已经踩过，则需要自动取消踩
                     caiImgv.setImageResource(R.drawable.cai_no);
-//                    playAnimator(caiImgv);
                 }
             }
 
@@ -107,7 +113,6 @@ public class ZanCaiVideoHelper {
             return false;
         } else {
             // 没有赞过，并且没有踩过，开始赞
-
             ZanCaiRecordEntity newZanCaiEntity = new ZanCaiRecordEntity();
             newZanCaiEntity.newsType = newsType;
             newZanCaiEntity.newsId = String.valueOf(videoNewsEntity.videoId);
@@ -141,15 +146,14 @@ public class ZanCaiVideoHelper {
     public boolean caiClick(String newsType, ImageView zanImgv, TextView zanTv,
             ImageView caiImgv, TextView caiTv, VideoNewsEntity videoNewsEntity) {
 
-        RealmQuery<ZanCaiRecordEntity> realmQuery = Realm.getDefaultInstance().where(ZanCaiRecordEntity.class);
-        realmQuery.equalTo("newsType", newsType);
-        realmQuery.equalTo("newsId", String.valueOf(videoNewsEntity.videoId));
+        String sql = String.format("select * from t_zan_cai_record where news_type='%s' and news_id='%s'", newsType,
+                String.valueOf(videoNewsEntity.videoId));
+        List<ZanCaiRecordEntity> dbHeroEntityList = M3DB.getInstance().selectList(sql, ZanCaiRecordEntity.class);
 
-        RealmResults<ZanCaiRecordEntity> recordEntities = realmQuery.findAll();
-        if (CollectionUtil.isNotEmpty(recordEntities)) {
+        if (CollectionUtil.isNotEmpty(dbHeroEntityList)) {
             int hasZan = 0, hasCai;
 
-            ZanCaiRecordEntity zanCaiRecordEntity = recordEntities.get(0);
+            ZanCaiRecordEntity zanCaiRecordEntity = dbHeroEntityList.get(0);
             if (zanCaiRecordEntity.hasCai == 1) {
                 // 已经踩过，需要取消踩
                 videoNewsEntity.caiCount--;
@@ -179,7 +183,6 @@ public class ZanCaiVideoHelper {
 
                     // 已经赞过，则需要自动取消赞
                     zanImgv.setImageResource(R.drawable.zan_no);
-//                    playAnimator(zanImgv);
                 }
             }
 
@@ -189,7 +192,6 @@ public class ZanCaiVideoHelper {
             return false;
         } else {
             // 没有踩过，并且没有赞过，开始踩
-
             ZanCaiRecordEntity newZanCaiEntity = new ZanCaiRecordEntity();
             newZanCaiEntity.newsType = newsType;
             newZanCaiEntity.newsId = String.valueOf(videoNewsEntity.videoId);
@@ -210,5 +212,29 @@ public class ZanCaiVideoHelper {
         }
     }
 
+
+    private void playAnimator(ImageView imageView) {
+        PropertyValuesHolder valuesHolder = PropertyValuesHolder.ofFloat("scaleX", 0.0f, 1.5f, 1.0f);
+        PropertyValuesHolder valuesHolder1 = PropertyValuesHolder.ofFloat("scaleY", 0.0f, 1.5f, 1.0f);
+        ObjectAnimator objectAnimator = ObjectAnimator
+                .ofPropertyValuesHolder(imageView, valuesHolder, valuesHolder1);
+        objectAnimator.setDuration(300);
+        objectAnimator.start();
+    }
+
+    /**
+     * @param hasZan 1
+     */
+    public boolean insertOrUpdate(ZanCaiRecordEntity zanCaiRecordEntity, int hasZan, int hasCai) {
+        try {
+            zanCaiRecordEntity.hasZan = hasZan;
+            zanCaiRecordEntity.hasCai = hasCai;
+            M3DB.getInstance().insertOrUpdate(zanCaiRecordEntity);
+            return true;
+        } catch (Exception e) {
+            LogUtil.e("RealmDbHelper", "save:" + e.getMessage());
+            return false;
+        }
+    }
 
 }

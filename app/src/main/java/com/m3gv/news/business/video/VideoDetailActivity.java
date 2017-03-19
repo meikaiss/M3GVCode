@@ -62,8 +62,7 @@ public class VideoDetailActivity extends VideoPlayerActivity implements View.OnC
         tvZanCount = f(R.id.tv_zan_video_detail_count);
         tvCaiCount = f(R.id.tv_cai_video_detail_count);
 
-        tvZanCount.setText(videoNewsEntity.zanCount + "");
-        tvCaiCount.setText(videoNewsEntity.caiCount + "");
+        new ZanCaiVideoHelper().init(videoNewsEntity, tvZanCount, imgvZan, tvCaiCount, imgvCai);
 
         f(R.id.layout_zan).setOnClickListener(this);
         f(R.id.layout_cai).setOnClickListener(this);

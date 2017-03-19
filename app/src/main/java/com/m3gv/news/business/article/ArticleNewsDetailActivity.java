@@ -126,6 +126,8 @@ public class ArticleNewsDetailActivity extends M3gBaseActivity implements View.O
         super.onDestroy();
         // 轮播插屏广告
         SpotManager.getInstance(this).onDestroy();
+        m3WebView.destroy();
+        m3WebView = null;
     }
 
     /**

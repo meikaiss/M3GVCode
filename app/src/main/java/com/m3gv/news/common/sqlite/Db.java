@@ -55,7 +55,7 @@ public class Db {
         return entity.getId() != null && entity.getId() > 0L;
     }
 
-    public synchronized <T extends IdEntity> void insertBatch(List<T> list) {
+    public synchronized <T extends IdEntity> void insertList(List<T> list) {
         if (CollectionUtil.isEmpty(list)) {
             return;
         }
@@ -78,7 +78,6 @@ public class Db {
             endTransaction(db);
             closeDB(db);
         }
-
     }
 
     public synchronized <T extends IdEntity> long insert(T entity) {

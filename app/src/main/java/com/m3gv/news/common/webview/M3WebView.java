@@ -5,14 +5,12 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Handler;
 import android.util.AttributeSet;
-import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import com.m3gv.news.base.M3Config;
 import com.m3gv.news.common.util.LogUtil;
 
 import java.util.Arrays;
@@ -53,7 +51,7 @@ public class M3WebView extends WebView {
     public void init() {
 
         this.getSettings().setJavaScriptEnabled(true);
-        this.setWebViewClient(new WebViewClient(){
+        this.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
@@ -71,6 +69,18 @@ public class M3WebView extends WebView {
         this.m3WebViewInterface = new M3WebViewInterface();
 
         addJavascriptInterface(m3WebViewInterface, "m3WebViewInterface");
+    }
+
+    @Override
+    public void destroy() {
+        this.removeAllViews();
+
+        ViewGroup viewGroup = (ViewGroup) getParent();
+        if (viewGroup != null) {
+            viewGroup.removeView(this);
+        }
+        removeAllViews();
+        super.destroy();
     }
 
     class M3WebViewInterface {
@@ -111,17 +121,6 @@ public class M3WebView extends WebView {
             LogUtil.e("setArticleImageArr", (dataTypes == null ? "null" : Arrays.toString(dataTypes)));
         }
     }
-
-
-    private void convulsions() {
-        this.post(new Runnable() {
-            @Override
-            public void run() {
-                M3WebView.this.setNetworkAvailable(online = !online);
-            }
-        });
-    }
-
 
     public interface OnImageClickListener {
         void onImageClick(int index, String[] dataTypes);

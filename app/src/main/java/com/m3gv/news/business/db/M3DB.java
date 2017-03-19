@@ -72,8 +72,16 @@ public class M3DB implements Db.DbUpgradeCallback {
         }
     }
 
-    public boolean insert(IdEntity entity) {
+    public <T extends IdEntity> void insertOrUpdate(T entity) {
+        db.insertOrUpdate(entity);
+    }
+
+    public <T extends IdEntity> boolean insert(T entity) {
         return db.insert(entity) != -1;
+    }
+
+    public <T extends IdEntity> void insertList(List<T> entity) {
+        db.insertList(entity);
     }
 
     public <T extends IdEntity> T select(String sql, Class<T> cls) {

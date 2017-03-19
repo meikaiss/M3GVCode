@@ -5,11 +5,12 @@ import android.os.Parcelable;
 
 import com.avos.avoscloud.AVObject;
 import com.m3gv.news.business.youmiAd.ItemType;
+import com.m3gv.news.common.sqlite.IdEntity;
 
 /**
  * Created by meikai on 17/1/12.
  */
-public class HeroEntity implements Parcelable, Cloneable {
+public class HeroEntity extends IdEntity implements Parcelable {
 
     public long heroId;
     public String heroName;
@@ -77,18 +78,18 @@ public class HeroEntity implements Parcelable, Cloneable {
     public String skill4Level3Effect;
     public String skill4Level4Effect;
 
-    public ItemType itemType = ItemType.REAL_DATA;
+    public transient ItemType itemType = ItemType.REAL_DATA;
 
-    public String[] skillName;
-    public String[] skillIcon;
-    public String[] skillScope;
-    public String[] skillEffect;
-    public String[] skillMagic;
-    public String[] skillCD;
-    public String[] skillLevel1Effect;
-    public String[] skillLevel2Effect;
-    public String[] skillLevel3Effect;
-    public String[] skillLevel4Effect;
+    public transient String[] skillName;
+    public transient String[] skillIcon;
+    public transient String[] skillScope;
+    public transient String[] skillEffect;
+    public transient String[] skillMagic;
+    public transient String[] skillCD;
+    public transient String[] skillLevel1Effect;
+    public transient String[] skillLevel2Effect;
+    public transient String[] skillLevel3Effect;
+    public transient String[] skillLevel4Effect;
 
     public HeroEntity() {
     }
@@ -322,13 +323,6 @@ public class HeroEntity implements Parcelable, Cloneable {
         heroEntity.skill4Level4Effect = avObject.getString("skill4Level4Effect");
 
         heroEntity.assembleInnerData();
-        return heroEntity;
-    }
-
-    @Override
-    protected HeroEntity clone() throws CloneNotSupportedException {
-        HeroEntity heroEntity = new HeroEntity();
-        heroEntity.skill1Level1Effect = skill1Level1Effect;
         return heroEntity;
     }
 

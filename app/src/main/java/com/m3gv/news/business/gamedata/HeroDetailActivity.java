@@ -3,6 +3,7 @@ package com.m3gv.news.business.gamedata;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
@@ -18,7 +19,6 @@ import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 import com.m3gv.news.R;
 import com.m3gv.news.base.M3gBaseActivity;
-import com.m3gv.news.common.util.UIUtil;
 
 import net.youmi.android.normal.common.ErrorCode;
 import net.youmi.android.normal.spot.SpotListener;
@@ -56,7 +56,7 @@ public class HeroDetailActivity extends M3gBaseActivity {
 
     public static void start(Activity activity, HeroEntity heroEntity) {
         Intent intent = new Intent(activity, HeroDetailActivity.class);
-        intent.putExtra("heroEntity", heroEntity);
+        intent.putExtra("heroEntity", (Parcelable) heroEntity);
         activity.startActivity(intent);
     }
 

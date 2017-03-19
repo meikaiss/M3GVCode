@@ -3,18 +3,15 @@ package com.m3gv.news.business.zanCai;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import io.realm.RealmModel;
-import io.realm.annotations.RealmClass;
-import io.realm.annotations.Required;
+import com.m3gv.news.common.sqlite.IdEntity;
 
 /**
  * Created by meikai on 17/3/4.
  */
-@RealmClass
-public class ZanCaiRecordEntity implements Parcelable, RealmModel, Cloneable {
+public class ZanCaiRecordEntity extends IdEntity implements Parcelable, Cloneable {
 
-    @Required public String newsType;
-    @Required public String newsId;
+    public String newsType;
+    public String newsId;
     public int hasZan;
     public int hasCai;
 

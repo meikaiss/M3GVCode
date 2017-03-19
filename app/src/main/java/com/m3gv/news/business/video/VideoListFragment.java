@@ -43,12 +43,6 @@ public class VideoListFragment extends NewsListFragment {
             @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
-        ArticleNewsEntity testEntity = new ArticleNewsEntity();
-        testEntity.name = "梅凯";
-        testEntity.pwd = "1234";
-
-        M3DB.getInstance().insert(testEntity);
-
         videoNewsAdapter = new VideoNewsAdapter(getActivity(), dataList, xRecyclerView.isPullRefreshEnabled());
         xRecyclerView.setAdapter(videoNewsAdapter);
 
