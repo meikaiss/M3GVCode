@@ -62,10 +62,10 @@ public class HomeArticleFragment extends M3gBaseFragment {
 
         categoryList = new ArrayList<>();
         categoryList.add(new CategoryEntity("攻略", "ArticleNews"));
+        categoryList.add(new CategoryEntity("历史", "ArticleNews5"));
         categoryList.add(new CategoryEntity("美女", "ArticleNews2"));
         categoryList.add(new CategoryEntity("英雄", "ArticleNews3"));
         categoryList.add(new CategoryEntity("赛事", "ArticleNews4"));
-        categoryList.add(new CategoryEntity("历史", "ArticleNews5"));
 
         magicIndicator = f(R.id.magic_indicator);
         articleViewPager = f(R.id.article_view_pager);

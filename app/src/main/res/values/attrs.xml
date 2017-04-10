@@ -11,5 +11,10 @@
         <attr name="height_scale" format="integer"/>
     </declare-styleable>
 
+    <declare-styleable name="ScaleRelativeLayout">
+        <attr name="relative_layout_width_scale" format="integer"/>
+        <attr name="relative_layout_height_scale" format="integer"/>
+    </declare-styleable>
+
 
 </resources>

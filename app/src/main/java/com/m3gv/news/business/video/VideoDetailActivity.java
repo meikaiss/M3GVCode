@@ -29,7 +29,6 @@ public class VideoDetailActivity extends VideoPlayerActivity implements View.OnC
     private TextView tvZanCount;
     private TextView tvCaiCount;
 
-
     private VideoNewsEntity videoNewsEntity;
 
     public static void start(Activity activity, VideoNewsEntity videoNewsEntity) {

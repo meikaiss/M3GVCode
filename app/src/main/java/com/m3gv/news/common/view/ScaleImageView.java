@@ -1,18 +1,16 @@
 package com.m3gv.news.common.view;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.os.Build;
+import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
-import android.widget.ImageView;
 
 import com.m3gv.news.R;
 
 /**
  * Created by meikai on 16/12/26.
  */
-public class ScaleImageView extends ImageView {
+public class ScaleImageView extends AppCompatImageView {
 
     private float widthScale = 1;
     private float heightScale = 1;
@@ -32,17 +30,17 @@ public class ScaleImageView extends ImageView {
         init(context, attrs, defStyleAttr, 0);
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public ScaleImageView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-        init(context, attrs, defStyleAttr, defStyleRes);
-    }
-
     private void init(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
 
         TypedArray arr = context.obtainStyledAttributes(attrs, R.styleable.ScaleImageView, defStyleAttr, defStyleRes);
         widthScale = arr.getFloat(R.styleable.ScaleImageView_width_scale, 1f);
         heightScale = arr.getFloat(R.styleable.ScaleImageView_height_scale, 1f);
+        if (widthScale == 0) {
+            widthScale = 1;
+        }
+        if (heightScale == 0) {
+            heightScale = 1;
+        }
         arr.recycle();
 
     }

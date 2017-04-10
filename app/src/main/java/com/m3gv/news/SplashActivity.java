@@ -24,7 +24,6 @@ import net.youmi.android.normal.spot.SpotManager;
 /**
  * Created by meikai on 17/1/31.
  */
-
 public class SplashActivity extends M3gBaseActivity {
 
     protected static final String TAG = "youmi-demo";
@@ -120,43 +119,43 @@ public class SplashActivity extends M3gBaseActivity {
 
                     @Override
                     public void onShowSuccess() {
-                        LogUtil.e("", "开屏展示成功");
+                        LogUtil.e("onShowSuccess", "开屏展示成功");
                     }
 
                     @Override
                     public void onShowFailed(int errorCode) {
-                        LogUtil.e("", "开屏展示失败");
+                        LogUtil.e("onShowFailed", "开屏展示失败");
                         switch (errorCode) {
                             case ErrorCode.NON_NETWORK:
-                                LogUtil.e("", "网络异常");
+                                LogUtil.e("onShowFailed", "网络异常");
                                 break;
                             case ErrorCode.NON_AD:
-                                LogUtil.e("", "暂无开屏广告");
+                                LogUtil.e("onShowFailed", "暂无开屏广告");
                                 break;
                             case ErrorCode.RESOURCE_NOT_READY:
-                                LogUtil.e("", "开屏资源还没准备好");
+                                LogUtil.e("onShowFailed", "开屏资源还没准备好");
                                 break;
                             case ErrorCode.SHOW_INTERVAL_LIMITED:
-                                LogUtil.e("", "开屏展示间隔限制");
+                                LogUtil.e("onShowFailed", "开屏展示间隔限制");
                                 break;
                             case ErrorCode.WIDGET_NOT_IN_VISIBILITY_STATE:
-                                LogUtil.e("", "开屏控件处在不可见状态");
+                                LogUtil.e("onShowFailed", "开屏控件处在不可见状态");
                                 break;
                             default:
-                                LogUtil.e("", String.format("errorCode: %d", errorCode));
+                                LogUtil.e("onShowFailed", String.format("errorCode: %d", errorCode));
                                 break;
                         }
                     }
 
                     @Override
                     public void onSpotClosed() {
-                        LogUtil.e("", "开屏被关闭");
+                        LogUtil.e("onSpotClosed", "开屏被关闭");
                     }
 
                     @Override
                     public void onSpotClicked(boolean isWebPage) {
-                        LogUtil.e("", "开屏被点击");
-                        LogUtil.e("", String.format("是否是网页广告？%s", isWebPage ? "是" : "不是"));
+                        LogUtil.e("onSpotClicked", "开屏被点击");
+                        LogUtil.e("onSpotClicked", String.format("是否是网页广告？%s", isWebPage ? "是" : "不是"));
                     }
                 });
     }

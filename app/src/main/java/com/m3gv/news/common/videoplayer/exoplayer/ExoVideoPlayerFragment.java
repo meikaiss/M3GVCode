@@ -15,6 +15,7 @@ import android.widget.SeekBar;
 import com.github.rubensousa.previewseekbar.PreviewSeekBar;
 import com.m3gv.news.R;
 import com.m3gv.news.base.M3gBaseFragment;
+import com.m3gv.news.common.videoplayer.SensorState;
 import com.m3gv.news.common.videoplayer.VideoEntity;
 import com.m3gv.news.common.videoplayer.VideoPlayerActivity;
 
@@ -71,6 +72,7 @@ public class ExoVideoPlayerFragment extends M3gBaseFragment {
         videoEntity = getArguments().getParcelable(KEY_VIDEO_ENTITY);
 
         exoPlayerManager = new ExoPlayerManager(rootView, playerView, circleProgressBar, videoEntity.url);
+
     }
 
     @Override
@@ -82,7 +84,7 @@ public class ExoVideoPlayerFragment extends M3gBaseFragment {
 
     public boolean onBackPressed() {
         if (isInFullScreen) {
-            onFullScreenToggle();
+            onFullScreenToggle(SensorState.PORTRAIT, 1);
             return true;
         }
         return false;
@@ -92,7 +94,7 @@ public class ExoVideoPlayerFragment extends M3gBaseFragment {
      * 自动切换 横竖屏
      * 若当前为竖屏，则切换到横屏；若当前为横屏，则切换到竖屏
      */
-    private void onFullScreenToggle() {
+    public void onFullScreenToggle(SensorState sensorState, int landScapeDir) {
         boolean newFullScreenState = isInFullScreen = !isInFullScreen;
         if (newFullScreenState) {
             // 期望到横屏，但当前是竖屏
@@ -105,7 +107,9 @@ public class ExoVideoPlayerFragment extends M3gBaseFragment {
             rootView.getLayoutParams().width = Resources.getSystem().getDisplayMetrics().heightPixels;
             rootView.getLayoutParams().height = Resources.getSystem().getDisplayMetrics().heightPixels * 9 / 16;
         }
-        ((VideoPlayerActivity) getActivity()).onFullScreenChange(isInFullScreen);
+        if (getActivity() != null && getActivity() instanceof VideoPlayerActivity) {
+            ((VideoPlayerActivity) getActivity()).onFullScreenChange(isInFullScreen, sensorState, landScapeDir);
+        }
     }
 
     @Override
@@ -138,7 +142,7 @@ public class ExoVideoPlayerFragment extends M3gBaseFragment {
             switch (view.getId()) {
                 case R.id.imgb_fullscreen:
                     if (getActivity() != null && getActivity() instanceof VideoPlayerActivity) {
-                        onFullScreenToggle();
+                        onFullScreenToggle(isInFullScreen ? SensorState.PORTRAIT : SensorState.LANDSCAPE, 1);
                     }
                     break;
                 default:
