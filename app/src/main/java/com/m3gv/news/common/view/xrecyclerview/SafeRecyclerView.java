@@ -5,10 +5,6 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 
-/**
- * 作者：柯亨群 on 2016/9/7 09:29<br/>
- * 邮箱：kehengqun@mucang.cn
- */
 public class SafeRecyclerView extends RecyclerView {
     public SafeRecyclerView(Context context) {
         super(context);

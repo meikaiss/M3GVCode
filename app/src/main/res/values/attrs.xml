@@ -16,5 +16,11 @@
         <attr name="relative_layout_height_scale" format="integer"/>
     </declare-styleable>
 
+    <declare-styleable name="LetterSpacingTextView">
+        <attr name="textSpacing" format="dimension"/>
+        <attr name="letterSpacingText" format="string"/>
+    </declare-styleable>
+
+
 
 </resources>

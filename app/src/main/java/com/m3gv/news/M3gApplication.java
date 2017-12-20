@@ -13,7 +13,6 @@ import com.tencent.bugly.crashreport.CrashReport;
 /**
  * Created by meikai on 16/12/3.
  */
-
 public class M3gApplication extends Application {
 
 
